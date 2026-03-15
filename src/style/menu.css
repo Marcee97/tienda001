@@ -1,0 +1,85 @@
+.menu{
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+}
+
+/* contenedor de la imagen */
+.img-back-container{
+  position: absolute;
+  z-index: -1;
+}
+
+/* imagen */
+.img-back{
+  width: 100%;
+  object-fit: cover;
+  inset: 0;
+}
+
+/* viñeta superior */
+.img-back-container::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+
+  background: linear-gradient(
+    #000000e6,
+    #000000be,
+    #00000096,
+    transparent
+  );
+
+  z-index: 1;
+}
+
+/* viñeta inferior */
+.img-back-container::after{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+
+  background: linear-gradient(
+    transparent,
+    #000000d5,
+    #000000bd,
+    #000000d0,
+    #000000d0,
+    #000000
+  );
+
+  z-index: 1;
+}
+
+/* menú encima de todo */
+
+.menu__container{
+display: flex;
+width: 100%;
+justify-content: space-between;
+align-items: center;
+padding: 1em .9em;
+color: #fff;
+position: fixed;
+z-index: 22;
+}
+
+.menu__title{
+    font-size: 1.9em;
+   
+    
+}
+.menu__item{
+    list-style: none;
+}
+.menu__icon{
+    font-size: 3em;
+
+}

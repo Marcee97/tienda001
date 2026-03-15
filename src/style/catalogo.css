@@ -1,0 +1,75 @@
+/* catalogo.css */
+.catalogo {
+  background: #000;
+  min-height: 100vh;
+  padding: 0.4rem;
+}
+
+.catalogo-cont {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.catalogo__producto {
+  position: relative;
+  background: #0c0c0cb7;
+  border-radius: 12px;
+  padding: 0.4rem;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.catalogo__producto:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(255, 255, 255, 0.1);
+}
+
+.catalogo__producto--imagen {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.4rem;
+}
+
+/* Viñeta oscura */
+.catalogo__producto::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 30%,
+    rgba(0, 0, 0, 0.4) 80%
+  );
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.catalogo__producto--nombre {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  position: relative;
+  z-index: 4;
+}
+
+.catalogo__producto--precio {
+  color: #10b981;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  position: relative;
+  z-index: 4;
+}

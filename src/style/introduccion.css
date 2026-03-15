@@ -1,0 +1,34 @@
+.introduccion {
+  z-index: 6;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  height: 100vh;
+  color: #c7c7c7;
+  padding: 1.8em 0;
+}
+
+.introduccion__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8em;
+  padding: 0.8em;
+}
+
+.introduccion__objetivo {
+  color: #ffffff;
+  text-shadow: 4px 5px 6px #000000;
+  font-size: 1.3em;
+}
+.introduccion__objetivo--parrafo {
+}
+
+.introduccion__container--text {
+  font-weight: 500;
+  text-shadow: 4px 5px 5px #000000;
+  font-size: 1.6em;
+}

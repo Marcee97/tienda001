@@ -1,0 +1,19 @@
+.modal-compra {
+  color: #fff;
+  border-radius: 8px;
+  position: absolute;
+  z-index: 90;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  width: 100%;
+  padding: 0.3em;
+  height: 95vh;
+  top: 0;
+  background-color: #0f0f0ff6;
+  transition: all ease-in-out 1s;
+
+}
+
+.modal-compra__imagen {
+  width: 100%;
+}

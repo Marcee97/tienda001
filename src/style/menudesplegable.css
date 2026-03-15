@@ -1,0 +1,85 @@
+.menu-desplegable{
+display: flex;
+justify-content: space-between;
+background-color: #000000ec;
+backdrop-filter: blur(5px);
+color: #fff;
+height: 100vh;
+position: absolute;
+transition: all ease-in-out .5s;
+z-index: 40;
+width: 100%;
+transform: translateX(100%);
+position: fixed;
+}
+
+.menu-desplegable-title{
+margin: .6em ;
+font-size: 1.9em;
+}
+.menu-desplegable-cont{
+outline: 1px solid green;
+
+}
+
+.menu-desplegable-lista{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .menu-desplegable{
+display: flex;
+justify-content: end;
+color: #fff;
+position: absolute;
+z-index: 25;
+width: 100%;
+background-color: #000000d3;
+backdrop-filter: blur(5px);
+transition: all ease-in-out 2s;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  transform: translateX(100%);
+  border: 1px solid green;
+}
+.menu-desplegable--active{
+}
+
+.menu-desplegable-cont{
+z-index: 45;
+display: flex;
+flex-direction: column;
+justify-content: start;
+
+}
+
+.menu-desplegable-lista{
+    list-style: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 3em;
+    font-size: 1.3em;
+    padding: 0 1em;
+    background-color: #000000d7;
+} */
