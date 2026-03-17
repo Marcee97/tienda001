@@ -1,19 +1,112 @@
 .modal-compra {
   color: #fff;
   border-radius: 8px;
-  position: absolute;
+  position: fixed;
   z-index: 90;
   overflow: hidden;
   backdrop-filter: blur(8px);
   width: 100%;
-  padding: 0.3em;
-  height: 95vh;
+  height: 0;
   top: 0;
-  background-color: #0f0f0ff6;
-  transition: all ease-in-out 1s;
+  transition: height 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  color: #000;
+}
+
+.modal-compra__contenedor{
+  display: flex;
+  flex-direction: column;
+}
+
+.material-symbols-outlined{
+background-color: #ffffff;
+padding: .2em;
+width: 10%;
+border-radius: 25px;
+position: absolute;
+display: flex;
+justify-content: center;
+margin-left: 82%;
+box-shadow: 1px 2px 9px 2px #161616da;
+}
+
+.modal-compra--active {
+  height: 100vh;
+  padding: 10px;
+}
+
+.modal-compra__cont{
+  background-color: #fff;
+  height: 95%;
+  padding: .3em;
+  border-radius: 9px;
 
 }
 
 .modal-compra__imagen {
-  width: 100%;
+  width: 95%;
+  height: 410px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin: 1.1em auto;
+}
+
+.modal-compra__titulo{
+  font-size: 1.4em;
+}
+
+.modal-compra__precio{
+  font-size: 1.9em;
+
+  color:#0ba681 ;
+
+}
+
+.modal-compra__talles {
+  font-size: 1.3em;
+  display: flex;
+  flex-direction: column;
+  gap: .3em;
+}
+
+.modal-compra__talles-botones {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .5em;
+
+  padding: 1em 0;
+  margin: .5em 0;
+}
+.modal-compra__cont-talles-botones{
+  display: flex;
+  justify-content:center ;
+  gap: 1em;
+}
+.modal-compra__talle-btn{
+font-size: 1.3em;
+padding: .3em 0;
+border-radius: 8px;
+border: none;
+width: 65px;
+color: #242424;
+border: 1px solid #242424;
+background-color: transparent;
+}
+
+.modal-compra__cantidad {
+  display: flex;
+  flex-direction: column;
+  gap: .3em;
+  font-size: 1.3em;
+  border-bottom: 1px solid red;
+  padding: 1em 0;
+}
+
+.modal-compra__acciones {
+  display: flex;
+  flex-direction: column;
+  gap: .3em;
 }

@@ -4,7 +4,7 @@ export const TiendaContext = createContext()
 
 export const TiendaProvider = ({ children }) => {
 
-  const [productoSeleccionado, setProductoSeleccionado] = useState([])
+  const [productoSeleccionado, setProductoSeleccionado] = useState(null)
 
   return (
     <TiendaContext.Provider
