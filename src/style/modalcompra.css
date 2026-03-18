@@ -15,34 +15,33 @@
   color: #000;
 }
 
-.modal-compra__contenedor{
-  display: flex;
-  flex-direction: column;
-}
-
-.material-symbols-outlined{
-background-color: #ffffff;
-padding: .2em;
-width: 10%;
-border-radius: 25px;
-position: absolute;
-display: flex;
-justify-content: center;
-margin-left: 82%;
-box-shadow: 1px 2px 9px 2px #161616da;
-}
-
 .modal-compra--active {
   height: 100vh;
   padding: 10px;
 }
+.modal-compra__contenedor {
+  display: flex;
+  flex-direction: column;
+}
 
-.modal-compra__cont{
+.modal-compra__icon-cerrar {
+  background-color: #ffffff;
+  padding: 0.2em;
+  width: 10%;
+  border-radius: 25px;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  margin-left: 82%;
+  box-shadow: 1px 2px 9px 2px #161616da;
+}
+
+.modal-compra__cont {
   background-color: #fff;
   height: 95%;
-  padding: .3em;
+  padding: 0.3em;
   border-radius: 9px;
-
+  overflow: auto;
 }
 
 .modal-compra__imagen {
@@ -53,60 +52,146 @@ box-shadow: 1px 2px 9px 2px #161616da;
   margin: 1.1em auto;
 }
 
-.modal-compra__titulo{
+.modal-compra__titulo {
   font-size: 1.4em;
 }
 
-.modal-compra__precio{
+.modal-compra__precio {
   font-size: 1.9em;
-
-  color:#0ba681 ;
-
+  color: #0ba681;
 }
 
 .modal-compra__talles {
   font-size: 1.3em;
   display: flex;
   flex-direction: column;
-  gap: .3em;
+  gap: 0.3em;
 }
 
 .modal-compra__talles-botones {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: .5em;
-
+  gap: 0.5em;
   padding: 1em 0;
-  margin: .5em 0;
+  margin: 0.5em 0;
 }
-.modal-compra__cont-talles-botones{
+.modal-compra__cont-talles-botones {
   display: flex;
-  justify-content:center ;
+  justify-content: center;
   gap: 1em;
 }
-.modal-compra__talle-btn{
-font-size: 1.3em;
-padding: .3em 0;
-border-radius: 8px;
-border: none;
-width: 65px;
-color: #242424;
-border: 1px solid #242424;
-background-color: transparent;
+.modal-compra__talle-btn {
+  font-size: 1.3em;
+  padding: 0.3em 0;
+  border-radius: 8px;
+  border: none;
+  width: 65px;
+  color: #242424;
+  border: 1px solid #242424;
+  background-color: transparent;
 }
 
 .modal-compra__cantidad {
   display: flex;
   flex-direction: column;
-  gap: .3em;
+  gap: 0.8em;
+}
+
+.modal-compra__label {
+  font-size: 1em;
+  font-weight: 700;
+  color: #3a3a3a;
+  letter-spacing: 1px;
+}
+
+.modal-compra__cantidad-label {
   font-size: 1.3em;
-  border-bottom: 1px solid red;
-  padding: 1em 0;
+  font-weight: 700;
+  color: #3a3a3a;
+  letter-spacing: 1px;
+}
+.modal-compra__cantidad-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  background-color: #2222222c;
+  border-radius: 5px;
+  padding: 0.4em;
+  width: max-content;
+}
+
+.modal-compra__input-cantidad {
+  width: 60px;
+  text-align: center;
+  border-radius: 6px;
+  border: none;
+  padding: 6px;
+  font-size: 1.3em;
+  font-weight: 800;
+}
+
+.modal-compra__cantidad-btn {
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 6px;
+  color: #000000;
+  font-size: 2em;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.modal-compra__total {
+  display: flex;
+   border-top: 1px solid #13131350;
+  border-bottom: 1px solid #13131350;
+  margin: 1.5em 0;
+}
+
+.modal-compra__total-cont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 1.4em;
+  padding: .8em 0;
+  gap: 0.5em;
+}
+
+.modal-compra__precio-label{
+   font-size: 1em;
+  font-weight: 700;
+  color: #3a3a3a;
+  letter-spacing: 1px;
+}
+
+.modal-compra__precio-total{
+  font-size: 1.4em;
 }
 
 .modal-compra__acciones {
   display: flex;
   flex-direction: column;
-  gap: .3em;
+  gap: .5em;
+
+}
+
+.modal-compra__btn-agregar{
+  color: #fff;
+   background-color: #01051d;
+
+  padding: .8em;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.3em;
+}
+
+.modal-compra__btn-comprar{
+    color: #fff;
+  background-color: #011d03;
+  padding: .8em;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.3em;
 }
