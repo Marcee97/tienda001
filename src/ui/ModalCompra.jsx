@@ -3,8 +3,12 @@ import "../style/modalcompra.css";
 import { TiendaContext } from "../context/TiendaContext";
 
 export const ModalCompra = () => {
-  const { productoSeleccionado } = useContext(TiendaContext);
+  const { productoSeleccionado, setProductoSeleccionado } = useContext(TiendaContext);
   const [cantidad, setCantidad] = useState(1);
+
+  const cerrarModalCompra = ()=> {
+setProductoSeleccionado(null)
+  }
   return (
     <section
       className={
@@ -16,7 +20,7 @@ export const ModalCompra = () => {
       <div className="modal-compra__cont">
         {productoSeleccionado && (
           <div className="modal-compra__contenedor">
-            <span className="modal-compra__icon-cerrar material-symbols-outlined">
+            <span className="modal-compra__icon-cerrar material-symbols-outlined" onClick={cerrarModalCompra}>
               close
             </span>
 

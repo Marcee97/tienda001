@@ -1,11 +1,18 @@
+import { useContext } from "react"
 import "../style/menudesplegable.css"
+import { TiendaContext } from "../context/TiendaContext"
 export const MenuDesplegable = () => {
+
+
+const {openCloseMenu, setOpenCloseMenu} = useContext(TiendaContext)
+
+
   return (
-    <section className="menu-desplegable">
+    <section className={openCloseMenu ? "menu-desplegable-active" : "menu-desplegable"} onClick={()=> setOpenCloseMenu(prev => !prev)}>
       <h2 className="menu-desplegable-title">VALLEY</h2>
         <div className="menu-desplegable-cont">
             <ul className="menu-desplegable-lista">
-                 <span class="material-symbols-outlined">
+                 <span className={"material-symbols-outlined menu-desplegable-icon-close"}>
 close
 </span>
                 <li className="menu-desplegable-item">Sobre Nosotros</li>

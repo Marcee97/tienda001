@@ -1,11 +1,10 @@
+import { useContext } from "react";
 import "../style/menu.css";
 import { Introduccion } from "./Introduccion";
 import { MenuDesplegable } from "./MenuDesplegable";
+import { TiendaContext } from "../context/TiendaContext";
 export const Menu = () => {
-
-
-
-  
+const {openCloseMenu, setOpenCloseMenu} = useContext(TiendaContext)
   return (
     <section className="menu">
         <MenuDesplegable/>
@@ -18,7 +17,7 @@ export const Menu = () => {
       </div>
       <div className="menu__container">
         <h1 className="menu__title">VALLEY</h1>
-        <ul className="menu__list">
+        <ul className="menu__list" onClick={()=> setOpenCloseMenu(prev => !prev)}>
           <li className="menu__item">
             <span className="menu__icon material-symbols-outlined">menu</span>
           </li>
