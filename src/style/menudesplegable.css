@@ -26,9 +26,20 @@ width: 100%;
 transform: translateX(0%);
 position: fixed;
 }
-.menu-desplegable-icon-close{
-  margin-left: 75%;
-  font-size: 2em;
+
+
+.menu-desplegable__icon-close-carrito{
+display: flex;
+justify-content: space-between;
+padding: .2em 0 1.5em 0;
+}
+.menu-desplegable-icons{
+  font-size: 1.5em;
+  
+}
+
+.menu-desplegable-icon-carrito{
+  color: red;
 }
 .menu-desplegable-title{
 margin: .6em ;
