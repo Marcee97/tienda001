@@ -5,6 +5,7 @@ export const TiendaContext = createContext();
 export const TiendaProvider = ({ children }) => {
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
   const [openCloseMenu, setOpenCloseMenu] = useState(false);
+  const [openCloseCarrito, setOpenCloseCarrito] = useState(false);
 
   return (
     <TiendaContext.Provider
@@ -13,6 +14,8 @@ export const TiendaProvider = ({ children }) => {
         setProductoSeleccionado,
         openCloseMenu,
         setOpenCloseMenu,
+        openCloseCarrito,
+        setOpenCloseCarrito,
       }}
     >
       {children}
