@@ -77,6 +77,10 @@
   padding: 1em 0;
   margin: 0.5em 0;
 }
+.modal-compra__talle-btn.active {
+  color: #ffffff;
+  background-color: #161616;
+}
 .modal-compra__cont-talles-botones {
   display: flex;
   justify-content: center;
@@ -93,55 +97,6 @@
   background-color: transparent;
 }
 
-.modal-compra__cantidad {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8em;
-}
-
-.modal-compra__label {
-  font-size: 1em;
-  font-weight: 700;
-  color: #3a3a3a;
-  letter-spacing: 1px;
-}
-
-.modal-compra__cantidad-label {
-  font-size: 1.3em;
-  font-weight: 700;
-  color: #3a3a3a;
-  letter-spacing: 1px;
-}
-.modal-compra__cantidad-control {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  background-color: #2222222c;
-  border-radius: 5px;
-  padding: 0.4em;
-  width: max-content;
-}
-
-.modal-compra__input-cantidad {
-  width: 60px;
-  text-align: center;
-  border-radius: 6px;
-  border: none;
-  padding: 6px;
-  font-size: 1.3em;
-  font-weight: 800;
-}
-
-.modal-compra__cantidad-btn {
-  width: 35px;
-  height: 35px;
-  border: none;
-  border-radius: 6px;
-  color: #000000;
-  font-size: 2em;
-  cursor: pointer;
-  font-weight: 500;
-}
 
 .modal-compra__total {
   display: flex;

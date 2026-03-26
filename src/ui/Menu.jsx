@@ -17,7 +17,7 @@ const {openCloseMenu, setOpenCloseMenu} = useContext(TiendaContext)
       </div>
       <div className="menu__container">
         <h1 className="menu__title">VALLEY</h1>
-        <ul className="menu__list" onClick={()=> setOpenCloseMenu(prev => !prev)}>
+        <ul className="menu__list" onClick={(e)=>{e.stopPropagation(); setOpenCloseMenu(prev => !prev)}}>
           <li className="menu__item">
             <span className="menu__icon material-symbols-outlined">menu</span>
           </li>

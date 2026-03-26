@@ -1,43 +1,108 @@
 .carrito{
-outline: 1px solid red;
 position: absolute;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
 right: 0;
 z-index: 45;
 width: 100%;
 height: 100vh;
-background-color: #ffffffe1;
+background-color: #202020e1;
 backdrop-filter: blur(9px);
 color: #000;
-transition: 1s all ease-in-out;
+transition: .3s all ease-in-out;
 transform: translateX(100%);
-
-
+padding: .5em .3em;
 }
 
-.carrito__active{
-    outline: 1px solid red;
+.carrito--active{
 position: absolute;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
 right: 0;
 z-index: 45;
 width: 100%;
 height: 100vh;
-background-color: #ffffffe1;
-backdrop-filter: blur(9px);
-color: #000;
-transition: 1s all ease-in-out;
+background-color: #3b3b3be1;
+backdrop-filter: blur(4px);
+color: #ffffff;
+transition: .3s all ease-in-out;
 transform: translateX(0%);
-
 }
 
-.carrito__icon-close{
+.carrito__close{
     position: absolute;
     right: 5px;
     font-size: 2.6em;
-    color: red;
 }
 
-.carrito-cont{
+.carrito__container{
+    padding: 2.5em 0;
+}
+
+.carrito__title{
+    font-size: 3em;
+    font-weight: bolder;
+}
+
+.carrito_items{
+}
+
+.carrito__item{
+outline: 1px solid red;
+width: 100%;
+display: flex;
+padding: 1em .2em;
+gap: .5em;
+outline: 1px solid #444444;
+background-color: transparent;
+backdrop-filter: blur(1px);
+
+}
+.carrito__item-title{
+    font-size:1.3em ;
+
+}
+.carrito__item-image{
+    width: 19%;
+    height: 80px;
+    border-radius: 15px;
+}
+.carrito__item-control-cantidad{
     display: flex;
-    justify-content: center;
-    padding: 2em;
+    justify-content: space-between;
+    width: 139%;
+    outline: 1px solid red;
+}
+
+.carrito__footer{
+display: flex;
+flex-direction: column;
+justify-content: center;
+width: 100%;
+outline: 1px solid red;
+align-items: center;
+height: 250px;
+
+}
+
+.carrito__total{
+display: flex;
+gap: 2em;
+
+}
+
+.carrito__actions{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+.carrito__button{
+    border: none;
+    padding: .5em 4em;
+    font-size: 1.6em;
+    border-radius: 19px;
+    font-weight: bolder;
 }
