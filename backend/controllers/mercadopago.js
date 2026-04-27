@@ -6,10 +6,13 @@ const client = new MercadoPagoConfig({ accessToken: process.env.TOKEN_MERCADOPAG
 
 
 const crearPreferencia = async (req, res) => {
+  console.log(req.body, "este es el body")
+
+  const {carrito} = req.body
   try{
     console.log("DATA EN BACK", req.body)
     
-    const {nombre, precio, cantidad = 1} = req.body
+    const {nombre, precio, cantidad} = req.body
     
     if(!nombre || !precio) {
       return res.status(400).json({

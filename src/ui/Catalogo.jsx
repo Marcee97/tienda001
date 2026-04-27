@@ -1,14 +1,34 @@
 import "../style/catalogo.css";
 import { remeras } from "../archivos/db";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TiendaContext } from "../context/TiendaContext";
 export const Catalogo = () => {
+  const [mostrarProductos, setMostrarProductos] = useState([])
   const { setProductoSeleccionado } = useContext(TiendaContext);
+useEffect(() => {
+  const obtenerProductos = async () => {
+try {
 
+  const res = await fetch("http://localhost:3000/api/productos");
+  
+  if (!res.ok) {
+    throw new Error("Error al obtener productos");
+  }
+
+  const data = await res.json();
+  console.log(data)
+  setMostrarProductos(data);
+  console.log(data, "la data desde la base de datos")
+}catch (error) {
+  console.error("Error al obtener productos:", error);
+}
+  }
+  obtenerProductos();
+},[])
   return (
     <section className="catalogo">
       <div className="catalogo-cont">
-        {remeras.map((remera, index) => (
+        {mostrarProductos.map((remera, index) => (
           <div
             className="catalogo__producto"
             key={index}
@@ -27,3 +47,6 @@ export const Catalogo = () => {
     </section>
   );
 };
+
+
+//https://res.cloudinary.com/dren5qsyw/image/upload/v1776009051/pruebacloud_jqckzo.jpg

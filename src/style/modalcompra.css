@@ -13,6 +13,8 @@
   flex-direction: column;
   justify-content: start;
   color: #000;
+  background-color: #00000086;
+  backdrop-filter: blur(25px);
 }
 
 .modal-compra--active {
@@ -38,7 +40,8 @@
 }
 
 .modal-compra__cont {
-  background-color: #fff;
+  background-color: #ffffff93;
+  backdrop-filter: blur(7px);
   height: 95%;
   padding: 0.3em;
   border-radius: 9px;
@@ -69,6 +72,13 @@
   gap: 0.3em;
 }
 
+.modal-compra__talles-label {
+  color: #0f0f0f;
+  font-weight: 600;
+  font-size: .9em;
+  
+}
+
 .modal-compra__talles-botones {
   display: flex;
   flex-direction: column;
@@ -97,10 +107,36 @@
   background-color: transparent;
 }
 
+.mensaje-agregado {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 0.5em;
+  justify-content: space-between;
+}
+
+.mensaje-agregado__text {
+}
+
+.mensaje-agregado__button {
+  border: 1 px solid #3a3a3a;
+  padding: 0.3em 1.5em;
+  border-radius: 5px;
+  background-color: #3a3a3a00;
+}
+.modal-compra__contenedor-cantidad {
+}
+
+.modal-compra__contenedor-label{
+  font-weight: 900;
+  font-size:1.13em;
+  letter-spacing: 1px;
+}
 
 .modal-compra__total {
   display: flex;
-   border-top: 1px solid #13131350;
+  border-top: 1px solid #13131350;
   border-bottom: 1px solid #13131350;
   margin: 1.5em 0;
 }
@@ -111,42 +147,41 @@
   justify-content: space-between;
   width: 100%;
   font-size: 1.4em;
-  padding: .8em 0;
+  padding: 0.8em 0;
   gap: 0.5em;
 }
 
-.modal-compra__precio-label{
-   font-size: 1em;
+.modal-compra__precio-label {
+  font-size: 1em;
   font-weight: 700;
   color: #3a3a3a;
   letter-spacing: 1px;
 }
 
-.modal-compra__precio-total{
+.modal-compra__precio-total {
   font-size: 1.4em;
 }
 
 .modal-compra__acciones {
   display: flex;
   flex-direction: column;
-  gap: .5em;
-
+  gap: 0.5em;
 }
 
-.modal-compra__btn-agregar{
+.modal-compra__btn-agregar {
   color: #fff;
-   background-color: #01051d;
+  background-color: #01051d;
 
-  padding: .8em;
+  padding: 0.8em;
   border-radius: 8px;
   border: none;
   font-size: 1.3em;
 }
 
-.modal-compra__btn-comprar{
-    color: #fff;
+.modal-compra__btn-comprar {
+  color: #fff;
   background-color: #011d03;
-  padding: .8em;
+  padding: 0.8em;
   border-radius: 8px;
   border: none;
   font-size: 1.3em;

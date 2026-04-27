@@ -10,9 +10,15 @@ app.use(express.json());
 
 const mercadoPagoRoutes = require('./routes/mercadopago.routes.js')
 const webhookRoutes = require('./routes/webhook.routes.js')
-app.use('/api/pagos', mercadoPagoRoutes)
+const ventaRoutes = require('./routes/ventas.routes.js')
+const productosRoutes = require('./routes/productos.routes.js')
+const variantesRoutes = require('./routes/variantes.routes.js')
 
+app.use('/api/variantes', variantesRoutes)
+app.use('/api/ventas', ventaRoutes)
+app.use('/api/pagos', mercadoPagoRoutes)
 app.use('/api/webhook', webhookRoutes)
+app.use('/api/productos', productosRoutes)
 
 app.get("/", (req, res) => {
   res.send("Servidor funcionando con CommonJS");
