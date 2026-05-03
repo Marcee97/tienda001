@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import "../style/carrito.css";
 import { TiendaContext } from "../context/TiendaContext";
 import { ControlCantidad } from "../components/ControlCantidad/ControlCantidad.jsx";
@@ -11,6 +11,10 @@ export const Carrito = () => {
     cambiarCantidad,
     ejecutarCompraCarrito,
   } = useContext(TiendaContext);
+  useEffect(() => {
+
+  console.log(carrito?.[0]?.imagenes[0]);
+  }, [carrito])
 
   return (
     <section
@@ -32,7 +36,7 @@ export const Carrito = () => {
             <article className="carrito__item" key={index}>
               <img
                 className="carrito__item-image"
-                src={item.imagen}
+                src={item.imagenes?.[0]?.url}
                 alt={item.nombre}
               />
               <div className="carrito__item-cont">

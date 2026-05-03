@@ -16,9 +16,9 @@ try {
   }
 
   const data = await res.json();
-  console.log(data)
+
   setMostrarProductos(data);
-  console.log(data, "la data desde la base de datos")
+ 
 }catch (error) {
   console.error("Error al obtener productos:", error);
 }
@@ -35,7 +35,7 @@ try {
             onClick={() => setProductoSeleccionado(remera)}
           >
             <img
-              src={remera.imagen}
+              src={remera.imagenes[0]?.url}
               alt={remera.nombre}
               className="catalogo__producto--imagen"
             />

@@ -8,6 +8,7 @@ export const MenuDesplegable = () => {
     setOpenCloseMenu,
     openCloseCarrito,
     setOpenCloseCarrito,
+    carrito
   } = useContext(TiendaContext);
 
   return (
@@ -25,6 +26,9 @@ export const MenuDesplegable = () => {
           >
             shopping_cart
           </span>
+          {carrito.length > 0 &&
+            <p className="menu-desplegable__icon-cantidad-productos">{carrito.length}</p>
+          }
           <span className={"material-symbols-outlined menu-desplegable-icons"}>
             close
           </span>

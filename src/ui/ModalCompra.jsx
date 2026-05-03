@@ -21,14 +21,10 @@ export const ModalCompra = () => {
     setOpenCloseCarrito,
   } = useContext(TiendaContext);
 
+  const [indexImagenCarrousel, setIndexImagenCarrousel] = useState(0)
   const cerrarModalCompra = () => {
     setProductoSeleccionado(null);
   };
-  const talles = ["S", "M", "XL", "XXL"];
-
-  useEffect(() => {
-    console.log(productoSeleccionado, " este es el producto que se selecciono");
-  }, [productoSeleccionado]);
 
   useEffect(() => {
     if (!productoSeleccionado) return;
@@ -41,7 +37,7 @@ export const ModalCompra = () => {
         body: JSON.stringify({ productoId: productoSeleccionado?.id }),
       });
       const variantesObtenidas = await data.json();
-      console.log(variantesObtenidas, "Estas son las variantes obtenidas");
+     
 
       const tallesOrdenados = [
         ...new Set(variantesObtenidas.map((v) => v.talle)),
@@ -51,10 +47,7 @@ export const ModalCompra = () => {
     variantesDeProducto();
   }, [productoSeleccionado]);
 
-  useEffect(() => {
-    console.log(varianteObtenida, "estos son los talles ordenados");
-  }, [varianteObtenida]);
-
+ 
   //LOGICA DE PAGO-----
   const generarPago = async () => {
     const res = await fetch(
@@ -116,11 +109,51 @@ export const ModalCompra = () => {
             >
               close
             </span>
-            <img
-              src={productoSeleccionado.imagen}
-              alt={productoSeleccionado.nombre}
-              className="modal-compra__imagen"
-            />
+           
+
+
+          <div
+  className="modal-compra__galeria"
+ 
+>
+  <div className="modal-compra__galeria-carrousel"  style={{
+    transform: `translateX(-${indexImagenCarrousel * 104}%)`,
+    transition: "transform 0.3s ease"
+  }}>
+
+  {productoSeleccionado.imagenes.map((img, i) => (
+    <img
+    key={i}
+    src={img.url}
+    className="modal-compra__miniatura"
+    onClick={() => setIndexImagenCarrousel(i)} 
+    />
+  ))}
+  </div>
+  <div className="modal-compra__botonera-carrousel">
+    <button
+  onClick={() =>
+    setIndexImagenCarrousel(prev =>
+      prev > 0 ? prev - 1 : prev
+    )
+  }
+>
+  ◀
+</button>
+
+<button
+  onClick={() =>
+    setIndexImagenCarrousel(prev =>
+      prev < productoSeleccionado.imagenes.length - 1
+      ? prev + 1
+      : prev
+    )
+  }
+>
+  ▶
+</button>
+  </div>
+</div>
 
             <h4 className="modal-compra__titulo">
               {productoSeleccionado.nombre}

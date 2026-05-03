@@ -15,7 +15,7 @@ export const TiendaProvider = ({ children }) => {
 
 
 const agregarAlCarrito = (producto, talle, cantidad) => {
-  console.log(producto,"este es el producto", talle,"estes es el talle", cantidad, "estes la cantidad")
+  
 setCarrito(prev => {
   const existe = prev.find(
     item => item.id === producto.id && item.talle === talle
