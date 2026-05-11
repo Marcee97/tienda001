@@ -4,39 +4,22 @@ const getProductos = async (req, res) => {
 try{
 const [rows] = await pool.query(`
   SELECT 
-    p.id,
-    p.nombre,
-    p.precio,
-    pi.url,
-    pi.orden
-  FROM productos p
-  LEFT JOIN producto_imagenes pi 
-    ON p.id = pi.producto_id
-  ORDER BY p.id, pi.orden ASC
+        p.id,
+        p.nombre,
+        p.precio,
+        MIN(pi.url) AS imagen
+
+      FROM productos p
+
+      LEFT JOIN producto_imagenes pi 
+        ON pi.producto_id = p.id
+
+      GROUP BY p.id
 `);
 
-const productosMap = {};
+console.log(rows, "estos son los productos que se estan enviando al frontend");
+res.json(rows);
 
-rows.forEach(row => {
-  if (!productosMap[row.id]) {
-    productosMap[row.id] = {
-      id: row.id,
-      nombre: row.nombre,
-      precio: row.precio,
-      imagenes: []
-    };
-  }
-
-  if (row.url) {
-    productosMap[row.id].imagenes.push({
-      url: row.url,
-      orden: row.orden
-    });
-  }
-});
-
-const productos = Object.values(productosMap);
-res.json(productos);
 } catch(error) {
   console.error(error);
 }

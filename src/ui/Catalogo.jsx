@@ -35,7 +35,7 @@ try {
             onClick={() => setProductoSeleccionado(remera)}
           >
             <img
-              src={remera.imagenes[0]?.url}
+              src={remera.imagen}
               alt={remera.nombre}
               className="catalogo__producto--imagen"
             />

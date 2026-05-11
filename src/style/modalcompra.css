@@ -82,6 +82,21 @@
   font-size: 1.9em;
   color: #0ba681;
 }
+.modal-compra__contenedor-btn-colores{
+  display:flex;
+  gap:.5em;
+}
+.modal-compra__color-btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.modal-compra__color-btn.active {
+  border-color: black;
+  transform: scale(1.1);
+}
 
 .modal-compra__talles {
   font-size: 1.3em;
@@ -134,8 +149,6 @@
   justify-content: space-between;
 }
 
-.mensaje-agregado__text {
-}
 
 .mensaje-agregado__button {
   border: 1 px solid #3a3a3a;

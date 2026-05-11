@@ -4,6 +4,6 @@ const { getVariantes } = require("../controllers/variantes.js")
 
 
 const router = express.Router();
-router.post("/", getVariantes);
+router.post("/:id", getVariantes);
 
 module.exports = router;

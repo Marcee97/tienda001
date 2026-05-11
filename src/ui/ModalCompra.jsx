@@ -5,7 +5,9 @@ import { ControlCantidad } from "../components/ControlCantidad/ControlCantidad";
 
 export const ModalCompra = () => {
   const [animationCompra, setAnimationCompra] = useState(false);
-  const [varianteObtenida, setVarianteObtenida] = useState([]);
+  const [variantes, setVariantes] = useState([]);
+  const [colorSeleccionado, setColorSeleccionado] = useState(null);
+ 
   const {
     productoSeleccionado,
     setProductoSeleccionado,
@@ -16,57 +18,39 @@ export const ModalCompra = () => {
     setProductoSeleccionadoCarrito,
     productoSeleccionadoCarrito,
     agregarAlCarrito,
-    carrito,
     setOpenCloseMenu,
     setOpenCloseCarrito,
   } = useContext(TiendaContext);
 
-  const [indexImagenCarrousel, setIndexImagenCarrousel] = useState(0)
+  const [indexImagenCarrousel, setIndexImagenCarrousel] = useState(0);
   const cerrarModalCompra = () => {
     setProductoSeleccionado(null);
   };
 
   useEffect(() => {
+    console.log(
+      productoSeleccionado,
+      "este es el producto seleccionado en el catalogo",
+    );
     if (!productoSeleccionado) return;
+    console.log(productoSeleccionado.id, "el id para el modal");
     const variantesDeProducto = async () => {
-      const data = await fetch("http://localhost:3000/api/variantes", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const data = await fetch(
+        `http://localhost:3000/api/variantes/${productoSeleccionado?.id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        
         },
-        body: JSON.stringify({ productoId: productoSeleccionado?.id }),
-      });
+      );
       const variantesObtenidas = await data.json();
-     
-
-      const tallesOrdenados = [
-        ...new Set(variantesObtenidas.map((v) => v.talle)),
-      ].sort();
-      setVarianteObtenida(tallesOrdenados);
+      setVariantes(variantesObtenidas);
     };
     variantesDeProducto();
   }, [productoSeleccionado]);
-
  
-  //LOGICA DE PAGO-----
-  const generarPago = async () => {
-    const res = await fetch(
-      "http://localhost:3000/api/pagos/crear-preferencia",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(productoSeleccionado),
-      },
-    );
-    const data = await res.json();
-    console.log("se ejecuta funcion de pagos", data);
-    // window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${data.id}`
-    console.log(
-      `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${data.id}`,
-    );
-  };
   useEffect(() => {
     if (animationCompra) {
       const timer = setTimeout(() => {
@@ -80,14 +64,59 @@ export const ModalCompra = () => {
   const btnOpenCarrito = () => {
     cerrarModalCompra();
 
-  setTimeout(() => {
-    setOpenCloseMenu(prev => !prev);
-  }, 250);
+    setTimeout(() => {
+      setOpenCloseMenu((prev) => !prev);
+    }, 250);
 
-  setTimeout(() => {
-    setOpenCloseCarrito(prev => !prev);
-  }, 450);
+    setTimeout(() => {
+      setOpenCloseCarrito((prev) => !prev);
+    }, 450);
   };
+//------------------ LOGICA DE SELECCION DE VARIANTES (COLORES Y TALLES)------------------
+   const colores = variantes.reduce((acc, item) => {
+    const existe = acc.some((c) => c.color_id === item.color_id);
+
+    if (!existe) {
+      acc.push({
+        color_id: item.color_id,
+        color: item.color,
+      });
+    }
+
+    return acc;
+  }, []);
+  
+  useEffect(() => {
+    if (colores.length > 0 && !colorSeleccionado) {
+      setColorSeleccionado(colores[0].color_id);
+    }
+  }, [colores]);
+
+  const tallesFiltrados = variantes.filter(
+    (v) => v.color_id === colorSeleccionado,
+  );
+
+  const imagenesPorColor = variantes.reduce((acc, item) => {
+    if (!acc[item.color_id]) {
+      acc[item.color_id] = [];
+    }
+
+    if (!acc[item.color_id].includes(item.url)) {
+      acc[item.color_id].push(item.url);
+    }
+
+    return acc;
+  }, {});
+
+  const imagenesActuales = imagenesPorColor[colorSeleccionado] || [];
+
+
+const tallesUnicos = tallesFiltrados.filter(
+  (item, index, self) =>
+    index === self.findIndex(v => v.talle === item.talle)
+);
+
+
   return (
     <section
       className={
@@ -109,51 +138,46 @@ export const ModalCompra = () => {
             >
               close
             </span>
-           
 
+            <div className="modal-compra__galeria">
+              <div
+                className="modal-compra__galeria-carrousel"
+                style={{
+                  transform: `translateX(-${indexImagenCarrousel * 104}%)`,
+                  transition: "transform 0.3s ease",
+                }}
+              >
+                {imagenesActuales.map((img, i) => (
+                  <img
+                    key={i}
+                    src={img}
+                    className="modal-compra__miniatura"
+                    onClick={() => setIndexImagenCarrousel(i)}
+                  />
+                ))}
+              </div>
+              <div className="modal-compra__botonera-carrousel">
+                <button
+                  onClick={() =>
+                    setIndexImagenCarrousel((prev) =>
+                      prev > 0 ? prev - 1 : prev,
+                    )
+                  }
+                >
+                  ◀
+                </button>
 
-          <div
-  className="modal-compra__galeria"
- 
->
-  <div className="modal-compra__galeria-carrousel"  style={{
-    transform: `translateX(-${indexImagenCarrousel * 104}%)`,
-    transition: "transform 0.3s ease"
-  }}>
-
-  {productoSeleccionado.imagenes.map((img, i) => (
-    <img
-    key={i}
-    src={img.url}
-    className="modal-compra__miniatura"
-    onClick={() => setIndexImagenCarrousel(i)} 
-    />
-  ))}
-  </div>
-  <div className="modal-compra__botonera-carrousel">
-    <button
-  onClick={() =>
-    setIndexImagenCarrousel(prev =>
-      prev > 0 ? prev - 1 : prev
-    )
-  }
->
-  ◀
-</button>
-
-<button
-  onClick={() =>
-    setIndexImagenCarrousel(prev =>
-      prev < productoSeleccionado.imagenes.length - 1
-      ? prev + 1
-      : prev
-    )
-  }
->
-  ▶
-</button>
-  </div>
-</div>
+                <button
+                  onClick={() =>
+                    setIndexImagenCarrousel((prev) =>
+                      prev < imagenesActuales.length - 1 ? prev + 1 : prev,
+                    )
+                  }
+                >
+                  ▶
+                </button>
+              </div>
+            </div>
 
             <h4 className="modal-compra__titulo">
               {productoSeleccionado.nombre}
@@ -164,22 +188,43 @@ export const ModalCompra = () => {
             </p>
           </div>
         )}
+        <div>
+          <h4>Colores</h4>
+          <div className="modal-compra__contenedor-btn-colores">
+            {colores.map((c) => (
+              <button
+                key={c.color_id}
+  className={`modal-compra__color-btn ${
+    colorSeleccionado === c.color_id ? "active" : ""
+  }`}
+  style={{ backgroundColor: c.color?.toLowerCase() }}
+  onClick={() => {
+    setColorSeleccionado(c.color_id);
+    setTalleSeleccionado(null);
+    setIndexImagenCarrousel(0);
+  }}
+              >
+                {c.color}
+              </button>
+            ))}
+          </div>
+        </div>
 
         <div className="modal-compra__talles">
           <div className="modal-compra__talles-botones">
             <p className="modal-compra__talles-label">Talle</p>
             <div className="modal-compra__cont-talles-botones">
-              {varianteObtenida.map((talle) => (
-                <button
-                  key={talle}
-                  className={`modal-compra__talle-btn ${
-                    talleSeleccionado === talle ? "active" : ""
-                  }`}
-                  onClick={() => setTalleSeleccionado(talle)}
-                >
-                  {talle}
-                </button>
-              ))}
+             {tallesUnicos.map((v, index) => (
+  <button
+    key={index}
+    className={`modal-compra__talle-btn ${
+      talleSeleccionado === v.talle ? "active" : ""
+    }`}
+    onClick={() => setTalleSeleccionado(v.talle)}
+  >
+    {v.talle}
+  </button>
+))}
             </div>
           </div>
         </div>
@@ -191,7 +236,9 @@ export const ModalCompra = () => {
         {animationCompra && (
           <div className="mensaje-agregado">
             <p className="mensaje-agregado__text">Se agregó al carrito</p>
-            <h4 className="mensaje-agregado__button" onClick={btnOpenCarrito}>Ver</h4>
+            <h4 className="mensaje-agregado__button" onClick={btnOpenCarrito}>
+              Ver
+            </h4>
           </div>
         )}
 
