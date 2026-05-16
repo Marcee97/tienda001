@@ -2,12 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import "../style/modalcompra.css";
 import { TiendaContext } from "../context/TiendaContext";
 import { ControlCantidad } from "../components/ControlCantidad/ControlCantidad";
+import { traduccionColores } from "../archivos/diccionarioIngles.js";
 
 export const ModalCompra = () => {
-  const [animationCompra, setAnimationCompra] = useState(false);
   const [variantes, setVariantes] = useState([]);
-  const [colorSeleccionado, setColorSeleccionado] = useState(null);
- 
+
   const {
     productoSeleccionado,
     setProductoSeleccionado,
@@ -20,6 +19,10 @@ export const ModalCompra = () => {
     agregarAlCarrito,
     setOpenCloseMenu,
     setOpenCloseCarrito,
+    colorSeleccionado,
+    setColorSeleccionado,
+    animationCompra,
+    setAnimationCompra
   } = useContext(TiendaContext);
 
   const [indexImagenCarrousel, setIndexImagenCarrousel] = useState(0);
@@ -42,7 +45,6 @@ export const ModalCompra = () => {
           headers: {
             "Content-Type": "application/json",
           },
-        
         },
       );
       const variantesObtenidas = await data.json();
@@ -50,7 +52,7 @@ export const ModalCompra = () => {
     };
     variantesDeProducto();
   }, [productoSeleccionado]);
- 
+
   useEffect(() => {
     if (animationCompra) {
       const timer = setTimeout(() => {
@@ -72,8 +74,8 @@ export const ModalCompra = () => {
       setOpenCloseCarrito((prev) => !prev);
     }, 450);
   };
-//------------------ LOGICA DE SELECCION DE VARIANTES (COLORES Y TALLES)------------------
-   const colores = variantes.reduce((acc, item) => {
+  //------------------ LOGICA DE SELECCION DE VARIANTES (COLORES Y TALLES)------------------
+  const colores = variantes.reduce((acc, item) => {
     const existe = acc.some((c) => c.color_id === item.color_id);
 
     if (!existe) {
@@ -85,7 +87,7 @@ export const ModalCompra = () => {
 
     return acc;
   }, []);
-  
+
   useEffect(() => {
     if (colores.length > 0 && !colorSeleccionado) {
       setColorSeleccionado(colores[0].color_id);
@@ -110,12 +112,10 @@ export const ModalCompra = () => {
 
   const imagenesActuales = imagenesPorColor[colorSeleccionado] || [];
 
-
-const tallesUnicos = tallesFiltrados.filter(
-  (item, index, self) =>
-    index === self.findIndex(v => v.talle === item.talle)
-);
-
+  const tallesUnicos = tallesFiltrados.filter(
+    (item, index, self) =>
+      index === self.findIndex((v) => v.talle === item.talle),
+  );
 
   return (
     <section
@@ -194,18 +194,18 @@ const tallesUnicos = tallesFiltrados.filter(
             {colores.map((c) => (
               <button
                 key={c.color_id}
-  className={`modal-compra__color-btn ${
-    colorSeleccionado === c.color_id ? "active" : ""
-  }`}
-  style={{ backgroundColor: c.color?.toLowerCase() }}
-  onClick={() => {
-    setColorSeleccionado(c.color_id);
-    setTalleSeleccionado(null);
-    setIndexImagenCarrousel(0);
-  }}
-              >
-                {c.color}
-              </button>
+                className={`modal-compra__color-btn ${
+                  colorSeleccionado === c.color_id ? "active" : ""
+                }`}
+                style={{
+                  backgroundColor: traduccionColores[c.color?.toLowerCase()],
+                }}
+                onClick={() => {
+                  setColorSeleccionado(c.color_id);
+                  setTalleSeleccionado(null);
+                  setIndexImagenCarrousel(0);
+                }}
+              ></button>
             ))}
           </div>
         </div>
@@ -214,17 +214,17 @@ const tallesUnicos = tallesFiltrados.filter(
           <div className="modal-compra__talles-botones">
             <p className="modal-compra__talles-label">Talle</p>
             <div className="modal-compra__cont-talles-botones">
-             {tallesUnicos.map((v, index) => (
-  <button
-    key={index}
-    className={`modal-compra__talle-btn ${
-      talleSeleccionado === v.talle ? "active" : ""
-    }`}
-    onClick={() => setTalleSeleccionado(v.talle)}
-  >
-    {v.talle}
-  </button>
-))}
+              {tallesUnicos.map((v, index) => (
+                <button
+                  key={index}
+                  className={`modal-compra__talle-btn ${
+                    talleSeleccionado === v.talle ? "active" : ""
+                  }`}
+                  onClick={() => setTalleSeleccionado(v.talle)}
+                >
+                  {v.talle}
+                </button>
+              ))}
             </div>
           </div>
         </div>
@@ -260,8 +260,9 @@ const tallesUnicos = tallesFiltrados.filter(
                 productoSeleccionado,
                 talleSeleccionado,
                 cantidad,
-              ),
-                setAnimationCompra(true));
+                colorSeleccionado,
+                imagenesActuales[0]
+              ));
             }}
           >
             Agregar al carrito

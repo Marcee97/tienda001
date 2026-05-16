@@ -1,5 +1,4 @@
 import "../style/catalogo.css";
-import { remeras } from "../archivos/db";
 import { useContext, useEffect, useState } from "react";
 import { TiendaContext } from "../context/TiendaContext";
 export const Catalogo = () => {

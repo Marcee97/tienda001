@@ -13,7 +13,7 @@ export const Carrito = () => {
   } = useContext(TiendaContext);
   useEffect(() => {
 
-  console.log(carrito?.[0]?.imagenes[0]);
+ 
   }, [carrito])
 
   return (
@@ -36,7 +36,7 @@ export const Carrito = () => {
             <article className="carrito__item" key={index}>
               <img
                 className="carrito__item-image"
-                src={item.imagenes?.[0]?.url}
+                src={item.imagen}
                 alt={item.nombre}
               />
               <div className="carrito__item-cont">

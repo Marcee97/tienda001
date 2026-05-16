@@ -11,7 +11,7 @@ const getVariantes = async (req, res) => {
     v.color_id,
     v.talle,
     v.stock,
-
+    c.nombre AS color,
     pi.url,
     pi.orden
 
@@ -21,8 +21,12 @@ LEFT JOIN producto_imagenes pi
     ON v.producto_id = pi.producto_id
     AND v.color_id = pi.color_id
 
+
+  LEFT JOIN colores c
+    ON v.color_id = c.id
+
 WHERE v.producto_id = ?
-ORDER BY v.color_id, pi.orden;`, [id]);
+ORDER BY c.orden, pi.orden;`, [id]);
     console.log(rows, "esto se son las variantes del producto seleccionado del catalogo")
     res.json(rows)
   // try {
