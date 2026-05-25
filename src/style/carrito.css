@@ -95,8 +95,7 @@ padding: 0 0 .5em 0;
   display: flex;
   gap: 2em;
 }
-.carrito__total-price{
-}
+
 
 .carrito__actions {
   display: flex;

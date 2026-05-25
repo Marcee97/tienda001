@@ -10,11 +10,9 @@ export const Carrito = () => {
     carrito,
     cambiarCantidad,
     ejecutarCompraCarrito,
+    openCloseEnvios,
+    setOpenCloseEnvios,
   } = useContext(TiendaContext);
-  useEffect(() => {
-
- 
-  }, [carrito])
 
   return (
     <section
@@ -64,12 +62,21 @@ export const Carrito = () => {
       <div className="carrito__footer">
         <div className="carrito__total">
           <h4 className="carrito__total-label">Total</h4>
-          <p className="carrito__total-price">${carrito.reduce((total, item) => total + item.precio * item.cantidad, 0)}</p>
+          <p className="carrito__total-price">
+            $
+            {carrito.reduce(
+              (total, item) => total + item.precio * item.cantidad,
+              0,
+            )}
+          </p>
         </div>
         <div className="carrito__actions">
           <button
             className="carrito__button carrito__button--primary"
-            onClick={() => ejecutarCompraCarrito()}
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpenCloseEnvios((prev) => !prev);
+            }}
           >
             Comprar
           </button>

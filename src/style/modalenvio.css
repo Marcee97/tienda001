@@ -1,0 +1,102 @@
+.modal-envio {
+  position: absolute;
+  background-color: #272727;
+  color: #fff;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.modal-envio__header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-envio__title{
+  padding: .5em;
+  font-size: 1.8em;
+}
+.modal-envio__close {
+  right: 5px;
+  font-size: 2.4em;
+}
+.modal-envio__cont {
+  padding: 1.5em .2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.modal-envio__formulario {
+  display: flex;
+  flex-direction: column;
+  gap: .8em;
+}
+
+.modal-envio__input-formulario{
+padding: .2em;
+font-size: 1.3em;
+border-radius: 5px;
+border: 1px solid #ccc;
+}
+
+.modal-envio__item {
+  width: 100%;
+  display: flex;
+  padding: .5em 0.2em;
+  gap: 0.5em;
+  outline: 1px solid #444444;
+  background-color: transparent;
+  backdrop-filter: blur(1px);
+}
+
+.modal-envio__item-titulo {
+  font-size: 1.7em;
+}
+
+.modal-envio__item-precio {
+  font-size: 1.5em;
+}
+
+.modal-envio__item-imagen {
+  width: 25%;
+  height: 120px;
+  border-radius: 15px;
+}
+
+.modal-envio__item-cantidad {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 280px;
+  min-width: 280px;
+}
+
+.modal-envio__item-cantidad-label {
+  font-size: 1.3em;
+}
+
+.modal-envio__vacio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.modal-envio__vacio-texto {
+  font-size: 1.5em;
+}
+
+.modal-envio__opciones{
+  display: flex;
+  gap: .3em;
+}
+.modal-envio__btn-opcion{
+  padding: .5em;
+  font-size: 1.2em;
+  border-radius: 5px;
+  border: none;
+  background-color: #444444;
+  color: #fff;
+}

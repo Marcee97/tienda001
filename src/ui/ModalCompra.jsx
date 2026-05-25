@@ -22,24 +22,24 @@ export const ModalCompra = () => {
     colorSeleccionado,
     setColorSeleccionado,
     animationCompra,
-    setAnimationCompra
+    setAnimationCompra,
+    cerrarModalCompra,
+    openCloseModalCompra,
+    setOpenCloseModalCompra,
   } = useContext(TiendaContext);
 
   const [indexImagenCarrousel, setIndexImagenCarrousel] = useState(0);
-  const cerrarModalCompra = () => {
-    setProductoSeleccionado(null);
-  };
 
   useEffect(() => {
     console.log(
       productoSeleccionado,
       "este es el producto seleccionado en el catalogo",
     );
-    if (!productoSeleccionado) return;
+    if (!openCloseModalCompra) return;
     console.log(productoSeleccionado.id, "el id para el modal");
     const variantesDeProducto = async () => {
       const data = await fetch(
-        `http://localhost:3000/api/variantes/${productoSeleccionado?.id}`,
+        `http://localhost:3000/api/variantes/${productoSeleccionado.id}`,
         {
           method: "POST",
           headers: {
@@ -51,7 +51,8 @@ export const ModalCompra = () => {
       setVariantes(variantesObtenidas);
     };
     variantesDeProducto();
-  }, [productoSeleccionado]);
+    console.log(variantes, "estas son las variantes obtenidas");
+  }, [openCloseModalCompra]);
 
   useEffect(() => {
     if (animationCompra) {
@@ -64,7 +65,8 @@ export const ModalCompra = () => {
   }, [animationCompra]);
 
   const btnOpenCarrito = () => {
-    cerrarModalCompra();
+    if (talleSeleccionado === null) return console.log("selecciona un talle");
+    setOpenCloseModalCompra((prev) => !prev);
 
     setTimeout(() => {
       setOpenCloseMenu((prev) => !prev);
@@ -120,13 +122,13 @@ export const ModalCompra = () => {
   return (
     <section
       className={
-        productoSeleccionado
+        openCloseModalCompra
           ? "modal-compra modal-compra--active"
           : "modal-compra"
       }
     >
       <div className="modal-compra__cont">
-        {productoSeleccionado && (
+        {variantes && (
           <div className="modal-compra__contenedor">
             <span
               className="modal-compra__icon-cerrar material-symbols-outlined"
@@ -179,13 +181,9 @@ export const ModalCompra = () => {
               </div>
             </div>
 
-            <h4 className="modal-compra__titulo">
-              {productoSeleccionado.nombre}
-            </h4>
+            <h4 className="modal-compra__titulo">{variantes[0]?.producto}</h4>
 
-            <p className="modal-compra__precio">
-              ${productoSeleccionado.precio}
-            </p>
+            <p className="modal-compra__precio">${variantes[0]?.precio}</p>
           </div>
         )}
         <div>
@@ -229,8 +227,12 @@ export const ModalCompra = () => {
           </div>
         </div>
         <div className="modal-compra__contenedor-cantidad">
-          <p className="modal-compra__contenedor-label">Cantidad</p>
+          <h4 className="modal-compra__contenedor-label">Cantidad</h4>
           <ControlCantidad value={cantidad} onChange={setCantidad} />
+          <div className= "modal-compra__stock">
+            <h4 className="modal-compra__stock-titutlo">Stock</h4>
+            <p>3</p>
+          </div>
         </div>
 
         {animationCompra && (
@@ -245,9 +247,9 @@ export const ModalCompra = () => {
         <div className="modal-compra__total">
           <div className="modal-compra__total-cont">
             <h3 className="modal-compra__precio-label">TOTAL:</h3>
-            {productoSeleccionado && (
+            {variantes && (
               <h4 className="modal-compra__precio-total">
-                ${productoSeleccionado.precio}
+                ${variantes[0]?.precio}
               </h4>
             )}
           </div>
@@ -256,13 +258,18 @@ export const ModalCompra = () => {
           <button
             className="modal-compra__btn-agregar"
             onClick={() => {
-              (agregarAlCarrito(
-                productoSeleccionado,
+              const producto = {
+                id: variantes[0]?.producto_id,
+                nombre: variantes[0]?.nombre,
+                precio: variantes[0]?.precio,
+              };
+              agregarAlCarrito(
+                producto,
                 talleSeleccionado,
                 cantidad,
                 colorSeleccionado,
-                imagenesActuales[0]
-              ));
+                imagenesActuales[0],
+              );
             }}
           >
             Agregar al carrito

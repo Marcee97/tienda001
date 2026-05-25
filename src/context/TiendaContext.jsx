@@ -3,12 +3,14 @@ import { createContext, useEffect, useState } from "react";
 export const TiendaContext = createContext();
 
 export const TiendaProvider = ({ children }) => {
-  const [productoSeleccionado, setProductoSeleccionado] = useState(null);
+  const [productoSeleccionado, setProductoSeleccionado] = useState(false);
   const [openCloseMenu, setOpenCloseMenu] = useState(false);
   const [openCloseCarrito, setOpenCloseCarrito] = useState(false);
   const [talleSeleccionado, setTalleSeleccionado] = useState(null);
   const [colorSeleccionado, setColorSeleccionado] = useState(null);
   const [animationCompra, setAnimationCompra] = useState(false);
+  const [openCloseModalCompra, setOpenCloseModalCompra] = useState(false);
+  const [openCloseEnvios, setOpenCloseEnvios] = useState(false);
 
   const [productoSeleccionadoCarrito, setProductoSeleccionadoCarrito] =
     useState([]);
@@ -16,12 +18,9 @@ export const TiendaProvider = ({ children }) => {
   const [carrito, setCarrito] = useState([]);
   const [cantidad, setCantidad] = useState(1);
 
-
-
-
   const agregarAlCarrito = (producto, talle, cantidad, color, imagen) => {
-    if (!talle) return console.log("selecciona un talle"); 
-   
+    if (!talle) return console.log("selecciona un talle");
+    console.log(producto);
 
     setCarrito((prev) => {
       const existe = prev.find(
@@ -43,6 +42,8 @@ export const TiendaProvider = ({ children }) => {
       return [...prev, { ...producto, talle, cantidad, color, imagen }];
     });
   };
+
+  const cerrarModalCompra = () => {};
 
   const cambiarCantidad = (id, talle, nuevaCantidad) => {
     setCarrito((prev) =>
@@ -92,6 +93,11 @@ export const TiendaProvider = ({ children }) => {
         setColorSeleccionado,
         animationCompra,
         setAnimationCompra,
+        cerrarModalCompra,
+        openCloseModalCompra,
+        setOpenCloseModalCompra,
+        openCloseEnvios,
+        setOpenCloseEnvios,
       }}
     >
       {children}

@@ -8,13 +8,15 @@ export const MenuDesplegable = () => {
     setOpenCloseMenu,
     openCloseCarrito,
     setOpenCloseCarrito,
-    carrito
+    carrito,
+    cerrarModalCompra,
+    setOpenCloseModalCompra,
   } = useContext(TiendaContext);
 
   return (
     <section
       className={openCloseMenu ? "menu-desplegable-active" : "menu-desplegable"}
-      onClick={() => setOpenCloseMenu((prev) => !prev)}
+      onClick={() => {  setOpenCloseModalCompra(prev => !prev); setOpenCloseMenu(false);}}
     >
       <Carrito />
       <h2 className="menu-desplegable-title">VALLEY</h2>

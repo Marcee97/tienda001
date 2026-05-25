@@ -8,7 +8,8 @@ import { ModalCompra } from "./ui/ModalCompra";
 import { Success } from "./ui/Success";
 import { Failed } from "./ui/Failed";
 import { Pending } from "./ui/Pending";
-
+import { Welcome } from "./ui/Welcome";
+import { ModalEnvio } from "./ui/ModalEnvio";
 export const App = () => {
   return (
     <section className="app">
@@ -19,9 +20,9 @@ export const App = () => {
             path="/"
             element={
               <>
-                <Introduccion />
-                <Catalogo />
+              <Welcome />
                 <ModalCompra />
+                <ModalEnvio />
               </>
             }
           />
