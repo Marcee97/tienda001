@@ -13,13 +13,16 @@ const webhookRoutes = require('./routes/webhook.routes.js')
 const ventaRoutes = require('./routes/ventas.routes.js')
 const productosRoutes = require('./routes/productos.routes.js')
 const variantesRoutes = require('./routes/variantes.routes.js')
+const actualizarStock = require('./routes/ventas.routes.js')
+const datosDeVenta = require("./routes/ventas.routes.js")
 
 app.use('/api/variantes', variantesRoutes)
 app.use('/api/ventas', ventaRoutes)
-app.use('/api/pagos', mercadoPagoRoutes)
+app.use('/api/crear-preferencia', mercadoPagoRoutes)
 app.use('/api/webhook', webhookRoutes)
 app.use('/api/productos', productosRoutes)
-
+app.use('/api/actualizar-stock', actualizarStock)
+app.use('/api/datos-venta', datosDeVenta)
 app.get("/", (req, res) => {
   res.send("Servidor funcionando con CommonJS");
 });

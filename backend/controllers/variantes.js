@@ -12,6 +12,8 @@ const getVariantes = async (req, res) => {
     v.talle,
     v.stock,
     c.nombre AS color,
+    p.precio AS precio,
+    p.nombre AS nombre,
     pi.url,
     pi.orden
 
@@ -21,22 +23,18 @@ LEFT JOIN producto_imagenes pi
     ON v.producto_id = pi.producto_id
     AND v.color_id = pi.color_id
 
-
-  LEFT JOIN colores c
+LEFT JOIN colores c
     ON v.color_id = c.id
 
-WHERE v.producto_id = ?
-ORDER BY c.orden, pi.orden;`, [id]);
-    console.log(rows, "esto se son las variantes del producto seleccionado del catalogo")
-    res.json(rows)
-  // try {
-  //   const [rows] = await pool.query(`SELECT * FROM variantes WHERE producto_id = ?`, [req.body.productoId]);
-  //   res.json(rows);
-  //   console.log(rows, "estas sonm las variantes del producto seleccionado")
-  // } catch (error) {
-  //   console.error(error);
-  //   res.status(500).json({ error: "Error al obtener las variantes" });
-  // }
+LEFT JOIN productos p
+    ON v.producto_id = p.id
+
+ORDER BY c.orden, pi.orden`);
+
+  console.log(rows, "catalogo completo");
+  res.json(rows);
+    
+  
 };
 
 module.exports = { getVariantes };
