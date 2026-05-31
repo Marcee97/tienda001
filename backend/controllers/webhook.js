@@ -38,7 +38,7 @@ const webhook = async (req, res) => {
           return res.sendStatus(200);
         }
 
-        const { carrito, datos_formulario } = payment.metadata;
+        const { carrito_seguro, datos_formulario } = payment.metadata;
 
         // 2. Guardar venta
         const [venta] = await pool.query(
@@ -60,7 +60,7 @@ const webhook = async (req, res) => {
 
         // 3. Guardar items
         await Promise.all(
-          carrito.map((item) =>
+          carrito_seguro.map((item) =>
             pool.query(
               `INSERT INTO venta_items (venta_id, producto_id, color_id, talle, cantidad, precio_unitario)
                VALUES (?, ?, ?, ?, ?, ?)`,
@@ -78,7 +78,7 @@ const webhook = async (req, res) => {
 
         // 4. Actualizar stock
         await Promise.all(
-          carrito.map((item) =>
+          carrito_seguro.map((item) =>
             pool.query(
               `UPDATE variantes SET stock = stock - ?
                WHERE producto_id = ? AND color_id = ? AND talle = ? AND stock >= ?`,
