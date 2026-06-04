@@ -74,7 +74,9 @@ export const Carrito = () => {
           <button
             className="carrito__button carrito__button--primary"
             onClick={(e) => {
+             
               e.stopPropagation();
+              if(carrito.length === 0) return;
               setOpenCloseEnvios((prev) => !prev);
             }}
           >

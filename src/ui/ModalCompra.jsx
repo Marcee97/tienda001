@@ -29,7 +29,7 @@ export const ModalCompra = () => {
   } = useContext(TiendaContext);
 
   const [indexImagenCarrousel, setIndexImagenCarrousel] = useState(0);
-
+  const [openChatbot, setOpenChatbot] = useState(false);
   useEffect(() => {
     console.log(
       productoSeleccionado,
@@ -76,7 +76,26 @@ export const ModalCompra = () => {
       setOpenCloseCarrito((prev) => !prev);
     }, 450);
   };
-  //------------------ LOGICA DE SELECCION DE VARIANTES (COLORES Y TALLES)------------------
+  const [mensajes, setMensajes] = useState([]);
+  const [inputChat, setInputChat] = useState("");
+
+  const enviarMensaje = async () => {
+    if (!inputChat.trim()) return;
+
+    const mensajeUsuario = { role: "user", texto: inputChat };
+    setMensajes((prev) => [...prev, mensajeUsuario]);
+    setInputChat("");
+
+    const response = await fetch("http://localhost:3000/api/chatbot", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ mensaje: inputChat }),
+    });
+
+    const data = await response.json();
+    setMensajes((prev) => [...prev, { role: "bot", texto: data.respuesta }]);
+  };
+  //------------------ LOGICA DE SELECCION DE VARIANTES (COLORES TALLES Y STOCK)------------------
   const colores = variantes.reduce((acc, item) => {
     const existe = acc.some((c) => c.color_id === item.color_id);
 
@@ -118,7 +137,9 @@ export const ModalCompra = () => {
     (item, index, self) =>
       index === self.findIndex((v) => v.talle === item.talle),
   );
-
+  const varianteSeleccionada = variantes.find(
+    (v) => v.color_id === colorSeleccionado && v.talle === talleSeleccionado,
+  );
   return (
     <section
       className={
@@ -130,17 +151,19 @@ export const ModalCompra = () => {
       <div className="modal-compra__cont">
         {variantes && (
           <div className="modal-compra__contenedor">
-            <span
-              className="modal-compra__icon-cerrar material-symbols-outlined"
-              onClick={() => {
-                cerrarModalCompra();
-                setTalleSeleccionado(null);
-                setCantidad(1);
-              }}
-            >
-              close
-            </span>
-
+            <div className="modal-compra__titulo-contenedor">
+              <span
+                className="material-symbols-outlined"
+                onClick={() => {
+                  cerrarModalCompra();
+                  setTalleSeleccionado(null);
+                  setCantidad(1);
+                }}
+              >
+                arrow_back_ios
+              </span>
+              <p className="modal-compra__titulo-carrousel">Remeras</p>
+            </div>
             <div className="modal-compra__galeria">
               <div
                 className="modal-compra__galeria-carrousel"
@@ -159,127 +182,183 @@ export const ModalCompra = () => {
                 ))}
               </div>
               <div className="modal-compra__botonera-carrousel">
-                <button
+                <span
+                  className="material-symbols-outlined modal-compra__carrousel-back"
                   onClick={() =>
                     setIndexImagenCarrousel((prev) =>
                       prev > 0 ? prev - 1 : prev,
                     )
                   }
                 >
-                  ◀
-                </button>
+                  arrow_back_ios
+                </span>
 
-                <button
+                <span
+                  className="material-symbols-outlined modal-compra__carrousel-next"
                   onClick={() =>
                     setIndexImagenCarrousel((prev) =>
                       prev < imagenesActuales.length - 1 ? prev + 1 : prev,
                     )
                   }
                 >
-                  ▶
-                </button>
+                  arrow_forward_ios
+                </span>
               </div>
             </div>
-
-            <h4 className="modal-compra__titulo">{variantes[0]?.producto}</h4>
-
-            <p className="modal-compra__precio">${variantes[0]?.precio}</p>
           </div>
         )}
-        <div>
-          <h4>Colores</h4>
-          <div className="modal-compra__contenedor-btn-colores">
-            {colores.map((c) => (
-              <button
-                key={c.color_id}
-                className={`modal-compra__color-btn ${
-                  colorSeleccionado === c.color_id ? "active" : ""
-                }`}
-                style={{
-                  backgroundColor: traduccionColores[c.color?.toLowerCase()],
-                }}
-                onClick={() => {
-                  setColorSeleccionado(c.color_id);
-                  setTalleSeleccionado(null);
-                  setIndexImagenCarrousel(0);
-                }}
-              ></button>
-            ))}
+        <div className="modal-compra__info">
+          <div className="modal-compra__cont-titulo-chatbot">
+            <h4 className="modal-compra__titulo">{variantes[0]?.nombre}</h4>
+            <h4 onClick={() => setOpenChatbot((prev) => !prev)} className="modal-compra__btn-chat">Necesito ayuda</h4>
           </div>
-        </div>
-
-        <div className="modal-compra__talles">
-          <div className="modal-compra__talles-botones">
-            <p className="modal-compra__talles-label">Talle</p>
-            <div className="modal-compra__cont-talles-botones">
-              {tallesUnicos.map((v, index) => (
+          <p className="modal-compra__precio">${variantes[0]?.precio}</p>
+          <div>
+            <h4>Colores</h4>
+            <div className="modal-compra__contenedor-btn-colores">
+              {colores.map((c) => (
                 <button
-                  key={index}
-                  className={`modal-compra__talle-btn ${
-                    talleSeleccionado === v.talle ? "active" : ""
+                  key={c.color_id}
+                  className={`modal-compra__color-btn ${
+                    colorSeleccionado === c.color_id ? "active" : ""
                   }`}
-                  onClick={() => setTalleSeleccionado(v.talle)}
-                >
-                  {v.talle}
-                </button>
+                  style={{
+                    backgroundColor: traduccionColores[c.color?.toLowerCase()],
+                  }}
+                  onClick={() => {
+                    setColorSeleccionado(c.color_id);
+                    setTalleSeleccionado(null);
+                    setIndexImagenCarrousel(0);
+                  }}
+                ></button>
               ))}
             </div>
           </div>
-        </div>
-        <div className="modal-compra__contenedor-cantidad">
-          <h4 className="modal-compra__contenedor-label">Cantidad</h4>
-          <ControlCantidad value={cantidad} onChange={setCantidad} />
-          <div className= "modal-compra__stock">
-            <h4 className="modal-compra__stock-titutlo">Stock</h4>
-            <p>3</p>
-          </div>
-        </div>
 
-        {animationCompra && (
-          <div className="mensaje-agregado">
-            <p className="mensaje-agregado__text">Se agregó al carrito</p>
-            <h4 className="mensaje-agregado__button" onClick={btnOpenCarrito}>
-              Ver
-            </h4>
+          <div className="modal-compra__talles">
+            <div className="modal-compra__talles-botones">
+              <div className="modal-compra__cont-talles-botones">
+                {tallesUnicos
+                  .filter((t) => t.stock > 0)
+                  .map((v, index) => (
+                    <button
+                      key={index}
+                      className={`modal-compra__talle-btn ${
+                        talleSeleccionado === v.talle ? "active" : ""
+                      }`}
+                      onClick={() => setTalleSeleccionado(v.talle)}
+                    >
+                      {v.talle}
+                    </button>
+                  ))}
+              </div>
+            </div>
           </div>
-        )}
+          <div className="modal-compra__contenedor-cantidad">
+            <h4 className="modal-compra__contenedor-label">Cantidad</h4>
+            <div className="modal-compra__stock">
+              <h4 className="modal-compra__stock-titutlo">Stock</h4>
+              <p>{varianteSeleccionada?.stock ?? "-"}</p>
+            </div>
+          </div>
 
-        <div className="modal-compra__total">
-          <div className="modal-compra__total-cont">
-            <h3 className="modal-compra__precio-label">TOTAL:</h3>
-            {variantes && (
-              <h4 className="modal-compra__precio-total">
-                ${variantes[0]?.precio}
+          {animationCompra && (
+            <div className="mensaje-agregado">
+              <p className="mensaje-agregado__text">Se agregó al carrito</p>
+              <h4 className="mensaje-agregado__button" onClick={btnOpenCarrito}>
+                Ver
               </h4>
-            )}
+            </div>
+          )}
+          <div className="modal-compra__total">
+            <div className="modal-compra__total-cont">
+              <h3 className="modal-compra__precio-label">TOTAL:</h3>
+              {variantes && (
+                <h4 className="modal-compra__precio-total">
+                  ${variantes[0]?.precio}
+                </h4>
+              )}
+            </div>
           </div>
-        </div>
-        <div className="modal-compra__acciones">
-          <button
-            className="modal-compra__btn-agregar"
-            onClick={() => {
-              const producto = {
-                id: variantes[0]?.producto_id,
-                nombre: variantes[0]?.nombre,
-                precio: variantes[0]?.precio,
-              };
-              agregarAlCarrito(
-                producto,
-                talleSeleccionado,
-                cantidad,
-                colorSeleccionado,
-                imagenesActuales[0],
-              );
-            }}
-          >
-            Agregar al carrito
-          </button>
-          <button
-            className="modal-compra__btn-comprar"
-            onClick={() => generarPago()}
-          >
-            Comprar ahora
-          </button>
+          <div className="modal-compra__acciones">
+            <button
+              className="modal-compra__btn-agregar"
+              onClick={() => {
+                const producto = {
+                  id: variantes[0]?.producto_id,
+                  nombre: variantes[0]?.nombre,
+                  precio: variantes[0]?.precio,
+                };
+                agregarAlCarrito(
+                  producto,
+                  talleSeleccionado,
+                  cantidad,
+                  colorSeleccionado,
+                  imagenesActuales[0],
+                );
+              }}
+            >
+              Agregar al carrito
+            </button>
+            <div
+              className={`modal-compra__chatbot ${openChatbot ? "modal-compra__chatbot--active" : ""}`}
+            >
+              <div className="modal-compra__chatbot-header">
+                <span
+                  className="material-symbols-outlined modal-compra__chatbot-back"
+                  onClick={() => setOpenChatbot(false)}
+                >
+                  close
+                </span>
+              </div>
+              <div className="chatbot">
+                <div className="chatbot__mensajes">
+                  {mensajes.length === 0 && (
+                    <p className="chatbot__mensajes-introduccion">
+                      {" "}
+                      <br />
+                      👋 Hola, puedo ayudarte con:
+                      <br />
+                      Precios
+                      <br />
+                      Envios
+                      <br />
+                      Talles
+                      <br/>
+                      Colores
+                      <br/>
+                      Y con cualquier duda que tengas.
+                    </p>
+                  )}
+
+                  {mensajes.map((msg, i) => (
+                    <div
+                      key={i}
+                      className={`chatbot__mensaje chatbot__mensaje--${msg.role}`}
+                    >
+                      <p>{msg.texto}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="chatbot__input-cont">
+                  <input
+                    type="text"
+                    value={inputChat}
+                    placeholder="Escribe tu consulta..."
+                    className="chatbot__input"
+                    onChange={(e) => setInputChat(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && enviarMensaje()}
+                  />
+                  <button
+                    className="chatbot__btn-enviar"
+                    onClick={enviarMensaje}
+                  >
+                    ➤
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

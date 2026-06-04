@@ -1,6 +1,5 @@
 .modal-compra {
   color: #fff;
-  border-radius: 8px;
   position: fixed;
   z-index: 90;
   overflow: hidden;
@@ -12,49 +11,60 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
-  color: #000;
-  background-color: #00000086;
-  backdrop-filter: blur(25px);
+  color: #242424;
 }
 
 .modal-compra--active {
   height: 100vh;
-  padding: 10px;
+  background-color: #949494;
 }
 .modal-compra__contenedor {
   display: flex;
   flex-direction: column;
   position: relative;
 }
-
-.modal-compra__icon-cerrar {
-  background-color: #ffffff;
-  padding: 0.2em;
-  width: 10%;
+.modal-compra__info {
   border-radius: 25px;
-  position: absolute;
+  box-shadow: 0 2px 12px 1px #000000f6;
+  padding: 0.3em;
+  border: 1px solid #13131350;
+  background-color: #929292c4;
+  position: relative;
+  overflow: hidden;
+}
+.modal-compra__titulo-contenedor {
+  width: 30%;
+  border-radius: 25px;
   display: flex;
   justify-content: center;
-  margin-left: 90%;
-  box-shadow: 1px 2px 9px 2px #161616da;
+  align-items: center;
   z-index: 45;
+}
+.modal-compra__cont-titulo-chatbot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.2em 0;
+}
+.modal-compra__btn-chat{
+  
+
+}
+.modal-compra__titulo-carrousel {
+  font-weight: 900;
+  font-size: 1.4em;
 }
 
 .modal-compra__cont {
-  background-color: #ffffff93;
-  backdrop-filter: blur(7px);
-  height: 95%;
-  padding: 0.3em;
-  border-radius: 9px;
   overflow: auto;
 }
-
 
 .modal-compra__galeria {
   display: flex;
   gap: 1em;
+  overflow: hidden;
 }
-.modal-compra__galeria-carrousel{
+.modal-compra__galeria-carrousel {
   display: flex;
   width: 100%;
   gap: 1em;
@@ -65,7 +75,7 @@
   height: 410px;
   object-fit: cover;
 }
-.modal-compra__botonera-carrousel{
+.modal-compra__botonera-carrousel {
   position: absolute;
   width: 100%;
   display: flex;
@@ -82,9 +92,12 @@
   font-size: 1.9em;
   color: #0ba681;
 }
-.modal-compra__contenedor-btn-colores{
-  display:flex;
-  gap:.5em;
+.modal-compra__colores-and-talles {
+  display: flex;
+}
+.modal-compra__contenedor-btn-colores {
+  display: flex;
+  gap: 0.5em;
 }
 .modal-compra__color-btn {
   width: 35px;
@@ -108,8 +121,7 @@
 .modal-compra__talles-label {
   color: #0f0f0f;
   font-weight: 600;
-  font-size: .9em;
-  
+  font-size: 0.9em;
 }
 
 .modal-compra__talles-botones {
@@ -122,7 +134,6 @@
 }
 .modal-compra__talle-btn.active {
   color: #ffffff;
-  background-color: #161616;
 }
 .modal-compra__cont-talles-botones {
   display: flex;
@@ -149,19 +160,15 @@
   justify-content: space-between;
 }
 
-
 .mensaje-agregado__button {
   border: 1 px solid #3a3a3a;
   padding: 0.3em 1.5em;
   border-radius: 5px;
-  background-color: #3a3a3a00;
-}
-.modal-compra__contenedor-cantidad {
 }
 
-.modal-compra__contenedor-label{
+.modal-compra__contenedor-label {
   font-weight: 900;
-  font-size:1.13em;
+  font-size: 1.13em;
   letter-spacing: 1px;
 }
 
@@ -202,18 +209,102 @@
 .modal-compra__btn-agregar {
   color: #fff;
   background-color: #01051d;
-
   padding: 0.8em;
   border-radius: 8px;
   border: none;
   font-size: 1.3em;
 }
+.modal-compra__chatbot {
+  position: absolute;
+  width: 100%;
+  background-color: #000000ec;
+  backdrop-filter: blur(5px);
+  height: 100%;
+  top: 0;
+  transform: translateX(-104%);
+  transition: transform 0.3s ease;
+}
+.modal-compra__chatbot-back {
+  font-size: 2.4em;
+}
 
-.modal-compra__btn-comprar {
-  color: #fff;
-  background-color: #011d03;
-  padding: 0.8em;
-  border-radius: 8px;
+.modal-compra__chatbot--active {
+  transform: translateX(-1.4%);
+}
+
+.modal-compra__chatbot-header {
+  display: flex;
+  justify-content: end;
+  background-color: #000000ec;
+  padding: 0.1em 0.4em;
+  color: #6b6b6b;
+}
+
+.chatbot {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 88%;
+  width: 101%;
+  background-color: #000000ec;
+}
+
+.chatbot__mensajes {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0.5em;
+}
+.chatbot__mensajes-introduccion {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color:#696969
+}
+
+.chatbot__mensaje {
+  max-width: 76%;
+  padding: 0.5em 0.7em;
+  border-radius: 15px;
+  font-size: 1.1em;
+}
+
+.chatbot__mensaje--user {
+  align-self: flex-end;
+  background-color: #4a90e2;
+  color: white;
+  border-bottom-right-radius: 0;
+}
+
+.chatbot__mensaje--bot {
+  align-self: flex-start;
+  background-color: #333;
+  color: white;
+  border-bottom-left-radius: 0;
+}
+
+.chatbot__input-cont {
+  display: flex;
+  gap: 0.5em;
+  padding: 0.5em;
+}
+
+.chatbot__input {
+  flex: 1;
+  padding: 0.5em;
+  border-radius: 19px;
   border: none;
-  font-size: 1.3em;
+  outline: none;
+}
+
+.chatbot__btn-enviar {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
 }

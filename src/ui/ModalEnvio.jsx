@@ -8,6 +8,9 @@ export const ModalEnvio = () => {
   const { carrito, openCloseEnvios, setOpenCloseEnvios } =
     useContext(TiendaContext);
 
+const [errores, setErrores] = useState({});
+
+
   useEffect(() => {
     console.log(carrito, "este es el carrito en el modal de envio");
   }, [carrito]);
@@ -29,43 +32,63 @@ export const ModalEnvio = () => {
     }
   };
 
-
   const [datosFormulario, setDatosFormulario] = useState({
     nombre: "",
-    calle:"",
-    numero:"",
+    calle: "",
+    numero: "",
     provincia: "",
     ciudad: "",
     codigoPostal: "",
     telefono: "",
     email: "",
-  })
+  });
 
   const cambiosFormulario = (e) => {
-    setDatosFormulario({...datosFormulario, [e.target.name] : e.target.value})
-  }
+    setDatosFormulario({ ...datosFormulario, [e.target.name]: e.target.value });
+  };
 
-  const enviarFormulario = async()=> {
-    console.log(datosFormulario, "estos son los datos del formulario")
-   
-    const response = await fetch(`https://9f71-181-165-192-32.ngrok-free.app/api/crear-preferencia`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+  const enviarFormulario = async () => {
+    console.log(datosFormulario, "estos son los datos del formulario");
+
+    const response = await fetch(
+      `https://054f-181-165-192-32.ngrok-free.app/api/crear-preferencia`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
           "ngrok-skip-browser-warning": "true",
+        },
+        body: JSON.stringify({ carrito, datosFormulario }),
       },
-      body: JSON.stringify({carrito, datosFormulario}),
+    );
+    const data = await response.json();
+    console.log(data, "aca deberia estar el init point");
+    window.location.href = data.init_point;
+  };
 
-    });
-    const data = await response.json()
-    console.log(data, "aca deberia estar el init point")
-     window.location.href = data.init_point;
-    
+const validarFormulario = () => {
+  const nuevosErrores = {};
+
+  if (!datosFormulario.nombre?.trim()) nuevosErrores.nombre = "El nombre es obligatorio";
+  if (!datosFormulario.calle?.trim()) nuevosErrores.calle = "La calle es obligatoria";
+  if (!datosFormulario.numero?.trim()) nuevosErrores.numero = "El número es obligatorio";
+  if (!datosFormulario.provincia?.trim()) nuevosErrores.provincia = "La provincia es obligatoria";
+  if (!datosFormulario.ciudad?.trim()) nuevosErrores.ciudad = "La ciudad es obligatoria";
+  if (!datosFormulario.codigoPostal?.trim()) nuevosErrores.codigoPostal = "El código postal es obligatorio";
+  if (!datosFormulario.telefono?.trim()) nuevosErrores.telefono = "El teléfono es obligatorio";
+  if (!datosFormulario.email?.trim()) {
+    nuevosErrores.email = "El email es obligatorio";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datosFormulario.email)) {
+    nuevosErrores.email = "El email no es válido";
   }
+
+  setErrores(nuevosErrores);
+  return Object.keys(nuevosErrores).length === 0;
+};
   return (
     <section
       style={{
-        maxHeight: openCloseEnvios ? "80vh" : "0",
+        maxHeight: openCloseEnvios ? "100vh" : "0",
         transition: "max-height 0.4s ease",
       }}
       className="modal-envio"
@@ -111,8 +134,7 @@ export const ModalEnvio = () => {
       </div>
       <div className="modal-envio__cont">
         <div className="modal-envio__opciones">
-          <button className="modal-envio__btn-opcion">Retiro</button>
-          <button className="modal-envio__btn-opcion">Envio</button>
+         
         </div>
         <div className="modal-envio__formulario">
           <input
@@ -122,6 +144,7 @@ export const ModalEnvio = () => {
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
           />
+          {errores.nombre && <p className="modal-envio__error">{errores.nombre}</p>}
           <input
             type="text"
             name="calle"
@@ -129,20 +152,26 @@ export const ModalEnvio = () => {
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
           />
-           <input
+          {errores.calle && <p className="modal-envio__error">{errores.calle}</p>}
+
+          <input
             type="text"
             name="numero"
             placeholder="Numero"
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
           />
-           <input
+          {errores.numero && <p className="modal-envio__error">{errores.numero}</p>}
+
+          <input
             type="text"
             name="provincia"
             placeholder="Provincia"
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
           />
+          {errores.numero && <p className="modal-envio__error">{errores.numero}</p>}
+
           <input
             type="text"
             name="ciudad"
@@ -150,6 +179,7 @@ export const ModalEnvio = () => {
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
           />
+          {errores.ciudad && <p className="modal-envio__error">{errores.ciudad}</p>}
           <input
             type="text"
             name="codigoPostal"
@@ -157,6 +187,7 @@ export const ModalEnvio = () => {
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
           />
+          {errores.codigoPostal && <p className="modal-envio__error">{errores.codigoPostal}</p>}
           <input
             type="text"
             name="telefono"
@@ -164,6 +195,7 @@ export const ModalEnvio = () => {
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
           />
+          {errores.telefono && <p className="modal-envio__error">{errores.telefono}</p>}
           <input
             type="email"
             name="email"
@@ -171,11 +203,15 @@ export const ModalEnvio = () => {
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
           />
+          {errores.email && <p className="modal-envio__error">{errores.email}</p>}
         </div>
         <div className="modal-envio__acciones">
           <button
             className="modal-envio__boton-confirmar"
-            onClick={enviarFormulario}
+            onClick={() => {
+              if (!validarFormulario()) return;
+              enviarFormulario();
+            }}
           >
             Confirmar
           </button>
