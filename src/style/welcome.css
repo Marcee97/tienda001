@@ -1,21 +1,28 @@
 .welcome{
-    outline: 1px solid red;
-    height: 80dvh;
+    height: 99dvh;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     color : #fff;
     font-size: 2.1em;
     flex-direction: column;
     text-align: center;
+    padding:2em 0;
 
 }
 
 .welcome__boton{
-    padding: .6em 1.2em;
-    background-color: #fff;
+    padding: .4em;
+    width:90%;
+    background-color: #ffffff00;
     color: #000;
-    font-size: 1em;
+    font-size: .9em;
     border-radius: 5px;
     cursor: pointer;
+    border-radius:45px;
+    border: none;
+    box-shadow: 0 0 10px #ffffff80;
+    color:#fff;
+    border:1px solid #fff;
+
 }

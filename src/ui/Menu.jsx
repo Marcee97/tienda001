@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import "../style/menu.css";
-import { Introduccion } from "./Introduccion";
 import { MenuDesplegable } from "./MenuDesplegable";
 import { TiendaContext } from "../context/TiendaContext";
 export const Menu = () => {
