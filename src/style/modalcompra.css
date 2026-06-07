@@ -308,6 +308,7 @@
   border-radius: 19px;
   border: none;
   outline: none;
+  font-size:17px;
 }
 
 .chatbot__btn-enviar {
