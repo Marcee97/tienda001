@@ -150,7 +150,7 @@ export const ModalCompra = () => {
  console.log("abriendo chatbot")
     setTimeout(() => {
 inputChatRef.current?.focus()
-    }, 100)
+    }, 0)
   }
   return (
     <section
