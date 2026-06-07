@@ -265,7 +265,10 @@ export const ModalCompra = () => {
             >
               Agregar al carrito
             </button>
-            <div
+           
+          </div>
+        </div>
+         <div
               className={`modal-compra__chatbot ${openChatbot ? "modal-compra__chatbot--active" : ""}`}
             >
               <div className="modal-compra__chatbot-header">
@@ -322,8 +325,6 @@ export const ModalCompra = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
       </div>
     </section>
   );
