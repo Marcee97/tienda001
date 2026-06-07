@@ -39,7 +39,7 @@ export const ModalCompra = () => {
     console.log(productoSeleccionado.id, "el id para el modal");
     const variantesDeProducto = async () => {
       const data = await fetch(
-        `http://localhost:3000/api/variantes/${productoSeleccionado.id}`,
+        `${import.meta.env.VITE_API_URL}/api/variantes/${productoSeleccionado.id}`,
         {
           method: "POST",
           headers: {
@@ -86,7 +86,7 @@ export const ModalCompra = () => {
     setMensajes((prev) => [...prev, mensajeUsuario]);
     setInputChat("");
 
-    const response = await fetch("http://localhost:3000/api/chatbot", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/chatbot`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ mensaje: inputChat }),

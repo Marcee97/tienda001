@@ -51,12 +51,12 @@ const [errores, setErrores] = useState({});
     console.log(datosFormulario, "estos son los datos del formulario");
 
     const response = await fetch(
-      `https://054f-181-165-192-32.ngrok-free.app/api/crear-preferencia`,
+      `${import.meta.env.VITE_API_URL}/api/crear-preferencia`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "ngrok-skip-browser-warning": "true",
+         
         },
         body: JSON.stringify({ carrito, datosFormulario }),
       },

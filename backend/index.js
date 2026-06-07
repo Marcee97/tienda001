@@ -4,20 +4,21 @@ const cors = require('cors')
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173"
+  origin: [
+    "http://localhost:5173",
+    "https://tu-app.vercel.app" // ← tu URL de Vercel
+  ]
 }));
 app.use(express.json());
 
 const mercadoPagoRoutes = require('./routes/mercadopago.routes.js')
 const webhookRoutes = require('./routes/webhook.routes.js')
-const ventaRoutes = require('./routes/ventas.routes.js')
 const productosRoutes = require('./routes/productos.routes.js')
 const variantesRoutes = require('./routes/variantes.routes.js')
 const actualizarStock = require('./routes/ventas.routes.js')
 const datosDeVenta = require("./routes/ventas.routes.js")
 
 app.use('/api/variantes', variantesRoutes)
-app.use('/api/ventas', ventaRoutes)
 app.use('/api/crear-preferencia', mercadoPagoRoutes)
 app.use('/api/webhook', webhookRoutes)
 app.use('/api/productos', productosRoutes)
