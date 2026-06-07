@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import "../style/modalcompra.css";
 import { TiendaContext } from "../context/TiendaContext";
 import { traduccionColores } from "../archivos/diccionarioIngles.js";
@@ -29,6 +29,8 @@ export const ModalCompra = () => {
 
   const [indexImagenCarrousel, setIndexImagenCarrousel] = useState(0);
   const [openChatbot, setOpenChatbot] = useState(false);
+  const inputChatRef = useRef(null);
+
   useEffect(() => {
     console.log(
       productoSeleccionado,
@@ -142,6 +144,14 @@ export const ModalCompra = () => {
   const varianteSeleccionada = variantes.find(
     (v) => v.color_id === colorSeleccionado && v.talle === talleSeleccionado,
   );
+
+  const abrirChatbot = () => {
+ setOpenChatbot(true)
+ console.log("abriendo chatbot")
+    setTimeout(() => {
+inputChatRef.current?.focus()
+    }, 100)
+  }
   return (
     <section
       className={
@@ -171,7 +181,7 @@ export const ModalCompra = () => {
           <div className="modal-compra__cont-titulo-chatbot">
             <h4 className="modal-compra__titulo">{variantes[0]?.nombre}</h4>
             <h4
-              onClick={() => setOpenChatbot((prev) => !prev)}
+             onClick={()=> abrirChatbot()}
               className="modal-compra__btn-chat"
             >
               Necesito ayuda
@@ -310,6 +320,7 @@ export const ModalCompra = () => {
                 <div className="chatbot__input-cont">
                   <input
                     type="text"
+                    ref={inputChatRef}
                     value={inputChat}
                     placeholder="Escribe tu consulta..."
                     className="chatbot__input"
