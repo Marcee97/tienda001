@@ -15,7 +15,7 @@
 }
 
 .modal-compra--active {
-  height: 100vh;
+  min-height: 100vh;
   background-color: #949494;
 }
 .modal-compra__contenedor {
@@ -24,7 +24,7 @@
   position: relative;
 }
 .modal-compra__info {
-  border-radius: 25px;
+  border-radius: 25px 25px 0 0;
   box-shadow: 0 2px 12px 1px #000000f6;
   padding: 0.3em;
   border: 1px solid #13131350;
@@ -33,12 +33,16 @@
   overflow: hidden;
 }
 .modal-compra__titulo-contenedor {
-  width: 30%;
+  position: absolute;
+  top: 0;
+  width: 9%;
   border-radius: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 45;
+  font-size:1.5em;
+  color:#222222;
 }
 .modal-compra__cont-titulo-chatbot {
   display: flex;
@@ -63,17 +67,20 @@
   display: flex;
   gap: 1em;
   overflow: hidden;
+  position: relative;
+  width: 100%;
+  outline:1px solid red;
 }
 .modal-compra__galeria-carrousel {
   display: flex;
+  justify-content:space-between;
   width: 100%;
-  gap: 1em;
 }
 
 .modal-compra__miniatura {
-  min-width: 100%;
-  height: 410px;
+  height: 350px;
   object-fit: cover;
+  min-width: 90%;
 }
 .modal-compra__botonera-carrousel {
   position: absolute;
@@ -81,7 +88,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 90%;
+  height: 100%; /* cambiá 90% por 100% */
+  top: 0; /* agregá esto */
+  z-index: 10; /* agregá esto */
+  pointer-events: none; /* agregá esto para que no bloquee el click en las imágenes */
 }
 
 .modal-compra__titulo {
@@ -129,7 +139,6 @@
   flex-direction: column;
   justify-content: center;
   gap: 0.5em;
-  padding: 1em 0;
   margin: 0.5em 0;
 }
 .modal-compra__talle-btn.active {
@@ -244,9 +253,11 @@
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
-  height: 88%;
+  height: 90%;
   width: 101%;
   background-color: #000000ec;
+  
+  
 }
 
 .chatbot__mensajes {

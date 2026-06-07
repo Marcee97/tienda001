@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import "../style/modalcompra.css";
 import { TiendaContext } from "../context/TiendaContext";
-import { ControlCantidad } from "../components/ControlCantidad/ControlCantidad";
 import { traduccionColores } from "../archivos/diccionarioIngles.js";
-
+import { Carrousel } from "../components/Carrousel.jsx";
 export const ModalCompra = () => {
   const [variantes, setVariantes] = useState([]);
 
@@ -86,11 +85,14 @@ export const ModalCompra = () => {
     setMensajes((prev) => [...prev, mensajeUsuario]);
     setInputChat("");
 
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/chatbot`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ mensaje: inputChat }),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/chatbot`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mensaje: inputChat }),
+      },
+    );
 
     const data = await response.json();
     setMensajes((prev) => [...prev, { role: "bot", texto: data.respuesta }]);
@@ -149,68 +151,31 @@ export const ModalCompra = () => {
       }
     >
       <div className="modal-compra__cont">
-        {variantes && (
-          <div className="modal-compra__contenedor">
-            <div className="modal-compra__titulo-contenedor">
-              <span
-                className="material-symbols-outlined"
-                onClick={() => {
-                  cerrarModalCompra();
-                  setTalleSeleccionado(null);
-                  setCantidad(1);
-                }}
-              >
-                arrow_back_ios
-              </span>
-              <p className="modal-compra__titulo-carrousel">Remeras</p>
-            </div>
-            <div className="modal-compra__galeria">
-              <div
-                className="modal-compra__galeria-carrousel"
-                style={{
-                  transform: `translateX(-${indexImagenCarrousel * 104}%)`,
-                  transition: "transform 0.3s ease",
-                }}
-              >
-                {imagenesActuales.map((img, i) => (
-                  <img
-                    key={i}
-                    src={img}
-                    className="modal-compra__miniatura"
-                    onClick={() => setIndexImagenCarrousel(i)}
-                  />
-                ))}
-              </div>
-              <div className="modal-compra__botonera-carrousel">
-                <span
-                  className="material-symbols-outlined modal-compra__carrousel-back"
-                  onClick={() =>
-                    setIndexImagenCarrousel((prev) =>
-                      prev > 0 ? prev - 1 : prev,
-                    )
-                  }
-                >
-                  arrow_back_ios
-                </span>
-
-                <span
-                  className="material-symbols-outlined modal-compra__carrousel-next"
-                  onClick={() =>
-                    setIndexImagenCarrousel((prev) =>
-                      prev < imagenesActuales.length - 1 ? prev + 1 : prev,
-                    )
-                  }
-                >
-                  arrow_forward_ios
-                </span>
-              </div>
-            </div>
+        <div className="modal-compra__contenedor">
+          <div className="modal-compra__titulo-contenedor">
+            <span
+              className="material-symbols-outlined modal-compra__titulo-contenedor"
+              onClick={() => {
+                cerrarModalCompra();
+                setTalleSeleccionado(null);
+                setCantidad(1);
+              }}
+            >
+              reply
+            </span>
           </div>
-        )}
+        </div>
+        <Carrousel imagenes={imagenesActuales} />
+
         <div className="modal-compra__info">
           <div className="modal-compra__cont-titulo-chatbot">
             <h4 className="modal-compra__titulo">{variantes[0]?.nombre}</h4>
-            <h4 onClick={() => setOpenChatbot((prev) => !prev)} className="modal-compra__btn-chat">Necesito ayuda</h4>
+            <h4
+              onClick={() => setOpenChatbot((prev) => !prev)}
+              className="modal-compra__btn-chat"
+            >
+              Necesito ayuda
+            </h4>
           </div>
           <p className="modal-compra__precio">${variantes[0]?.precio}</p>
           <div>
@@ -324,10 +289,9 @@ export const ModalCompra = () => {
                       Envios
                       <br />
                       Talles
-                      <br/>
+                      <br />
                       Colores
-                      <br/>
-                      Y con cualquier duda que tengas.
+                      <br />Y con cualquier duda que tengas.
                     </p>
                   )}
 

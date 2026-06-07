@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import "../style/carrito.css";
 import { TiendaContext } from "../context/TiendaContext";
-import { ControlCantidad } from "../components/ControlCantidad/ControlCantidad.jsx";
 
 export const Carrito = () => {
   const {
@@ -43,12 +42,7 @@ export const Carrito = () => {
                 <p>Talle: {item.talle}</p>
                 <div className="carrito__item-control-cantidad">
                   <p className="carrito__item-control-text">Cantidad</p>
-                  <ControlCantidad
-                    value={item.cantidad}
-                    onChange={(nuevaCantidad) =>
-                      cambiarCantidad(item.id, item.talle, nuevaCantidad)
-                    }
-                  />
+                 
                 </div>
               </div>
             </article>
