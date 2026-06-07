@@ -257,8 +257,7 @@
   height: 100%;
   width: 101%;
   background-color: #000000ec;
-  
-  
+  padding:.5em 0 5em 0;
 }
 
 .chatbot__mensajes {
