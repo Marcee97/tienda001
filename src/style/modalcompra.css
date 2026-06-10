@@ -300,6 +300,8 @@
   display: flex;
   gap: 0.5em;
   padding: 0.5em;
+  position:sticky;
+
 }
 
 .chatbot__input {
@@ -309,7 +311,6 @@
   border: none;
   outline: none;
   font-size:17px;
-  position:sticky;
 }
 
 .chatbot__btn-enviar {
