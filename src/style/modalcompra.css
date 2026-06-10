@@ -309,6 +309,7 @@
   border: none;
   outline: none;
   font-size:17px;
+  position:sticky;
 }
 
 .chatbot__btn-enviar {

@@ -149,6 +149,7 @@ export const ModalCompra = () => {
  setOpenChatbot(true)
  console.log("abriendo chatbot")
    inputChatRef.current?.focus();
+    inputChatRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
   return (
     <section
