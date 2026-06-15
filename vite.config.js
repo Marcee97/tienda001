@@ -5,7 +5,11 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   plugins: [react()],
   server: {
+    host:true,
     allowedHosts: "all",
      historyApiFallback: true
   }
 })
+
+
+// 192.168.0.221

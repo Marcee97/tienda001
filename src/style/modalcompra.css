@@ -26,9 +26,10 @@
 .modal-compra__info {
   border-radius: 25px 25px 0 0;
   box-shadow: 0 2px 12px 1px #000000f6;
-  padding: 0.3em;
+  padding: 0.9em;
   border: 1px solid #13131350;
-  background-color: #929292c4;
+  background-color: #1A1A1A;
+  color: #F5F5F5;
   position: relative;
   overflow: hidden;
 }
@@ -42,7 +43,7 @@
   align-items: center;
   z-index: 45;
   font-size:1.5em;
-  color:#222222;
+  color:#000000;
 }
 .modal-compra__cont-titulo-chatbot {
   display: flex;
@@ -95,19 +96,28 @@
 }
 
 .modal-compra__titulo {
-  font-size: 1.4em;
+  font-size: 1.25rem;
+  color:#ffffff;
+  font-weight: 800;
 }
 
 .modal-compra__precio {
-  font-size: 1.9em;
-  color: #0ba681;
+  font-size: 1.5rem;
+  color:  #F5F5F5;
 }
-.modal-compra__colores-and-talles {
-  display: flex;
+.modal-compra__colores-talles{
+  padding: 0.5em 0;
 }
 .modal-compra__contenedor-btn-colores {
   display: flex;
+  justify-content:space-between;
+  padding:.5em 0;
   gap: 0.5em;
+}
+
+.modal-compra__cont-btn-colores{
+  display:flex;
+  gap:.5em;
 }
 .modal-compra__color-btn {
   width: 35px;
@@ -155,9 +165,19 @@
   border-radius: 8px;
   border: none;
   width: 65px;
-  color: #242424;
+  color: #F5F5F5;
   border: 1px solid #242424;
-  background-color: transparent;
+  background: #333333;
+}
+.modal-compra__stock{
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  gap: 0.3em;
+}
+
+.modal-compra__stock-titulo{
+ 
 }
 
 .mensaje-agregado {
@@ -177,7 +197,7 @@
 
 .modal-compra__contenedor-label {
   font-weight: 900;
-  font-size: 1.13em;
+  font-size: 0.875rem;
   letter-spacing: 1px;
 }
 
@@ -186,6 +206,7 @@
   border-top: 1px solid #13131350;
   border-bottom: 1px solid #13131350;
   margin: 1.5em 0;
+  color:#F5F5F5;
 }
 
 .modal-compra__total-cont {
@@ -201,7 +222,7 @@
 .modal-compra__precio-label {
   font-size: 1em;
   font-weight: 700;
-  color: #3a3a3a;
+  color:  #A3A3A3;
   letter-spacing: 1px;
 }
 
@@ -216,8 +237,8 @@
 }
 
 .modal-compra__btn-agregar {
-  color: #fff;
-  background-color: #01051d;
+ color: #FFFFFF;
+  background: #333333;
   padding: 0.8em;
   border-radius: 8px;
   border: none;

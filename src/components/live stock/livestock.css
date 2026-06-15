@@ -1,0 +1,22 @@
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.live-indicator__punto {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #00e677;
+  animation: pulso 3s ease-in-out infinite;
+}
+
+
+
+@keyframes pulso {
+  0%   { opacity: 1; transform: scale(1); }
+  50%  { opacity: 0.5; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
