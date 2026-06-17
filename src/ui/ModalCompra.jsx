@@ -4,6 +4,7 @@ import { TiendaContext } from "../context/TiendaContext";
 import { traduccionColores } from "../archivos/diccionarioIngles.js";
 import { Carrousel } from "../components/Carrousel.jsx";
 import { LiveStock } from "../components/live stock/LiveStock.jsx";
+import { SelectorCantidad } from "../components/SelectorCantidad/SelectorCantidad.jsx";
 export const ModalCompra = () => {
   const [variantes, setVariantes] = useState([]);
 
@@ -104,7 +105,7 @@ export const ModalCompra = () => {
         color: item.color,
       });
     }
-    
+
     return acc;
   }, []);
   console.log(colores);
@@ -200,6 +201,7 @@ export const ModalCompra = () => {
                       setColorSeleccionado(c.color_id);
                       setTalleSeleccionado(null);
                       setIndexImagenCarrousel(0);
+                      setCantidad(1);
                     }}
                   ></button>
                 ))}
@@ -219,7 +221,9 @@ export const ModalCompra = () => {
                       className={`modal-compra__talle-btn ${
                         talleSeleccionado === v.talle ? "active" : ""
                       }`}
-                      onClick={() => setTalleSeleccionado(v.talle)}
+                      onClick={() => {setTalleSeleccionado(v.talle)
+                        setCantidad(1)
+                      }}
                     >
                       {v.talle}
                     </button>
@@ -229,9 +233,12 @@ export const ModalCompra = () => {
           </div>
           <div className="modal-compra__contenedor-cantidad">
             <div className="modal-compra__stock">
-              <h4 className="modal-compra__contenedor-label">Cantidad</h4>
-
-             <LiveStock stock={varianteSeleccionada?.stock}/> 
+              <SelectorCantidad
+                cantidad={cantidad}
+                setCantidad={setCantidad}
+                max={varianteSeleccionada?.stock}
+              />
+              <LiveStock stock={varianteSeleccionada?.stock} />
             </div>
           </div>
 
@@ -243,16 +250,20 @@ export const ModalCompra = () => {
               </h4>
             </div>
           )}
-          <div className="modal-compra__total">
+          {cantidad > 1 &&
+
+            <div className="modal-compra__total">
+
             <div className="modal-compra__total-cont">
               <h3 className="modal-compra__precio-label">TOTAL:</h3>
               {variantes && (
                 <h4 className="modal-compra__precio-total">
-                  ${variantes[0]?.precio}
-                </h4>
+          ${variantes[0]?.precio * cantidad}
+        </h4>
               )}
             </div>
           </div>
+           }
           <div className="modal-compra__acciones">
             <button
               className="modal-compra__btn-agregar"

@@ -69,7 +69,6 @@ color: #fff;
 position: fixed;
 z-index: 22;
 background-color: #53535300;
-backdrop-filter: blur(5px);
 }
 
 .menu__title{
