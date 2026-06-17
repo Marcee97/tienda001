@@ -59,25 +59,28 @@
 
 .welcome__boton--toggle {
   background: #00000000;
-  backdrop-filter: blur(5px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 40px;
-  height: 80px;
   padding: 0;
   font-size: 16px;
   position: absolute;
   z-index: 45;
   top: 44%;
-  animation: float 9s ease-in-out infinite;
+  animation: float 7s ease-in-out infinite;
+  background-color: #ffffff00;
+  backdrop-filter: blur(5px);
+  border-radius: 25px;
 
 }
 .welcome__cont-boton-punto{
   border: 1px solid #ffffff;
   padding: 1.2em;
   border-radius: 25px;
+ 
+
 }
 
 .welcome__boton-punto {
@@ -86,6 +89,7 @@
   border-radius: 50%;
   border-radius: 25px;
   border: 1px solid #ffffff;
+  
 
 }
 
@@ -110,7 +114,7 @@
 
   25% {
     transform: translate(1px, -1px);
-    opacity: .4;
+    opacity: .9;
   }
 
   50% {
@@ -120,6 +124,6 @@
 
   75% {
     transform: translate(1px, -1px);
-    opacity: .5;
+    opacity: .9;
   }
 }
