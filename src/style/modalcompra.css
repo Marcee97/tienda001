@@ -259,11 +259,13 @@
   width: 100%;
   background-color: #000000ec;
   backdrop-filter: blur(5px);
-  height: 94%;
+  height: 100%; /* ← de 94% a 100% */
   top: 0px;
   transform: translateX(-104%);
   transition: transform 0.3s ease;
   z-index: 50;
+  display: flex;        /* ← agregá esto */
+  flex-direction: column; /* ← agregá esto */
 }
 .modal-compra__chatbot-back {
   font-size: 2.4em;
@@ -283,22 +285,17 @@
 
 .chatbot {
   display: flex;
-  justify-content: space-evenly;
   flex-direction: column;
-  height: 100dvh;
-  width: 101%;
-  background-color: #000000ec;
-  padding:.5em 0 7em 0;
-  position: fixed;
+  flex: 1;        /* ← en vez de height: 100% */
+  width: 100%;
+  overflow: hidden; /* ← agregá esto */
 }
 
 .chatbot__mensajes {
   flex: 1;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
   padding: 0.5em;
+  overscroll-behavior: contain;
 }
 .chatbot__mensajes-introduccion {
   display: flex;
@@ -329,9 +326,10 @@
 }
 
 .chatbot__input-cont {
-  display: flex;
-  gap: 0.5em;
   padding: 0.5em;
+  padding-bottom: env(safe-area-inset-bottom);
+  background-color: #000000ec;
+  /* sacá el position: sticky */
 
 }
 

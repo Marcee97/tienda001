@@ -6,17 +6,15 @@ export const InfoStock = () => {
   const { openCloseInfoStock, setOpenCloseInfoStock } =
     useContext(TiendaContext);
 
-    useEffect(() => {
-console.log("se deberia abrir el info stock", openCloseInfoStock)
-    }, [openCloseInfoStock])
+  useEffect(() => {
+    console.log("se deberia abrir el info stock", openCloseInfoStock);
+  }, [openCloseInfoStock]);
   return (
-    <section  className={
-          openCloseInfoStock ? "infostock__--active" : "infostock"
-        }>
-      <div
-       
-      >
-        <div>
+    <section
+      className={openCloseInfoStock ? "infostock__--active" : "infostock"}
+    >
+      <div className="infostock__cont">
+        <div className="infostock-cont--info">
           <div className="infostock__cont--p">
             No hay mas stock <LiveStock stock={0} />
           </div>
@@ -24,9 +22,10 @@ console.log("se deberia abrir el info stock", openCloseInfoStock)
             Ultimas unidades <LiveStock stock={3} />
           </div>
           <div className="infostock__cont--p">
-            Mucho stock disponible <LiveStock stock={6} />
+            Stock disponible <LiveStock stock={6} />
           </div>
         </div>
+          <span class="material-symbols-outlined">arrow_forward_ios</span>
       </div>
     </section>
   );

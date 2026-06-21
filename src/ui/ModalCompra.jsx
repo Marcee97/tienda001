@@ -6,6 +6,8 @@ import { Carrousel } from "../components/Carrousel.jsx";
 import { LiveStock } from "../components/live stock/LiveStock.jsx";
 import { SelectorCantidad } from "../components/SelectorCantidad/SelectorCantidad.jsx";
 import { InfoStock } from "../components/panel info stock/InfoStock.jsx";
+import { Chatbot } from "../components/chatbot/Chatbot.jsx";
+
 export const ModalCompra = () => {
   const [variantes, setVariantes] = useState([]);
 
@@ -35,6 +37,9 @@ export const ModalCompra = () => {
   const [indexImagenCarrousel, setIndexImagenCarrousel] = useState(0);
   const [openChatbot, setOpenChatbot] = useState(false);
   const inputChatRef = useRef(null);
+
+
+  const mensajesEndRef = useRef(null);
 
   
   useEffect(() => {
@@ -84,6 +89,9 @@ export const ModalCompra = () => {
   const [mensajes, setMensajes] = useState([]);
   const [inputChat, setInputChat] = useState("");
 
+useEffect(() => {
+  mensajesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+}, [mensajes]);
   const enviarMensaje = async () => {
     if (!inputChat.trim()) return;
 
@@ -304,61 +312,7 @@ export const ModalCompra = () => {
             </button>
           </div>
         </div>
-        <div
-          className={`modal-compra__chatbot ${openChatbot ? "modal-compra__chatbot--active" : ""}`}
-        >
-          <div className="modal-compra__chatbot-header">
-            <span
-              className="material-symbols-outlined modal-compra__chatbot-back"
-              onClick={() => setOpenChatbot(false)}
-            >
-              close
-            </span>
-          </div>
-          <div className="chatbot">
-            <div className="chatbot__mensajes">
-              {mensajes.length === 0 && (
-                <p className="chatbot__mensajes-introduccion">
-                  {" "}
-                  <br />
-                  👋 Hola, puedo ayudarte con:
-                  <br />
-                  Precios
-                  <br />
-                  Envios
-                  <br />
-                  Talles
-                  <br />
-                  Colores
-                  <br />Y con cualquier duda que tengas.
-                </p>
-              )}
-
-              {mensajes.map((msg, i) => (
-                <div
-                  key={i}
-                  className={`chatbot__mensaje chatbot__mensaje--${msg.role}`}
-                >
-                  <p>{msg.texto}</p>
-                </div>
-              ))}
-            </div>
-            <div className="chatbot__input-cont">
-              <input
-                type="text"
-                ref={inputChatRef}
-                value={inputChat}
-                placeholder="Escribe tu consulta..."
-                className="chatbot__input"
-                onChange={(e) => setInputChat(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && enviarMensaje()}
-              />
-              <button className="chatbot__btn-enviar" onClick={enviarMensaje}>
-                ➤
-              </button>
-            </div>
-          </div>
-        </div>
+     <Chatbot open={openChatbot} onClose={() => setOpenChatbot(false)} />
       </div>
     </section>
   );

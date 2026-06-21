@@ -4,20 +4,30 @@
   transform: translateX(103%);
   transition: 1s transform ease-in-out;
   top: 45%;
-  width: 100%;
 }
 
 .infostock__--active {
-  outline: 1px solid red;
   position: absolute;
-  transform: translateX(-3%);
-   top: 45%;
+  transform: translateX(52%);
+  top: 45%;
   transition: 1s transform ease-in-out;
-  width: 100%;
-
+  width: 65%;
+  padding: .4em;
+  background-color: #030303;
+  z-index: 12;
+  border-radius: 5px 0 0 5px;
 }
-.infostock__cont {
+.infostock__cont{
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.infostock-cont--info {
   padding: 0.3em;
+  display: flex;
+  flex-direction: column;
+  gap: .3em;
 }
 
 .infostock__cont--p {
