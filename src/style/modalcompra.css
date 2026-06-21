@@ -205,8 +205,17 @@
   display: flex;
   border-top: 1px solid #13131350;
   border-bottom: 1px solid #13131350;
-  margin: 1.5em 0;
+  margin: .88em 0;
   color:#F5F5F5;
+}
+
+.modal-compra__total--active{
+ display: flex;
+  border-top: 1px solid #13131350;
+  border-bottom: 1px solid #13131350;
+  margin: .88em 0;
+  color:#F5F5F5;
+  visibility: hidden;
 }
 
 .modal-compra__total-cont {
@@ -243,6 +252,7 @@
   border-radius: 8px;
   border: none;
   font-size: 1.3em;
+  
 }
 .modal-compra__chatbot {
   position: absolute;

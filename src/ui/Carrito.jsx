@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import "../style/carrito.css";
 import { TiendaContext } from "../context/TiendaContext";
+import { SelectorCantidad } from "../components/SelectorCantidad/SelectorCantidad";
 
 export const Carrito = () => {
   const {
@@ -12,12 +13,13 @@ export const Carrito = () => {
     openCloseEnvios,
     setOpenCloseEnvios,
   } = useContext(TiendaContext);
-
+console.log(carrito.stock, "aca deberia seguir el stock hasta el carrito")
   return (
     <section
       className={openCloseCarrito ? "carrito carrito--active" : "carrito"}
     >
-      <span
+      
+        <h3 className="carrito__title">Carrito. <span
         className="material-symbols-outlined carrito__close"
         onClick={(e) => {
           e.stopPropagation();
@@ -25,9 +27,8 @@ export const Carrito = () => {
         }}
       >
         close
-      </span>
+      </span></h3>
       <div className="carrito__container">
-        <h3 className="carrito__title">Carrito.</h3>
         {carrito.length > 0 ? (
           carrito.map((item, index) => (
             <article className="carrito__item" key={index}>
@@ -41,9 +42,12 @@ export const Carrito = () => {
                 <p className="carrito__item-precio">${item.precio}</p>
                 <p>Talle: {item.talle}</p>
                 <div className="carrito__item-control-cantidad">
-                  <p className="carrito__item-control-text">Cantidad</p>
-                 
+                  <p className="carrito__item-control-text">Cantidad:{item.cantidad}</p>
                 </div>
+              </div>
+              <div className="carrito__cont--selector-cantidad">
+
+              <SelectorCantidad cantidad={item.cantidad} setCantidad={(nuevaCantidad) => cambiarCantidad(item.id, item.talle, item.color, nuevaCantidad)} max={item.stock}/>
               </div>
             </article>
           ))

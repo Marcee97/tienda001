@@ -13,8 +13,8 @@ const crearPreferencia = async (req, res) => {
     console.log("DATA EN BACK", req.body)
     
     const ids = carrito.map((item) => item.id);
-    const [productos] = await pool.query(
-      `SELECT id, precio FROM productos WHERE id IN (?)`, [ids]
+    const { rows: productos } = await pool.query(
+      `SELECT id, precio FROM productos WHERE id = ANY($1)`, [ids]
     )
     
 const carritoSeguro = carrito.map((item) => {
@@ -39,12 +39,12 @@ console.log("Carruto seguor", carritoSeguro)
           carritoSeguro,datosFormulario
         },
         back_urls: {
-          success: "https://64f3-181-165-192-32.ngrok-free.app/success",
-          failure: "https://64f3-181-165-192-32.ngrok-free.app/failed",
-          pending: "https://64f3-181-165-192-32.ngrok-free.app/pending"
+          success: "https://tienda001-892w.vercel.app/success",
+          failure: "https://tienda001-892w.vercel.app/failed",
+          pending: "https://tienda001-892w.vercel.app/pending"
         },
          auto_return: "approved",
-         notification_url: "https://054f-181-165-192-32.ngrok-free.app/api/webhook"
+         notification_url: "https://ecomercce-back.onrender.com/api/webhook"
       }
     })
     console.log("RESPUESTA MP COMPLETA:", JSON.stringify(response, null, 2))

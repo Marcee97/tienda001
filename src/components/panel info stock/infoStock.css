@@ -1,0 +1,26 @@
+.infostock {
+  outline: 1px solid red;
+  position: absolute;
+  transform: translateX(103%);
+  transition: 1s transform ease-in-out;
+  top: 45%;
+  width: 100%;
+}
+
+.infostock__--active {
+  outline: 1px solid red;
+  position: absolute;
+  transform: translateX(-3%);
+   top: 45%;
+  transition: 1s transform ease-in-out;
+  width: 100%;
+
+}
+.infostock__cont {
+  padding: 0.3em;
+}
+
+.infostock__cont--p {
+  display: flex;
+  justify-content: space-between;
+}

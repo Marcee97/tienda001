@@ -5,6 +5,7 @@ import { traduccionColores } from "../archivos/diccionarioIngles.js";
 import { Carrousel } from "../components/Carrousel.jsx";
 import { LiveStock } from "../components/live stock/LiveStock.jsx";
 import { SelectorCantidad } from "../components/SelectorCantidad/SelectorCantidad.jsx";
+import { InfoStock } from "../components/panel info stock/InfoStock.jsx";
 export const ModalCompra = () => {
   const [variantes, setVariantes] = useState([]);
 
@@ -27,12 +28,18 @@ export const ModalCompra = () => {
     cerrarModalCompra,
     openCloseModalCompra,
     setOpenCloseModalCompra,
+    openCloseInfoStock,
+    setOpenCloseInfoStock,
   } = useContext(TiendaContext);
 
   const [indexImagenCarrousel, setIndexImagenCarrousel] = useState(0);
   const [openChatbot, setOpenChatbot] = useState(false);
   const inputChatRef = useRef(null);
 
+  
+  useEffect(() => {
+    console.log("test infomodal", openCloseInfoStock);
+  }, [openCloseInfoStock]);
   useEffect(() => {
     if (!openCloseModalCompra) return;
 
@@ -173,6 +180,7 @@ export const ModalCompra = () => {
         <Carrousel imagenes={imagenesActuales} />
 
         <div className="modal-compra__info">
+          <InfoStock />
           <div className="modal-compra__cont-titulo-chatbot">
             <h4 className="modal-compra__titulo">{variantes[0]?.nombre}</h4>
             <h4
@@ -182,7 +190,6 @@ export const ModalCompra = () => {
               IA
             </h4>
           </div>
-
           <div className="modal-compra__colores-talles">
             <h4>Colores</h4>
             <div className="modal-compra__contenedor-btn-colores">
@@ -221,8 +228,9 @@ export const ModalCompra = () => {
                       className={`modal-compra__talle-btn ${
                         talleSeleccionado === v.talle ? "active" : ""
                       }`}
-                      onClick={() => {setTalleSeleccionado(v.talle)
-                        setCantidad(1)
+                      onClick={() => {
+                        setTalleSeleccionado(v.talle);
+                        setCantidad(1);
                       }}
                     >
                       {v.talle}
@@ -238,7 +246,12 @@ export const ModalCompra = () => {
                 setCantidad={setCantidad}
                 max={varianteSeleccionada?.stock}
               />
-              <LiveStock stock={varianteSeleccionada?.stock} />
+              <LiveStock
+                stock={varianteSeleccionada?.stock}
+                onClick={() => {
+                  setOpenCloseInfoStock((prev) => !prev);
+                }}
+              />
             </div>
           </div>
 
@@ -250,20 +263,24 @@ export const ModalCompra = () => {
               </h4>
             </div>
           )}
-          {cantidad > 1 &&
 
-            <div className="modal-compra__total">
-
+          <div
+            className={
+              cantidad > 1
+                ? "modal-compra__total"
+                : "modal-compra__total--active"
+            }
+          >
             <div className="modal-compra__total-cont">
               <h3 className="modal-compra__precio-label">TOTAL:</h3>
               {variantes && (
                 <h4 className="modal-compra__precio-total">
-          ${variantes[0]?.precio * cantidad}
-        </h4>
+                  ${variantes[0]?.precio * cantidad}
+                </h4>
               )}
             </div>
           </div>
-           }
+
           <div className="modal-compra__acciones">
             <button
               className="modal-compra__btn-agregar"
@@ -279,6 +296,7 @@ export const ModalCompra = () => {
                   cantidad,
                   colorSeleccionado,
                   imagenesActuales[0],
+                  varianteSeleccionada.stock
                 );
               }}
             >

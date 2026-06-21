@@ -1,9 +1,14 @@
 import "../SelectorCantidad/selectorCantidad.css";
 
-
 export const SelectorCantidad = ({ cantidad, setCantidad, max = 10 }) => {
-  const restar = () => setCantidad((prev) => Math.max(1, prev - 1));
-  const sumar = () => setCantidad((prev) => Math.min(max, prev + 1));
+const restar = (e) => {
+  e.stopPropagation();
+  setCantidad(Math.max(1, cantidad - 1));
+};
+  const sumar = (e) => {
+  e.stopPropagation();
+  setCantidad(Math.min(max, cantidad + 1));
+};
 
   return (
     <div className="selector-cantidad">

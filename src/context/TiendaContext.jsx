@@ -11,6 +11,7 @@ export const TiendaProvider = ({ children }) => {
   const [animationCompra, setAnimationCompra] = useState(false);
   const [openCloseModalCompra, setOpenCloseModalCompra] = useState(false);
   const [openCloseEnvios, setOpenCloseEnvios] = useState(false);
+  const [openCloseInfoStock, setOpenCloseInfoStock] = useState(false);
 
   const [productoSeleccionadoCarrito, setProductoSeleccionadoCarrito] =
     useState([]);
@@ -18,9 +19,10 @@ export const TiendaProvider = ({ children }) => {
   const [carrito, setCarrito] = useState([]);
   const [cantidad, setCantidad] = useState(1);
 
-  const agregarAlCarrito = (producto, talle, cantidad, color, imagen) => {
+  const agregarAlCarrito = (producto, talle, cantidad, color, imagen,stock) => {
+    console.log(stock, "este deberia ser el stock para el carrito")
     if (!talle) return console.log("selecciona un talle");
-    console.log(producto);
+    console.log(cantidad, "la cantida de compra en context");
 
     setCarrito((prev) => {
       const existe = prev.find(
@@ -39,16 +41,15 @@ export const TiendaProvider = ({ children }) => {
         );
       }
       setAnimationCompra(true);
-      return [...prev, { ...producto, talle, cantidad, color, imagen }];
+      return [...prev, { ...producto, talle, cantidad, color, imagen,stock }];
     });
   };
 
-  const cerrarModalCompra = () => {};
 
-  const cambiarCantidad = (id, talle, nuevaCantidad) => {
+  const cambiarCantidad = (id, talle, color, nuevaCantidad) => {
     setCarrito((prev) =>
       prev.map((item) =>
-        item.id === id && item.talle === talle
+        item.id === id && item.talle === talle && item.color === color
           ? { ...item, cantidad: nuevaCantidad }
           : item,
       ),
@@ -93,11 +94,12 @@ export const TiendaProvider = ({ children }) => {
         setColorSeleccionado,
         animationCompra,
         setAnimationCompra,
-        cerrarModalCompra,
         openCloseModalCompra,
         setOpenCloseModalCompra,
         openCloseEnvios,
         setOpenCloseEnvios,
+        openCloseInfoStock,
+        setOpenCloseInfoStock,
       }}
     >
       {children}

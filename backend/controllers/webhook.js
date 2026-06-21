@@ -1,5 +1,6 @@
 const { MercadoPagoConfig, Payment } = require("mercadopago");
 const { pool } = require("../database/db.config.js");
+const { enviarEmailCompra } = require("./email/emailService.js");
 
 const client = new MercadoPagoConfig({
   accessToken: process.env.TOKEN_MERCADOPAGO,
@@ -23,7 +24,7 @@ const webhook = async (req, res) => {
         status: payment.status,
         amount: payment.transaction_amount,
       });
-
+//-------------------PAGO APROBADO-------------------------------------------------------
       if (payment.status === "approved") {
         console.log("✅ PAGO APROBADO");
         console.log("METADATA:", JSON.stringify(payment.metadata, null, 2));
@@ -59,6 +60,12 @@ const webhook = async (req, res) => {
             String(payment.id),
           ]
         );
+        await enviarEmailCompra({
+          email:datos_formulario.email,
+          nombre:datos_formulario.nombre,
+          carrito:datos_formulario.carrito,
+          total:payment.transaction_amount
+        })
 
         const ventaId = venta.rows[0].id;
 

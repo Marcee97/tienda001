@@ -1,0 +1,33 @@
+import React, { useContext, useEffect, useState } from "react";
+import { LiveStock } from "../live stock/LiveStock";
+import "../panel info stock/infoStock.css";
+import { TiendaContext } from "../../context/TiendaContext";
+export const InfoStock = () => {
+  const { openCloseInfoStock, setOpenCloseInfoStock } =
+    useContext(TiendaContext);
+
+    useEffect(() => {
+console.log("se deberia abrir el info stock", openCloseInfoStock)
+    }, [openCloseInfoStock])
+  return (
+    <section  className={
+          openCloseInfoStock ? "infostock__--active" : "infostock"
+        }>
+      <div
+       
+      >
+        <div>
+          <div className="infostock__cont--p">
+            No hay mas stock <LiveStock stock={0} />
+          </div>
+          <div className="infostock__cont--p">
+            Ultimas unidades <LiveStock stock={3} />
+          </div>
+          <div className="infostock__cont--p">
+            Mucho stock disponible <LiveStock stock={6} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
