@@ -6,7 +6,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://tienda001-892w.vercel.app",
+      "https://tienda001-892w.vercel.app"
         //"http://100.119.98.86:5173" // ← tu URL de Vercel
     ],
   }),

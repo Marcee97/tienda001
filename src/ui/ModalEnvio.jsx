@@ -63,6 +63,10 @@ const [errores, setErrores] = useState({});
     );
     const data = await response.json();
     console.log(data, "aca deberia estar el init point");
+     if (!data.init_point) {
+    console.error("No llegó init_point");
+    return; // ← para que no navegue a /undefined
+  }
     window.location.href = data.init_point;
   };
 
