@@ -174,7 +174,7 @@ useEffect(() => {
         <div className="modal-compra__contenedor">
           <div className="modal-compra__titulo-contenedor">
             <span
-              className="material-symbols-outlined modal-compra__titulo-contenedor"
+              className="material-symbols-outlined modal-compra__titulo-contenedor--retoceder"
               onClick={() => {
                 cerrarModalCompra();
                 setTalleSeleccionado(null);
@@ -224,7 +224,6 @@ useEffect(() => {
               <h4 className="modal-compra__precio">${variantes[0]?.precio}</h4>
             </div>
           </div>
-
           <div className="modal-compra__talles">
             <div className="modal-compra__talles-botones">
               <div className="modal-compra__cont-talles-botones">

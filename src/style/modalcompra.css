@@ -43,8 +43,14 @@
   align-items: center;
   z-index: 45;
   font-size:1.5em;
-  color:#000000;
+  color:#8f2222;
 }
+
+.modal-compra__titulo-contenedor--retoceder{
+  color: #3b3b3b;
+  font-size: 1.4em;
+}
+
 .modal-compra__cont-titulo-chatbot {
   display: flex;
   justify-content: space-between;
@@ -253,7 +259,6 @@
   border-radius: 8px;
   border: none;
   font-size: 1.3em;
-  
 }
 .modal-compra__chatbot {
   position: absolute;

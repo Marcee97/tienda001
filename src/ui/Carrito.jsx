@@ -42,12 +42,12 @@ console.log(carrito.stock, "aca deberia seguir el stock hasta el carrito")
                 <p className="carrito__item-precio">${item.precio}</p>
                 <p>Talle: {item.talle}</p>
                 <div className="carrito__item-control-cantidad">
-                  <p className="carrito__item-control-text">Cantidad:{item.cantidad}</p>
+                  <SelectorCantidad cantidad={item.cantidad} setCantidad={(nuevaCantidad) => cambiarCantidad(item.id, item.talle, item.color, nuevaCantidad)} max={item.stock}/>
                 </div>
               </div>
               <div className="carrito__cont--selector-cantidad">
 
-              <SelectorCantidad cantidad={item.cantidad} setCantidad={(nuevaCantidad) => cambiarCantidad(item.id, item.talle, item.color, nuevaCantidad)} max={item.stock}/>
+              
               </div>
             </article>
           ))
@@ -80,9 +80,7 @@ console.log(carrito.stock, "aca deberia seguir el stock hasta el carrito")
           >
             Comprar
           </button>
-          <button className="carrito__button carrito__button--secondary">
-            Volver a Home
-          </button>
+          
         </div>
       </div>
     </section>
