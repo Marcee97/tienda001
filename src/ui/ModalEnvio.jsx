@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import { TiendaContext } from "../context/TiendaContext";
 
 export const ModalEnvio = () => {
-  const { carrito, openCloseEnvios, setOpenCloseEnvios } =
+  const { carrito, openCloseEnvios, setOpenCloseEnvios, datosFormulario,
+        setDatosFormulario, } =
     useContext(TiendaContext);
 
 const [errores, setErrores] = useState({});
@@ -32,16 +33,6 @@ const [errores, setErrores] = useState({});
     }
   };
 
-  const [datosFormulario, setDatosFormulario] = useState({
-    nombre: "",
-    calle: "",
-    numero: "",
-    provincia: "",
-    ciudad: "",
-    codigoPostal: "",
-    telefono: "",
-    email: "",
-  });
 
   const cambiosFormulario = (e) => {
     setDatosFormulario({ ...datosFormulario, [e.target.name]: e.target.value });
@@ -174,7 +165,7 @@ const validarFormulario = () => {
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
           />
-          {errores.numero && <p className="modal-envio__error">{errores.numero}</p>}
+          {errores.numero && <p className="modal-envio__error">{errores.provincia}</p>}
 
           <input
             type="text"

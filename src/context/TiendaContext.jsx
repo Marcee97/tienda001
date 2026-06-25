@@ -19,8 +19,15 @@ export const TiendaProvider = ({ children }) => {
   const [carrito, setCarrito] = useState([]);
   const [cantidad, setCantidad] = useState(1);
 
-  const agregarAlCarrito = (producto, talle, cantidad, color, imagen,stock) => {
-    console.log(stock, "este deberia ser el stock para el carrito")
+  const agregarAlCarrito = (
+    producto,
+    talle,
+    cantidad,
+    color,
+    imagen,
+    stock,
+  ) => {
+    console.log(stock, "este deberia ser el stock para el carrito");
     if (!talle) return console.log("selecciona un talle");
     console.log(cantidad, "la cantida de compra en context");
 
@@ -41,10 +48,9 @@ export const TiendaProvider = ({ children }) => {
         );
       }
       setAnimationCompra(true);
-      return [...prev, { ...producto, talle, cantidad, color, imagen,stock }];
+      return [...prev, { ...producto, talle, cantidad, color, imagen, stock }];
     });
   };
-
 
   const cambiarCantidad = (id, talle, color, nuevaCantidad) => {
     setCarrito((prev) =>
@@ -73,6 +79,17 @@ export const TiendaProvider = ({ children }) => {
     }
   };
 
+  const [datosFormulario, setDatosFormulario] = useState({
+    nombre: "",
+    calle: "",
+    numero: "",
+    provincia: "",
+    ciudad: "",
+    codigoPostal: "",
+    telefono: "",
+    email: "",
+  });
+
   return (
     <TiendaContext.Provider
       value={{
@@ -100,6 +117,8 @@ export const TiendaProvider = ({ children }) => {
         setOpenCloseEnvios,
         openCloseInfoStock,
         setOpenCloseInfoStock,
+        datosFormulario,
+        setDatosFormulario,
       }}
     >
       {children}

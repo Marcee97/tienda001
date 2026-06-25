@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import "./style/app.css";
 import { Menu } from "./ui/Menu";
 import { ModalCompra } from "./ui/ModalCompra";
-import { Success } from "./ui/Success";
+import { Success } from "./components/Success/Success";
 import { Failed } from "./ui/Failed";
 import { Pending } from "./ui/Pending";
 import { Welcome } from "./ui/Welcome";

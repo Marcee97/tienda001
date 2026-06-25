@@ -1,0 +1,57 @@
+.success {
+  color: #ffffff;
+  height: 88dvh;
+  position: absolute;
+  top: 9%;
+  width: 100%;
+  font-size: 1.4em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.success__container {
+    height: 50%;
+  width: 98%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #181818;
+  padding: 1.5em 0.2em;
+  border-radius: 9px;
+}
+
+.success__title {
+}
+
+.success__icon{
+    color: green;
+    font-size: 3.5em;
+}
+
+.success__image {
+  width: 60%;
+}
+
+.success__cont--email{
+    height: 100%;
+    padding: 2em .3em;
+    font-size: .6em;
+}
+
+.success__cont--orden{
+    padding: .2em 0;
+}
+.success__orden{
+    font-size: .6em;
+}
+
+.success__button{
+    font-size: 1em;
+    font-weight: bolder;
+    padding: .5em 4.5em;
+    color: #000;
+    border-radius: 8px;
+
+}
