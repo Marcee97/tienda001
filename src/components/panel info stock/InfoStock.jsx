@@ -7,7 +7,6 @@ export const InfoStock = () => {
     useContext(TiendaContext);
 
   useEffect(() => {
-    console.log("se deberia abrir el info stock", openCloseInfoStock);
   }, [openCloseInfoStock]);
   return (
     <section

@@ -13,7 +13,6 @@ const [errores, setErrores] = useState({});
 
 
   useEffect(() => {
-    console.log(carrito, "este es el carrito en el modal de envio");
   }, [carrito]);
 
   const actulizarStock = async () => {

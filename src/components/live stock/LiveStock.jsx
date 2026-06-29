@@ -5,7 +5,6 @@ import {useContext} from "react";
 export const LiveStock = ({stock, onClick}) => {
 
 useEffect(() => {
-console.log("Stock actualizado:", stock);
 } ,[stock])
 
  const color = stock > 4 ? "green" : stock > 0 ? "orange" : "white";

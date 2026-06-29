@@ -12,6 +12,7 @@ export const TiendaProvider = ({ children }) => {
   const [openCloseModalCompra, setOpenCloseModalCompra] = useState(false);
   const [openCloseEnvios, setOpenCloseEnvios] = useState(false);
   const [openCloseInfoStock, setOpenCloseInfoStock] = useState(false);
+  const [openCloseGuiaTalles, setOpenCloseGuiaTalles] = useState(false);
 
   const [productoSeleccionadoCarrito, setProductoSeleccionadoCarrito] =
     useState([]);
@@ -90,6 +91,10 @@ export const TiendaProvider = ({ children }) => {
     email: "",
   });
 
+
+  const guiaTalles = () => {
+console.log("messi")
+  }
   return (
     <TiendaContext.Provider
       value={{
@@ -119,6 +124,8 @@ export const TiendaProvider = ({ children }) => {
         setOpenCloseInfoStock,
         datosFormulario,
         setDatosFormulario,
+        openCloseGuiaTalles,
+        setOpenCloseGuiaTalles,
       }}
     >
       {children}

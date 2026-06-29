@@ -13,13 +13,12 @@ export const Carrito = () => {
     openCloseEnvios,
     setOpenCloseEnvios,
   } = useContext(TiendaContext);
-console.log(carrito.stock, "aca deberia seguir el stock hasta el carrito")
   return (
     <section
       className={openCloseCarrito ? "carrito carrito--active" : "carrito"}
     >
       
-        <h3 className="carrito__title">Carrito. <span
+         <span
         className="material-symbols-outlined carrito__close"
         onClick={(e) => {
           e.stopPropagation();
@@ -27,7 +26,7 @@ console.log(carrito.stock, "aca deberia seguir el stock hasta el carrito")
         }}
       >
         close
-      </span></h3>
+      </span>
       <div className="carrito__container">
         {carrito.length > 0 ? (
           carrito.map((item, index) => (
@@ -46,8 +45,6 @@ console.log(carrito.stock, "aca deberia seguir el stock hasta el carrito")
                 </div>
               </div>
               <div className="carrito__cont--selector-cantidad">
-
-              
               </div>
             </article>
           ))

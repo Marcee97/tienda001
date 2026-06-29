@@ -10,8 +10,13 @@
   padding: 2em 0;
   position: relative;
   overflow: hidden;
+  transform: translateY(0%);
+  transition: 1s transform ease-in-out;
+  z-index: 190;
 }
-
+.welcome--active{
+  transform: translateY(-100%);
+}
 .welcome__bg {
   position: absolute;
   inset: 0;

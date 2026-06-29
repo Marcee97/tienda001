@@ -11,7 +11,7 @@ const {openCloseMenu, setOpenCloseMenu, carrito} = useContext(TiendaContext)
       
       </div>
       <div className="menu__container">
-        <h1 className="menu__title">NOMBRE</h1>
+        <h1 className="menu__title">Lisbel</h1>
         <ul className="menu__list" onClick={(e)=>{e.stopPropagation(); setOpenCloseMenu(prev => !prev)}}>
           <li className="menu__item">
             <span className="menu__icon material-symbols-outlined">menu</span>

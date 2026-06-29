@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   gap: 0.4em;
+  padding: .3em;
 }
 
 .live-indicator__punto {

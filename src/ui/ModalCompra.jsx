@@ -7,6 +7,7 @@ import { LiveStock } from "../components/live stock/LiveStock.jsx";
 import { SelectorCantidad } from "../components/SelectorCantidad/SelectorCantidad.jsx";
 import { InfoStock } from "../components/panel info stock/InfoStock.jsx";
 import { Chatbot } from "../components/chatbot/Chatbot.jsx";
+import { GuiaTalles } from "../components/guiaTalles/GuiaTalles.jsx";
 
 export const ModalCompra = () => {
   const [variantes, setVariantes] = useState([]);
@@ -32,19 +33,17 @@ export const ModalCompra = () => {
     setOpenCloseModalCompra,
     openCloseInfoStock,
     setOpenCloseInfoStock,
+    openCloseGuiaTalles,
+    setOpenCloseGuiaTalles,
   } = useContext(TiendaContext);
 
   const [indexImagenCarrousel, setIndexImagenCarrousel] = useState(0);
   const [openChatbot, setOpenChatbot] = useState(false);
   const inputChatRef = useRef(null);
 
-
   const mensajesEndRef = useRef(null);
 
-  
-  useEffect(() => {
-    console.log("test infomodal", openCloseInfoStock);
-  }, [openCloseInfoStock]);
+  useEffect(() => {}, [openCloseInfoStock]);
   useEffect(() => {
     if (!openCloseModalCompra) return;
 
@@ -89,9 +88,9 @@ export const ModalCompra = () => {
   const [mensajes, setMensajes] = useState([]);
   const [inputChat, setInputChat] = useState("");
 
-useEffect(() => {
-  mensajesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-}, [mensajes]);
+  useEffect(() => {
+    mensajesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [mensajes]);
   const enviarMensaje = async () => {
     if (!inputChat.trim()) return;
 
@@ -123,7 +122,6 @@ useEffect(() => {
 
     return acc;
   }, []);
-  console.log(colores);
 
   useEffect(() => {
     if (colores.length > 0 && !colorSeleccionado) {
@@ -159,7 +157,6 @@ useEffect(() => {
 
   const abrirChatbot = () => {
     setOpenChatbot(true);
-    console.log("abriendo chatbot");
     inputChatRef.current?.focus();
   };
   return (
@@ -185,7 +182,52 @@ useEffect(() => {
             </span>
           </div>
         </div>
-        <Carrousel imagenes={imagenesActuales} />
+        <div className="cont__carrousel--guiatalles">
+          <Carrousel imagenes={imagenesActuales} />
+
+          <GuiaTalles
+            visible={openCloseGuiaTalles}
+            medidas={{
+              NONE: {
+                hombro: "Selecciona",
+                pecho: "0 cm",
+                largo: "0 cm",
+                manga: "0 cm",
+              },
+              S: {
+                hombro: "42 cm",
+                pecho: "96 cm",
+                largo: "68 cm",
+                manga: "20 cm",
+              },
+              M: {
+                hombro: "44 cm",
+                pecho: "100 cm",
+                largo: "70 cm",
+                manga: "21 cm",
+              },
+              L: {
+                hombro: "46 cm",
+                pecho: "106 cm",
+                largo: "72 cm",
+                manga: "22 cm",
+              },
+              XL: {
+                hombro: "48 cm",
+                pecho: "75 cm",
+                largo: "74 cm",
+                manga: "23 cm",
+              },
+              XXL: {
+                hombro: "48 cm",
+                pecho: "75 cm",
+                largo: "74 cm",
+                manga: "23 cm",
+              }
+            }}
+            talle={talleSeleccionado || "NONE"}
+          />
+        </div>
 
         <div className="modal-compra__info">
           <InfoStock />
@@ -215,6 +257,10 @@ useEffect(() => {
                     onClick={() => {
                       setColorSeleccionado(c.color_id);
                       setTalleSeleccionado(null);
+                      console.log(
+                        talleSeleccionado,
+                        " este es el talle seleccionado",
+                      );
                       setIndexImagenCarrousel(0);
                       setCantidad(1);
                     }}
@@ -244,6 +290,26 @@ useEffect(() => {
                     </button>
                   ))}
               </div>
+              <div className="modal--compra__cont__guiatalles">
+                <p
+                  className="modal--compra__cont__guiatalles--mensage"
+                  style={{
+                    visibility:
+                      openCloseGuiaTalles && !talleSeleccionado
+                        ? "visible"
+                        : "hidden",
+                  }}
+                >
+                  Elegí un talle para ver medidas
+                </p>
+
+                <span
+                  class="material-symbols-outlined modal--compra__cont__guiatalles--btn"
+                  onClick={() => setOpenCloseGuiaTalles((prev) => !prev)}
+                >
+                  settings_accessibility
+                </span>
+              </div>
             </div>
           </div>
           <div className="modal-compra__contenedor-cantidad">
@@ -261,7 +327,6 @@ useEffect(() => {
               />
             </div>
           </div>
-
           {animationCompra && (
             <div className="mensaje-agregado">
               <p className="mensaje-agregado__text">Se agregó al carrito</p>
@@ -270,7 +335,6 @@ useEffect(() => {
               </h4>
             </div>
           )}
-
           <div
             className={
               cantidad > 1
@@ -303,7 +367,7 @@ useEffect(() => {
                   cantidad,
                   colorSeleccionado,
                   imagenesActuales[0],
-                  varianteSeleccionada.stock
+                  varianteSeleccionada.stock,
                 );
               }}
             >
@@ -311,7 +375,7 @@ useEffect(() => {
             </button>
           </div>
         </div>
-     <Chatbot open={openChatbot} onClose={() => setOpenChatbot(false)} />
+        <Chatbot open={openChatbot} onClose={() => setOpenChatbot(false)} />
       </div>
     </section>
   );

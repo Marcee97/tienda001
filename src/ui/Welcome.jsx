@@ -6,9 +6,10 @@ import { TiendaContext } from "../context/TiendaContext";
 export const Welcome = () => {
   const { setOpenCloseModalCompra } = useContext(TiendaContext);
   const [colorNegro, setColorNegro] = useState(false);
+  const [openCloseWelcome, setOpenCloseWelcome] = useState(false);
 
   return (
-    <section className="welcome">
+    <section className={openCloseWelcome ? "welcome welcome--active" : "welcome"}>
       <div
         className="welcome__boton--toggle"
         onClick={() => setColorNegro((prev) => !prev)}
@@ -38,17 +39,19 @@ export const Welcome = () => {
       <div className="welcome__contenido">
         <p className="welcome__contenido--titulo">Remeras</p>
         <div className="welcome__contenido--subtitulo">
-
-        <h3>BLANCAS.</h3>
-        <h3>NEGRAS.</h3>
+          <h3>BLANCAS.</h3>
+          <h3>NEGRAS.</h3>
         </div>
         <button
           className="welcome__boton-open-shop"
-          onClick={() => setOpenCloseModalCompra(true)}
+          onClick={() => {
+            setOpenCloseWelcome(true);
+            setOpenCloseModalCompra(true)
+           
+          }}
         >
           VER COLECCION
         </button>
-       
       </div>
     </section>
   );
