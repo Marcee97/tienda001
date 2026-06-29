@@ -1,4 +1,4 @@
-import "./guiaTalles.css";
+import "../guiaTalles/guiatalles.css";
 
 const lineas = [
   { key: "hombro", x1: 31, y1: 28, x2: 68, y1b: 28, etX: 50, etY: 25, horizontal: true,  delay: 0   },
