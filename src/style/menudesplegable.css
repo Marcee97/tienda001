@@ -7,13 +7,13 @@ color: #fff;
 height: 100vh;
 position: absolute;
 transition: all ease-in-out .3s;
-z-index: 120;
 width: 100%;
-transform: translateX(100%);
-position: fixed;
+transform: translateX(103%);
+position: absolute;
+z-index: 82;
 }
 .menu-desplegable-active{
-  display: flex;
+display: flex;
 justify-content: space-between;
 background-color: #000000ec;
 backdrop-filter: blur(5px);
@@ -21,12 +21,11 @@ color: #fff;
 height: 100vh;
 position: absolute;
 transition: all ease-in-out .3s;
-z-index: 40;
+position: absolute;
+z-index: 82;
 width: 100%;
 transform: translateX(0%);
-position: fixed;
 }
-
 
 .menu-desplegable__icon-close-carrito{
 display: flex;

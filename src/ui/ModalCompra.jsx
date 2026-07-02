@@ -8,6 +8,8 @@ import { SelectorCantidad } from "../components/SelectorCantidad/SelectorCantida
 import { InfoStock } from "../components/panel info stock/InfoStock.jsx";
 import { Chatbot } from "../components/chatbot/Chatbot.jsx";
 import { GuiaTalles } from "../components/guiaTalles/GuiaTalles.jsx";
+import { Carrito } from "./Carrito.jsx";
+import { MenuDesplegable } from "./MenuDesplegable.jsx";
 
 export const ModalCompra = () => {
   const [variantes, setVariantes] = useState([]);
@@ -75,14 +77,15 @@ export const ModalCompra = () => {
 
   const btnOpenCarrito = () => {
     if (talleSeleccionado === null) return;
-    setOpenCloseModalCompra((prev) => !prev);
+    
+  setOpenCloseModalCompra(true);
 
     setTimeout(() => {
-      setOpenCloseMenu((prev) => !prev);
+      setOpenCloseMenu(true);
     }, 250);
 
     setTimeout(() => {
-      setOpenCloseCarrito((prev) => !prev);
+      setOpenCloseCarrito(true);
     }, 450);
   };
   const [mensajes, setMensajes] = useState([]);
@@ -167,6 +170,8 @@ export const ModalCompra = () => {
           : "modal-compra"
       }
     >
+      <MenuDesplegable/>
+      <Carrito/>
       <div className="modal-compra__cont">
         <div className="modal-compra__contenedor">
           <div className="modal-compra__titulo-contenedor">

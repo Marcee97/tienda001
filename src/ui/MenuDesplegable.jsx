@@ -27,7 +27,7 @@ export const MenuDesplegable = () => {
         setOpenCloseMenu(false);
       }}
     >
-      <Carrito />
+     
       <h2 className="menu-desplegable-title">NOMBRE</h2>
       <div className="menu-desplegable-cont">
         <div className="menu-desplegable__icon-close-carrito">

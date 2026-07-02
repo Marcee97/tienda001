@@ -1,7 +1,7 @@
 .modal-compra {
   color: #fff;
   position: fixed;
-  z-index: 90;
+  z-index: 80;
   overflow: hidden;
   backdrop-filter: blur(8px);
   width: 100%;
@@ -17,6 +17,8 @@
 .modal-compra--active {
   min-height: 100vh;
   background-color: #949494;
+  z-index: 60;
+
 }
 .modal-compra__contenedor {
   display: flex;

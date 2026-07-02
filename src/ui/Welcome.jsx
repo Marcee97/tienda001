@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { TiendaContext } from "../context/TiendaContext";
 
 export const Welcome = () => {
-  const { setOpenCloseModalCompra } = useContext(TiendaContext);
+  const { setOpenCloseModalCompra, setVisibilidadTitle } = useContext(TiendaContext);
   const [colorNegro, setColorNegro] = useState(false);
   const [openCloseWelcome, setOpenCloseWelcome] = useState(false);
 
@@ -47,7 +47,7 @@ export const Welcome = () => {
           onClick={() => {
             setOpenCloseWelcome(true);
             setOpenCloseModalCompra(true)
-           
+             setVisibilidadTitle(true)
           }}
         >
           VER COLECCION
