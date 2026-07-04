@@ -11,8 +11,8 @@
   position: relative;
   overflow: hidden;
   transform: translateY(0%);
-  transition: 1s transform ease-in-out;
-  z-index: 190;
+  transition: .5s transform ease-in-out;
+  z-index: 120;
 }
 .welcome--active{
   transform: translateY(-100%);

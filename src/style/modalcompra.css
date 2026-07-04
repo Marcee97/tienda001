@@ -16,7 +16,8 @@
 
 .modal-compra--active {
   min-height: 100vh;
-  background-color: #949494;
+   background-color: #3a3939;
+
   z-index: 60;
 
 }
@@ -99,16 +100,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100%; /* cambiá 90% por 100% */
-  top: 0; /* agregá esto */
-  z-index: 10; /* agregá esto */
-  pointer-events: none; /* agregá esto para que no bloquee el click en las imágenes */
+  height: 100%;
+  top: 0;
+  z-index: 10;
+  pointer-events: none;
 }
 
 .modal-compra__titulo {
   font-size: 1.25rem;
   color: #ffffff;
   font-weight: 800;
+}
+.modal-compra__precio--unidad{
+  color: #a3a3a3;
+  font-size: 1.1rem;
+  letter-spacing: 0em;
 }
 
 .modal-compra__precio {

@@ -2,6 +2,7 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
+  background-color: #29292900;
 }
 
 .carrousel__track {
@@ -29,6 +30,7 @@
 .carrousel__btn {
   pointer-events: all;
   font-size: 2em;
-  color: #555555;
+  color: #55555500;
   padding: 0.2em;
+  height:100%;
 }

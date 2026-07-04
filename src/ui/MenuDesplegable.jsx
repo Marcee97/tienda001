@@ -22,14 +22,16 @@ export const MenuDesplegable = () => {
   return (
     <section
       className={openCloseMenu ? "menu-desplegable-active" : "menu-desplegable"}
-      onClick={() => {
-        setOpenCloseModalCompra((prev) => !prev);
+      onClick={(e) => {
+        e.stopPropagation();
         setOpenCloseMenu(false);
       }}
     >
-     
       <h2 className="menu-desplegable-title">NOMBRE</h2>
-      <div className="menu-desplegable-cont">
+      <div
+        className="menu-desplegable-cont"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="menu-desplegable__icon-close-carrito">
           <span
             className="material-symbols-outlined menu-desplegable-icons"
@@ -47,10 +49,7 @@ export const MenuDesplegable = () => {
           )}
           <span
             className={"material-symbols-outlined menu-desplegable-icons"}
-            onClick={(e) => {
-              e.stopPropagation();
-              setOpenCloseMenu(false);
-            }}
+            onClick={(e) => setOpenCloseMenu(false)}
           >
             close
           </span>
@@ -70,7 +69,10 @@ export const MenuDesplegable = () => {
 
           <li
             className="menu-desplegable-item"
-            onClick={(e) => toggleSeccion(e, "ubicacion")}
+            onClick={(e) => {
+              toggleSeccion(e, "ubicacion");
+              e.stopPropagation();
+            }}
           >
             Ubicacion
             <div
@@ -91,7 +93,7 @@ export const MenuDesplegable = () => {
               <p>Info del sitio</p>
             </div>
           </li>
-          
+
           <li
             className="menu-desplegable-item"
             onClick={(e) => toggleSeccion(e, "chatbot")}

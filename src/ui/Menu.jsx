@@ -3,23 +3,23 @@ import "../style/menu.css";
 import { MenuDesplegable } from "./MenuDesplegable";
 import { TiendaContext } from "../context/TiendaContext";
 export const Menu = () => {
-const {openCloseMenu, setOpenCloseMenu, carrito,visibilidadTitle} = useContext(TiendaContext)
+const {openCloseMenu, setOpenCloseMenu, carrito,visibilidadTitle, openCloseCarrito} = useContext(TiendaContext)
 
   return (
-    <section className={openCloseMenu ? "menu menu-hidden" : "menu"}>
+    <section className={openCloseMenu || openCloseCarrito ? "menu menu-hidden" : "menu"}>
       <div className="img-back-container">
       </div>
-      <div className="menu__container">
-        <h1 className={visibilidadTitle ? "menu__title hidden" : "menu__title "}>Lisbel</h1>
+      <div className={"menu__container"}>
+        <h1 className={visibilidadTitle ? "menu__title title-hidden" : "menu__title "}>Lisbel</h1>
         <ul className="menu__list" onClick={(e)=>{e.stopPropagation(); setOpenCloseMenu(prev => !prev);
           console.log("estado de :",openCloseMenu)
         }}>
           <li className="menu__item">
-            <span className={openCloseMenu ? "menu__icon material-symbols-outlined menu-hidden" : "menu__icon material-symbols-outlined"}>menu</span>
+            <span className={openCloseMenu || openCloseCarrito ? "menu__icon material-symbols-outlined  menu-hidden" : "menu__icon material-symbols-outlined"}>menu</span>
           </li>
         </ul>
         {carrito.length > 0 &&
-          <p className="menu__icon-cantidad-items">{carrito.length}</p>
+          <p className={openCloseMenu || openCloseCarrito ? "menu__icon-cantidad-items menu-hidden" : "menu__icon-cantidad-items"}>{carrito.length}</p>
         }
       </div>
     </section>

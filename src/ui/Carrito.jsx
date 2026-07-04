@@ -21,8 +21,8 @@ export const Carrito = () => {
          <span
         className="material-symbols-outlined carrito__close"
         onClick={(e) => {
-          e.stopPropagation();
           setOpenCloseCarrito((prev) => !prev);
+          e.stopPropagation();
         }}
       >
         close

@@ -77,16 +77,7 @@ export const ModalCompra = () => {
 
   const btnOpenCarrito = () => {
     if (talleSeleccionado === null) return;
-    
-  setOpenCloseModalCompra(true);
-
-    setTimeout(() => {
-      setOpenCloseMenu(true);
-    }, 250);
-
-    setTimeout(() => {
       setOpenCloseCarrito(true);
-    }, 450);
   };
   const [mensajes, setMensajes] = useState([]);
   const [inputChat, setInputChat] = useState("");
@@ -175,16 +166,7 @@ export const ModalCompra = () => {
       <div className="modal-compra__cont">
         <div className="modal-compra__contenedor">
           <div className="modal-compra__titulo-contenedor">
-            <span
-              className="material-symbols-outlined modal-compra__titulo-contenedor--retoceder"
-              onClick={() => {
-                cerrarModalCompra();
-                setTalleSeleccionado(null);
-                setCantidad(1);
-              }}
-            >
-              reply
-            </span>
+           
           </div>
         </div>
         <div className="cont__carrousel--guiatalles">
@@ -272,7 +254,7 @@ export const ModalCompra = () => {
                   ></button>
                 ))}
               </div>
-              <h4 className="modal-compra__precio">${variantes[0]?.precio}</h4>
+              <h4 className="modal-compra__precio"><span className="modal-compra__precio--unidad">UNIT </span>${variantes[0]?.precio}</h4>
             </div>
           </div>
           <div className="modal-compra__talles">

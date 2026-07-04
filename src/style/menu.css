@@ -1,10 +1,13 @@
 .menu{
   position: absolute;
-  z-index: 61;
+  z-index: 163;
   overflow: hidden;
   width: 100%;
 }
-
+.menu-hidden{
+  position: absolute;
+  visibility: hidden;
+}
 /* contenedor de la imagen */
 .img-back-container{
   position: absolute;
@@ -59,22 +62,21 @@ display: flex;
 width: 100%;
 justify-content: space-between;
 align-items: center;
-padding: .6em .9em;
-color: #fff;
-
+padding: 0 .3em;
+color: #dadada;
 background-color: #53535300;
 }
 
 .menu__title{
     font-size: 1.9em;
-    position: relative;  
+    position: relative;
+      z-index:135;
 }
-.hidden{
-  visibility: hidden;
+.title-hidden{
+    visibility: hidden;
 }
-.menu-hidden{
-  visibility: hidden;
-}
+
+
 .menu__item{
     list-style: none;
 }

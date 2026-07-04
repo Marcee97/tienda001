@@ -19,6 +19,7 @@ const productosRoutes = require("./routes/productos.routes.js");
 const variantesRoutes = require("./routes/variantes.routes.js");
 const actualizarStock = require("./routes/ventas.routes.js");
 const datosDeVenta = require("./routes/ventas.routes.js");
+const chatbotRoutes = require("./routes/chatbot.routes.js");
 
 app.use("/api/variantes", variantesRoutes);
 app.use("/api/crear-preferencia", mercadoPagoRoutes);
@@ -26,6 +27,7 @@ app.use("/api/webhook", webhookRoutes);
 app.use("/api/productos", productosRoutes);
 app.use("/api/actualizar-stock", actualizarStock);
 app.use("/api/datos-venta", datosDeVenta);
+app.use("/api/chatbot", chatbotRoutes);
 app.get("/", (req, res) => {
   res.send("Servidor funcionando con CommonJS");
 });
