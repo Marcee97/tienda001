@@ -24,7 +24,7 @@ export const InfoStock = () => {
             Stock disponible <LiveStock stock={6} />
           </div>
         </div>
-          <span class="material-symbols-outlined" onClick={()=> setOpenCloseInfoStock(prev => !prev)}>arrow_forward_ios</span>
+          <span className="material-symbols-outlined" onClick={()=> setOpenCloseInfoStock(prev => !prev)}>arrow_forward_ios</span>
       </div>
     </section>
   );

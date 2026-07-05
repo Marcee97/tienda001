@@ -77,7 +77,7 @@ export const ModalCompra = () => {
 
   const btnOpenCarrito = () => {
     if (talleSeleccionado === null) return;
-      setOpenCloseCarrito(true);
+    setOpenCloseCarrito(true);
   };
   const [mensajes, setMensajes] = useState([]);
   const [inputChat, setInputChat] = useState("");
@@ -161,13 +161,11 @@ export const ModalCompra = () => {
           : "modal-compra"
       }
     >
-      <MenuDesplegable/>
-      <Carrito/>
+      <MenuDesplegable />
+      <Carrito />
       <div className="modal-compra__cont">
         <div className="modal-compra__contenedor">
-          <div className="modal-compra__titulo-contenedor">
-           
-          </div>
+          <div className="modal-compra__titulo-contenedor"></div>
         </div>
         <div className="cont__carrousel--guiatalles">
           <Carrousel imagenes={imagenesActuales} />
@@ -210,7 +208,7 @@ export const ModalCompra = () => {
                 pecho: "75 cm",
                 largo: "74 cm",
                 manga: "23 cm",
-              }
+              },
             }}
             talle={talleSeleccionado || "NONE"}
           />
@@ -254,7 +252,10 @@ export const ModalCompra = () => {
                   ></button>
                 ))}
               </div>
-              <h4 className="modal-compra__precio"><span className="modal-compra__precio--unidad">UNIT </span>${variantes[0]?.precio}</h4>
+              <h4 className="modal-compra__precio">
+                <span className="modal-compra__precio--unidad">UNIT </span>$
+                {variantes[0]?.precio}
+              </h4>
             </div>
           </div>
           <div className="modal-compra__talles">
@@ -262,6 +263,10 @@ export const ModalCompra = () => {
               <div className="modal-compra__cont-talles-botones">
                 {tallesUnicos
                   .filter((t) => t.stock > 0)
+                  .sort((a, b) => {
+                    const orden = ["S", "M", "L", "XL", "XXL"];
+                    return orden.indexOf(a.talle) - orden.indexOf(b.talle);
+                  })
                   .map((v, index) => (
                     <button
                       key={index}
@@ -291,7 +296,7 @@ export const ModalCompra = () => {
                 </p>
 
                 <span
-                  class="material-symbols-outlined modal--compra__cont__guiatalles--btn"
+                  className="material-symbols-outlined modal--compra__cont__guiatalles--btn"
                   onClick={() => setOpenCloseGuiaTalles((prev) => !prev)}
                 >
                   settings_accessibility

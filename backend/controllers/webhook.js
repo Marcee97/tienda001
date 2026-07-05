@@ -60,13 +60,7 @@ const webhook = async (req, res) => {
             String(payment.id),
           ]
         );
-        await enviarEmailCompra({
-          email:datos_formulario.email,
-          nombre:datos_formulario.nombre,
-          carrito:carrito_seguro,
-          total:payment.transaction_amount
-        })
-
+        
         const ventaId = venta.rows[0].id;
 
         // 3. Guardar items
@@ -90,8 +84,19 @@ const webhook = async (req, res) => {
             )
           )
         );
+try{
 
-        console.log("✅ Venta guardada y stock actualizado");
+          await enviarEmailCompra({
+            email:datos_formulario.email,
+            nombre:datos_formulario.nombre,
+            carrito:carrito_seguro,
+            total:payment.transaction_amount
+          })
+          console.log(("se envia la data al compoenente emailService"))
+        }catch(error){
+          console.error("❌ Error al enviar email:", error);
+        }
+        console.log("✅ Venta guardada y stock actualizado y se envio mail de verificación");
       }
     }
 

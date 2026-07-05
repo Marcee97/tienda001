@@ -3,6 +3,7 @@ const { Resend } = require('resend');
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const enviarEmailCompra = async ({ email, nombre, carrito, total }) => {
+  console.log(email, nombre, carrito, total, "esta es la info que llega al emailService");
   await resend.emails.send({
     from: 'Valley <noreply@tudominio.com>',
     to: email,

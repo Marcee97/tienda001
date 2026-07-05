@@ -44,7 +44,7 @@ console.log("Carruto seguor", carritoSeguro)
           pending: "https://tienda001-892w.vercel.app/pending"
         },
          auto_return: "approved",
-         notification_url: "https://ecomercce-back.onrender.com/api/webhook"
+         notification_url:"https://3614-181-165-192-32.ngrok-free.app/api/webhook"
       }
     })
     console.log("RESPUESTA MP COMPLETA:", JSON.stringify(response, null, 2))
