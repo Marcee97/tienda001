@@ -87,6 +87,7 @@
 .carrito__footer {
  padding: .6em;
  background-color: #080808;
+ border-radius:15px 15px 0px 0px ;
 }
 
 .carrito__total {

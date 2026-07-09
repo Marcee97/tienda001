@@ -289,8 +289,22 @@
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  position: relative;
 }
-
+.mensaje-selecciona-talle{
+  position: absolute;
+  transform: translateY(100%);
+  transition: .5s ease-in-out transform;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.mensaje-selecciona-talle__active{
+transform: translateY(-100%);
+color: #ffffff;
+animation: pulso-mensaje 2s ease-in-out infinite;
+}
 .modal-compra__btn-agregar {
   color: #ffffff;
   background: #333333;
@@ -298,6 +312,7 @@
   border-radius: 8px;
   border: none;
   font-size: 1.3em;
+  z-index: 4;
 }
 .modal-compra__chatbot {
   position: absolute;

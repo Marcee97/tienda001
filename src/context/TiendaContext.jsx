@@ -14,6 +14,7 @@ export const TiendaProvider = ({ children }) => {
   const [openCloseInfoStock, setOpenCloseInfoStock] = useState(false);
   const [openCloseGuiaTalles, setOpenCloseGuiaTalles] = useState(false);
   const [visibilidadTitle, setVisibilidadTitle] = useState(false);
+  const [openChatbot, setOpenChatbot] = useState(false);
 
   const [productoSeleccionadoCarrito, setProductoSeleccionadoCarrito] =
     useState([]);
@@ -29,9 +30,8 @@ export const TiendaProvider = ({ children }) => {
     imagen,
     stock,
   ) => {
-    console.log(stock, "este deberia ser el stock para el carrito");
-    if (!talle) return console.log("selecciona un talle");
-    console.log(cantidad, "la cantida de compra en context");
+    if (!stock) return console.log("No hay stock disponible para este producto");
+    console.log(producto, "este deberia ser el prodycto seleccio9nadkpara el carrito");
 
     setCarrito((prev) => {
       const existe = prev.find(
@@ -128,6 +128,8 @@ export const TiendaProvider = ({ children }) => {
         setOpenCloseGuiaTalles,
         visibilidadTitle,
         setVisibilidadTitle,
+        openChatbot,
+        setOpenChatbot,
       }}
     >
       {children}

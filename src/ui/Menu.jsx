@@ -3,10 +3,10 @@ import "../style/menu.css";
 import { MenuDesplegable } from "./MenuDesplegable";
 import { TiendaContext } from "../context/TiendaContext";
 export const Menu = () => {
-const {openCloseMenu, setOpenCloseMenu, carrito,visibilidadTitle, openCloseCarrito} = useContext(TiendaContext)
+const {openCloseMenu, setOpenCloseMenu, carrito,visibilidadTitle, openCloseCarrito, openChatbot} = useContext(TiendaContext)
 
   return (
-    <section className={openCloseMenu || openCloseCarrito ? "menu menu-hidden" : "menu"}>
+    <section className={openCloseMenu || openCloseCarrito || openChatbot ? "menu menu-hidden" : "menu"}>
       <div className="img-back-container">
       </div>
       <div className={"menu__container"}>
@@ -15,7 +15,7 @@ const {openCloseMenu, setOpenCloseMenu, carrito,visibilidadTitle, openCloseCarri
           console.log("estado de :",openCloseMenu)
         }}>
           <li className="menu__item">
-            <span className={openCloseMenu || openCloseCarrito ? "menu__icon material-symbols-outlined  menu-hidden" : "menu__icon material-symbols-outlined"}>menu</span>
+            <span className={openCloseMenu || openCloseCarrito || openChatbot ? "menu__icon material-symbols-outlined  menu-hidden" : "menu__icon material-symbols-outlined"}>menu</span>
           </li>
         </ul>
         {carrito.length > 0 &&

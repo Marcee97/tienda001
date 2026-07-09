@@ -37,10 +37,14 @@ export const ModalCompra = () => {
     setOpenCloseInfoStock,
     openCloseGuiaTalles,
     setOpenCloseGuiaTalles,
+    visibilidadTitle,
+    setVisibilidadTitle,
+    openChatbot,
+    setOpenChatbot,
   } = useContext(TiendaContext);
 
   const [indexImagenCarrousel, setIndexImagenCarrousel] = useState(0);
-  const [openChatbot, setOpenChatbot] = useState(false);
+  const [mensajeSeleccionaTalle, setMensajeSeleccionaTalle] = useState(false);
   const inputChatRef = useRef(null);
 
   const mensajesEndRef = useRef(null);
@@ -151,6 +155,7 @@ export const ModalCompra = () => {
 
   const abrirChatbot = () => {
     setOpenChatbot(true);
+    setVisibilidadTitle(true);
     inputChatRef.current?.focus();
   };
   return (
@@ -276,6 +281,7 @@ export const ModalCompra = () => {
                       onClick={() => {
                         setTalleSeleccionado(v.talle);
                         setCantidad(1);
+                        setMensajeSeleccionaTalle(false);
                       }}
                     >
                       {v.talle}
@@ -319,6 +325,7 @@ export const ModalCompra = () => {
               />
             </div>
           </div>
+
           {animationCompra && (
             <div className="mensaje-agregado">
               <p className="mensaje-agregado__text">Se agregó al carrito</p>
@@ -345,9 +352,24 @@ export const ModalCompra = () => {
           </div>
 
           <div className="modal-compra__acciones">
+            <div
+              className={
+                mensajeSeleccionaTalle
+                  ? "mensaje-selecciona-talle mensaje-selecciona-talle__active"
+                  : "mensaje-selecciona-talle"
+              }
+            >
+              <p className="mensaje-selecciona-talle__text">
+                Selecciona un talle
+              </p>
+            </div>
+
             <button
               className="modal-compra__btn-agregar"
               onClick={() => {
+                if (talleSeleccionado === null)
+                  return setMensajeSeleccionaTalle(true);
+                setMensajeSeleccionaTalle(false);
                 const producto = {
                   id: variantes[0]?.producto_id,
                   nombre: variantes[0]?.nombre,
