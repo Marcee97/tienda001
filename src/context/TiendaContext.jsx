@@ -109,6 +109,7 @@ export const TiendaProvider = ({ children }) => {
         cantidad,
         setCantidad,
         carrito,
+        setCarrito,
         agregarAlCarrito,
         cambiarCantidad,
         ejecutarCompraCarrito,

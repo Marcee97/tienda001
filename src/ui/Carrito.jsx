@@ -8,17 +8,28 @@ export const Carrito = () => {
     openCloseCarrito,
     setOpenCloseCarrito,
     carrito,
+    setCarrito,
     cambiarCantidad,
     ejecutarCompraCarrito,
     openCloseEnvios,
     setOpenCloseEnvios,
   } = useContext(TiendaContext);
+
+const deleteItem = (id, talle, color) => {
+  console.log(id, talle, color)
+  setCarrito((prevCarrito) =>
+    prevCarrito.filter(
+      (item) => !(item.id === id && item.talle === talle && item.color === color)
+    )
+  );
+}
+
+
   return (
     <section
       className={openCloseCarrito ? "carrito carrito--active" : "carrito"}
     >
-      
-         <span
+      <span
         className="material-symbols-outlined carrito__close"
         onClick={(e) => {
           setOpenCloseCarrito((prev) => !prev);
@@ -41,11 +52,22 @@ export const Carrito = () => {
                 <p className="carrito__item-precio">${item.precio}</p>
                 <p>Talle: {item.talle}</p>
                 <div className="carrito__item-control-cantidad">
-                  <SelectorCantidad cantidad={item.cantidad} setCantidad={(nuevaCantidad) => cambiarCantidad(item.id, item.talle, item.color, nuevaCantidad)} max={item.stock}/>
+                  <SelectorCantidad
+                    cantidad={item.cantidad}
+                    setCantidad={(nuevaCantidad) =>
+                      cambiarCantidad(
+                        item.id,
+                        item.talle,
+                        item.color,
+                        nuevaCantidad,
+                      )
+                    }
+                    max={item.stock}
+                  />
+                  <span className="material-symbols-outlined carrito__item-control-delete" onClick={() => deleteItem(item.id, item.talle, item.color)}>delete</span>
                 </div>
               </div>
-              <div className="carrito__cont--selector-cantidad">
-              </div>
+              <div className="carrito__cont--selector-cantidad"></div>
             </article>
           ))
         ) : (
@@ -69,15 +91,13 @@ export const Carrito = () => {
           <button
             className="carrito__button carrito__button--primary"
             onClick={(e) => {
-             
               e.stopPropagation();
-              if(carrito.length === 0) return;
+              if (carrito.length === 0) return;
               setOpenCloseEnvios((prev) => !prev);
             }}
           >
             Comprar
           </button>
-          
         </div>
       </div>
     </section>
