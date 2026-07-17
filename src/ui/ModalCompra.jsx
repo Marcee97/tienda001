@@ -222,7 +222,7 @@ export const ModalCompra = () => {
         <div className="modal-compra__info">
           <InfoStock />
           <div className="modal-compra__cont-titulo-chatbot">
-            <h4 className="modal-compra__titulo">{variantes[0]?.nombre}</h4>
+            <h4 className="modal-compra__titulo">{variantes[0]?.nombre} <span className="modal-compra__color-seleccionado">{colores.find((c) => c.color_id === colorSeleccionado)?.color}</span></h4>
             <h4
               onClick={() => abrirChatbot()}
               className="modal-compra__btn-chat"

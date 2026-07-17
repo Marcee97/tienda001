@@ -52,7 +52,10 @@
   font-size: 1.5em;
   color: #8f2222;
 }
-
+.modal-compra__color-seleccionado{
+  color: #505050;
+  font-size: .8em;
+}
 .modal-compra__titulo-contenedor--retoceder {
   color: #3b3b3b;
   font-size: 1.4em;

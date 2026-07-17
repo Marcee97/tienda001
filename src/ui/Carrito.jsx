@@ -24,7 +24,6 @@ const deleteItem = (id, talle, color) => {
   );
 }
 
-
   return (
     <section
       className={openCloseCarrito ? "carrito carrito--active" : "carrito"}
