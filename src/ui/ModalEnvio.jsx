@@ -1,6 +1,6 @@
 import React from "react";
 import "../style/modalenvio.css";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { useEffect, useState } from "react";
 import { TiendaContext } from "../context/TiendaContext";
 
@@ -14,6 +14,18 @@ export const ModalEnvio = () => {
   } = useContext(TiendaContext);
 
   const [errores, setErrores] = useState({});
+  const [cargando, setCargando] = useState(false);
+
+  const refs = {
+    nombre: useRef(null),
+    calle: useRef(null),
+    numero: useRef(null),
+    provincia: useRef(null),
+    ciudad: useRef(null),
+    codigoPostal: useRef(null),
+    telefono: useRef(null),
+    email: useRef(null),
+  };
 
   useEffect(() => {}, [carrito]);
 
@@ -39,6 +51,7 @@ export const ModalEnvio = () => {
   };
 
   const enviarFormulario = async () => {
+    setCargando(true);
     console.log(datosFormulario, "estos son los datos del formulario");
 
     const response = await fetch(
@@ -55,6 +68,7 @@ export const ModalEnvio = () => {
     console.log(data, "aca deberia estar el init point");
     if (!data.init_point) {
       console.error("No llegó init_point");
+      setCargando(false);
       return; // ← para que no navegue a /undefined
     }
     window.location.href = data.init_point;
@@ -84,7 +98,9 @@ export const ModalEnvio = () => {
     }
 
     setErrores(nuevosErrores);
-    return Object.keys(nuevosErrores).length === 0;
+    const primerError = Object.keys(nuevosErrores)[0];
+    if (primerError && refs[primerError]?.current?.focus())
+      return Object.keys(nuevosErrores).length === 0;
   };
   return (
     <section
@@ -135,7 +151,9 @@ export const ModalEnvio = () => {
       </div>
       <div className="modal-envio__cont">
         <div className="modal-envio__opciones"></div>
-        <div className="modal-envio__formulario">
+        <div
+          className={`modal-envio__formulario ${cargando ? "loading--active" : ""}`}
+        >
           <p className="modal-envio__label">
             Nombre y Apellido{" "}
             {errores.nombre && (
@@ -148,8 +166,9 @@ export const ModalEnvio = () => {
             placeholder="Ej: Jorge Cafrune"
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
+            ref={refs.nombre}
           />
-           <p className="modal-envio__label">
+          <p className="modal-envio__label">
             Calle{" "}
             {errores.calle && (
               <span className="modal-envio__error">{errores.calle}</span>
@@ -161,8 +180,9 @@ export const ModalEnvio = () => {
             placeholder="Ej: Pellegrini"
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
+            ref={refs.calle}
           />
-           <p className="modal-envio__label">
+          <p className="modal-envio__label">
             Numero de Calle{" "}
             {errores.numero && (
               <span className="modal-envio__error">{errores.numero}</span>
@@ -171,10 +191,13 @@ export const ModalEnvio = () => {
 
           <input
             type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
             name="numero"
             placeholder="Ej: 1077"
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
+            ref={refs.numero}
           />
           <p className="modal-envio__label">
             Provincia{" "}
@@ -188,6 +211,7 @@ export const ModalEnvio = () => {
             placeholder="Provincia"
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
+            ref={refs.provincia}
           />
           <p className="modal-envio__label">
             Localidad{" "}
@@ -202,6 +226,7 @@ export const ModalEnvio = () => {
             placeholder="Localidad"
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
+            ref={refs.ciudad}
           />
           <p className="modal-envio__label">
             CodigoPostal{" "}
@@ -211,10 +236,13 @@ export const ModalEnvio = () => {
           </p>
           <input
             type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
             name="codigoPostal"
             placeholder="Codigo postal (ej:5800)"
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
+            ref={refs.codigoPostal}
           />
           <p className="modal-envio__label">
             Telefono{" "}
@@ -224,12 +252,15 @@ export const ModalEnvio = () => {
           </p>
           <input
             type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
             name="telefono"
             placeholder="Telefono"
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
+            ref={refs.telefono}
           />
-           <p className="modal-envio__label">
+          <p className="modal-envio__label">
             Email{" "}
             {errores.email && (
               <span className="modal-envio__error">{errores.email}</span>
@@ -241,6 +272,7 @@ export const ModalEnvio = () => {
             placeholder="Ej: alanturing@gmail.com"
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
+            ref={refs.email}
           />
         </div>
         <div className="modal-envio__acciones">
@@ -248,10 +280,15 @@ export const ModalEnvio = () => {
             className="modal-envio__boton-confirmar"
             onClick={() => {
               if (!validarFormulario()) return;
+              setCargando(true);
               enviarFormulario();
             }}
           >
-            Confirmar
+            {cargando ? (
+              <span className="btn-text-cargando">Redirigiendo...</span>
+            ) : (
+              <span className="btn-text-confirmar">Confirmar</span>
+            )}
           </button>
           {/*Crea base de datos setear este formulario crear logica dde backend en hoja aparte */}
         </div>
