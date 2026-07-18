@@ -25,7 +25,7 @@
   font-size: 2.4em;
 }
 .modal-envio__cont {
-  padding: .2em 0.2em;
+  padding: 0 .2em;
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -38,7 +38,7 @@
   max-height: 47px;
   overflow: hidden;
   border-radius: 0px 0px 8px 8px;
-  margin-bottom: 5px;
+  margin-bottom: 40px;
 }
 
 .productos--active {
@@ -53,7 +53,6 @@
   width: 100%;
   justify-content: space-between;
   background-color: #1f1f1f;
-
   font-size: 1.5em;
   padding: 0.4em;
 }
@@ -65,7 +64,6 @@
   width: 100%;
   justify-content: space-between;
   background-color: #1f1f1f;
-
   padding: 0.4em;
   border-radius: 8px;
   font-size: 1.5em;
@@ -87,7 +85,7 @@
 }
 .modal-envio__formulario--titulo{
   font-size: 1.5em;
-  padding: 0 0 .5em 0;
+  margin-top: -33px;
 }
 .loading--active {
   opacity: 0.3;
@@ -120,39 +118,48 @@
 .modal-envio__item {
   width: 100%;
   display: flex;
-  padding: 0.5em 0.2em;
+  padding: .5em .2em;
   gap: 0.5em;
   background-color: #1f1f1f;
-  border-top: 1px solid rgb(58, 58, 58);
+  border-top: 1px solid #3a3a3a;
 
 }
-
 .modal-envio__item-titulo {
   font-size: 1.4em;
 }
 
 .modal-envio__item-precio {
   font-size: 1.2em;
+  font-weight: 100;
 }
 
 .modal-envio__item-imagen {
-  width: 20%;
-  height: 100px;
+  width: 24%;
+  height: 80px;
   border-radius: 15px;
+  object-fit: contain;
+  margin-top: 5px;
 }
 
 .modal-envio__item-cantidad {
   display: flex;
   justify-content: space-between;
+  padding: .9em 0;
   align-items: center;
-  max-width: 280px;
-  min-width: 280px;
+  max-width: 250px;
+  min-width: 250px;
 }
 
 .modal-envio__item-cantidad-label {
-  font-size: 1.3em;
+  font-size: 1.1em;
+  font-weight: 900;
+  border: 1px solid #fff;
+  border-radius: 39px;
+  padding: .2em .5em;
 }
-
+.modal-envio__item-talle-numero{
+  color: #999999;
+}
 .modal-envio__boton-confirmar {
   font-size: 1.2em;
   padding: 0.8em 2em;

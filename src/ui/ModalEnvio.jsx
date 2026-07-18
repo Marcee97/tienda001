@@ -78,7 +78,7 @@ export const ModalEnvio = () => {
     const nuevosErrores = {};
 
     if (!datosFormulario.nombre?.trim())
-      nuevosErrores.nombre = "Ingresa el Nombre y Apellido";
+      nuevosErrores.nombre = "Ingresa tu Nombre y Apellido";
     if (!datosFormulario.calle?.trim())
       nuevosErrores.calle = "Ingresa la calle";
     if (!datosFormulario.numero?.trim())
@@ -137,7 +137,7 @@ export const ModalEnvio = () => {
           }
           onClick={() => setOpenCloseProductoss((prev) => !prev)}
         >
-         <span className="">Mis Compras</span>
+          <span className="">Resumen de Compra</span>
           <span className="modal-envio__icon">
             <svg
               width="20"
@@ -163,10 +163,10 @@ export const ModalEnvio = () => {
                 />
                 <div className="modal-envio__item-cont">
                   <h4 className="modal-envio__item-titulo">{item.nombre}</h4>
-                  <p className="modal-envio__item-precio">${item.precio}</p>
-                  <p className="modal-envio__item-talle">Talle: {item.talle}</p>
+                  <p className="modal-envio__item-talle">Talle: <span className="modal-envio__item-talle-numero">{item.talle}</span> </p>
                   <div className="modal-envio__item-cantidad">
-                    <p className="modal-envio__item-cantidad-label">Cantidad</p>
+                    <p className="modal-envio__item-cantidad-label">{item.cantidad}</p>
+                    <p className="modal-envio__item-precio">${item.precio}</p>
                   </div>
                 </div>
               </article>
@@ -183,7 +183,7 @@ export const ModalEnvio = () => {
         <div
           className={`modal-envio__formulario ${cargando ? "loading--active" : ""}`}
         >
-          <h3 className="modal-envio__formulario--titulo">Formulario</h3>
+          <h3 className="modal-envio__formulario--titulo">Datos Personales</h3>
           <p className="modal-envio__label">
             Nombre y Apellido{" "}
             {errores.nombre && (
