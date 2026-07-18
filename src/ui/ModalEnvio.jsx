@@ -15,7 +15,7 @@ export const ModalEnvio = () => {
 
   const [errores, setErrores] = useState({});
   const [cargando, setCargando] = useState(false);
-
+  const [openCloseProductoss, setOpenCloseProductoss] = useState(false);
   const refs = {
     nombre: useRef(null),
     calle: useRef(null),
@@ -122,8 +122,37 @@ export const ModalEnvio = () => {
           close
         </span>
       </div>
-      <div className="modal-envio__productos">
-        <div className="modal-envio__productos">
+      <div
+        className={
+          openCloseProductoss
+            ? "modal-envio__productos productos--active"
+            : "modal-envio__productos"
+        }
+      >
+        <p
+          className={
+            openCloseProductoss
+              ? "text-informativo"
+              : "text-informativo--active"
+          }
+          onClick={() => setOpenCloseProductoss((prev) => !prev)}
+        >
+         <span className="">Mis Compras</span>
+          <span className="modal-envio__icon">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </span>
+        </p>
+
+        <div className="modal-envio__productos--cont">
           {carrito.length > 0 ? (
             carrito.map((item, index) => (
               <article className="modal-envio__item" key={index}>
@@ -154,6 +183,7 @@ export const ModalEnvio = () => {
         <div
           className={`modal-envio__formulario ${cargando ? "loading--active" : ""}`}
         >
+          <h3 className="modal-envio__formulario--titulo">Formulario</h3>
           <p className="modal-envio__label">
             Nombre y Apellido{" "}
             {errores.nombre && (

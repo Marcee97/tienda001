@@ -1,14 +1,14 @@
 .modal-envio {
   position: absolute;
   background-color: #121212;
-  color: #F5F5F5;
+  color: #f5f5f5;
   bottom: 0;
   width: 100%;
   overflow: hidden;
   z-index: 100;
   overflow: scroll;
   height: 100dvh;
-  padding: 0 .5em;
+  padding: 0 0.5em;
 }
 
 .modal-envio__header {
@@ -25,16 +25,59 @@
   font-size: 2.4em;
 }
 .modal-envio__cont {
-  padding: 1.5em 0.2em;
+  padding: .2em 0.2em;
   display: flex;
   flex-direction: column;
   gap: 1em;
+  background: linear-gradient(#070707, #0c0c0c);
+  border-radius: 10px;
 }
 
 .modal-envio__productos {
-
+  transition: max-height 0.3s ease-in-out;
+  max-height: 47px;
+  overflow: hidden;
+  border-radius: 0px 0px 8px 8px;
+  margin-bottom: 5px;
 }
 
+.productos--active {
+  max-height: 100%;
+}
+
+.text-informativo {
+  transition: all 0.3s ease-in-out;
+  color: #f3f1f1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  background-color: #1f1f1f;
+
+  font-size: 1.5em;
+  padding: 0.4em;
+}
+.text-informativo--active {
+  transition: all 0.5s ease-in-out;
+  color: #f3f1f1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  background-color: #1f1f1f;
+
+  padding: 0.4em;
+  border-radius: 8px;
+  font-size: 1.5em;
+}
+.modal-envio__icon {
+  display: flex;
+  align-items: center;
+  transition: all 0.5s;
+}
+.modal-envio__icon--active {
+  transform: rotate(45deg);
+}
 .modal-envio__formulario {
   display: flex;
   flex-direction: column;
@@ -42,22 +85,25 @@
   justify-content: start;
   gap: 0.8em;
 }
-.loading--active{
-  opacity: .3;
-
+.modal-envio__formulario--titulo{
+  font-size: 1.5em;
+  padding: 0 0 .5em 0;
 }
-.modal-envio__label{
+.loading--active {
+  opacity: 0.3;
+}
+.modal-envio__label {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 0 .1em;
+  padding: 0 0.1em;
   align-items: center;
   font-size: 1.1em;
-  margin-bottom: -.7em;
+  margin-bottom: -0.7em;
 }
-.modal-envio__error{
-  color:#cf0b0b;
-  font-size: .8em;
+.modal-envio__error {
+  color: #cf0b0b;
+  font-size: 0.8em;
 }
 
 .modal-envio__input-formulario {
@@ -65,33 +111,33 @@
   font-size: 1.1em;
   border-radius: 5px;
   width: 99%;
-  background-color: #2A2A2A;
-  color:#F5F5F5;
+  background-color: #2a2a2a;
+  color: #f5f5f5;
 }
-.modal-envio__input-formulario::placeholder{
-    color:#7D7D7D;
+.modal-envio__input-formulario::placeholder {
+  color: #7d7d7d;
 }
 .modal-envio__item {
   width: 100%;
   display: flex;
   padding: 0.5em 0.2em;
   gap: 0.5em;
-  outline: 1px solid #444444;
-  background-color: transparent;
-  backdrop-filter: blur(1px);
+  background-color: #1f1f1f;
+  border-top: 1px solid rgb(58, 58, 58);
+
 }
 
 .modal-envio__item-titulo {
-  font-size: 1.7em;
+  font-size: 1.4em;
 }
 
 .modal-envio__item-precio {
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 
 .modal-envio__item-imagen {
-  width: 25%;
-  height: 120px;
+  width: 20%;
+  height: 100px;
   border-radius: 15px;
 }
 
@@ -107,15 +153,12 @@
   font-size: 1.3em;
 }
 
-.modal-envio__boton-confirmar{
+.modal-envio__boton-confirmar {
   font-size: 1.2em;
-  padding: .8em 2em;
+  padding: 0.8em 2em;
   width: 100%;
   border-radius: 10px;
-  color:#F5F5F5;
-  background-color: #1E1E1E;
+  color: #f5f5f5;
+  background-color: #1e1e1e;
   border: none;
 }
-
-
-
