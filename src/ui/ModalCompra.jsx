@@ -299,11 +299,12 @@ export const ModalCompra = () => {
           </div>
           <div className="modal-compra__contenedor-cantidad">
             <div className="modal-compra__stock">
-              <SelectorCantidad
-                cantidad={cantidad}
+             <SelectorCantidad
+                cantidad={talleSeleccionado ? cantidad : "-"}
                 setCantidad={setCantidad}
                 max={varianteSeleccionada?.stock}
-              />
+              /> 
+             
               <LiveStock
                 stock={varianteSeleccionada?.stock}
                 onClick={() => {
@@ -372,7 +373,7 @@ export const ModalCompra = () => {
                 );
               }}
             >
-              Agregar al carrito
+              {talleSeleccionado ? "Agregar al carrito" : "Seleccionar talle"}
             </button>
           </div>
         </div>
