@@ -16,13 +16,13 @@ app.use(express.json());
 const mercadoPagoRoutes = require("./routes/mercadopago.routes.js");
 const webhookRoutes = require("./routes/webhook.routes.js");
 const productosRoutes = require("./routes/productos.routes.js");
-const variantesRoutes = require("./routes/variantes.routes.js");
+const getCatalogoCompleto = require("./routes/catalogoCompleto.routes.js");
 const actualizarStock = require("./routes/ventas.routes.js");
 const datosDeVenta = require("./routes/ventas.routes.js");
 const chatbotRoutes = require("./routes/chatbot.routes.js");
 const successRoutes = require("./routes/success.routes.js")
 
-app.use("/api/variantes", variantesRoutes);
+app.use("/api/variantes", getCatalogoCompleto);
 app.use("/api/crear-preferencia", mercadoPagoRoutes);
 app.use("/api/webhook", webhookRoutes);
 app.use("/api/productos", productosRoutes);

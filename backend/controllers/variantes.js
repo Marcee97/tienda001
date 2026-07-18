@@ -1,8 +1,7 @@
 const { pool } = require("../database/db.config.js");
 
-const getVariantes = async (req, res) => {
-  const { id } = req.params;
-  console.log(id, "llega el id seleccionado para el modal atraves de params");
+const getCatalogoCompleto = async (req, res) => {
+  console.log("llega el id seleccionado para el modal atraves de params");
 
   try {
     const result = await pool.query(`
@@ -37,4 +36,4 @@ const getVariantes = async (req, res) => {
   }
 };
 
-module.exports = { getVariantes };
+module.exports = { getCatalogoCompleto };

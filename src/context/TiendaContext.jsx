@@ -3,6 +3,8 @@ import { createContext, useEffect, useState } from "react";
 export const TiendaContext = createContext();
 
 export const TiendaProvider = ({ children }) => {
+  const [variantes, setVariantes] = useState([]);
+
   const [productoSeleccionado, setProductoSeleccionado] = useState(false);
   const [openCloseMenu, setOpenCloseMenu] = useState(false);
   const [openCloseCarrito, setOpenCloseCarrito] = useState(false);
@@ -22,6 +24,15 @@ export const TiendaProvider = ({ children }) => {
   const [carrito, setCarrito] = useState([]);
   const [cantidad, setCantidad] = useState(1);
 
+  useEffect(() => {
+    const variantesDeProducto = async () => {
+      const data = await fetch(`${import.meta.env.VITE_API_URL}/api/variantes`);
+      const variantesObtenidas = await data.json();
+      setVariantes(variantesObtenidas);
+    };
+    variantesDeProducto();
+  }, []);
+
   const agregarAlCarrito = (
     producto,
     talle,
@@ -30,8 +41,12 @@ export const TiendaProvider = ({ children }) => {
     imagen,
     stock,
   ) => {
-    if (!stock) return console.log("No hay stock disponible para este producto");
-    console.log(producto, "este deberia ser el prodycto seleccio9nadkpara el carrito");
+    if (!stock)
+      return console.log("No hay stock disponible para este producto");
+    console.log(
+      producto,
+      "este deberia ser el prodycto seleccio9nadkpara el carrito",
+    );
 
     setCarrito((prev) => {
       const existe = prev.find(
@@ -131,6 +146,8 @@ export const TiendaProvider = ({ children }) => {
         setVisibilidadTitle,
         openChatbot,
         setOpenChatbot,
+        variantes,
+        setVariantes
       }}
     >
       {children}

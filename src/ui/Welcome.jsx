@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "../style/welcome.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { TiendaContext } from "../context/TiendaContext";
 
 export const Welcome = () => {
-  const { setOpenCloseModalCompra, setVisibilidadTitle } = useContext(TiendaContext);
+  const { setOpenCloseModalCompra, setVisibilidadTitle, productoSeleccionado, setVariantes } = useContext(TiendaContext);
   const [colorNegro, setColorNegro] = useState(false);
   const [openCloseWelcome, setOpenCloseWelcome] = useState(false);
+ 
+
 
   return (
     <section className={openCloseWelcome ? "welcome welcome--active" : "welcome"}>

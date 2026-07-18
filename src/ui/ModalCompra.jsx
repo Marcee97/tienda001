@@ -12,8 +12,6 @@ import { Carrito } from "./Carrito.jsx";
 import { MenuDesplegable } from "./MenuDesplegable.jsx";
 
 export const ModalCompra = () => {
-  const [variantes, setVariantes] = useState([]);
-
   const {
     productoSeleccionado,
     setProductoSeleccionado,
@@ -41,6 +39,8 @@ export const ModalCompra = () => {
     setVisibilidadTitle,
     openChatbot,
     setOpenChatbot,
+    variantes,
+    setVariantes,
   } = useContext(TiendaContext);
 
   const [indexImagenCarrousel, setIndexImagenCarrousel] = useState(0);
@@ -50,24 +50,6 @@ export const ModalCompra = () => {
   const mensajesEndRef = useRef(null);
 
   useEffect(() => {}, [openCloseInfoStock]);
-  useEffect(() => {
-    if (!openCloseModalCompra) return;
-
-    const variantesDeProducto = async () => {
-      const data = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/variantes/${productoSeleccionado.id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-      );
-      const variantesObtenidas = await data.json();
-      setVariantes(variantesObtenidas);
-    };
-    variantesDeProducto();
-  }, [openCloseModalCompra]);
 
   useEffect(() => {
     if (animationCompra) {
@@ -222,7 +204,12 @@ export const ModalCompra = () => {
         <div className="modal-compra__info">
           <InfoStock />
           <div className="modal-compra__cont-titulo-chatbot">
-            <h4 className="modal-compra__titulo">{variantes[0]?.nombre} <span className="modal-compra__color-seleccionado">{colores.find((c) => c.color_id === colorSeleccionado)?.color}</span></h4>
+            <h4 className="modal-compra__titulo">
+              {variantes[0]?.nombre}{" "}
+              <span className="modal-compra__color-seleccionado">
+                {colores.find((c) => c.color_id === colorSeleccionado)?.color}
+              </span>
+            </h4>
             <h4
               onClick={() => abrirChatbot()}
               className="modal-compra__btn-chat"
