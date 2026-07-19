@@ -27,13 +27,16 @@ width: 100%;
 transform: translateX(0%);
 }
 
+
+
 .menu-desplegable__icon-close-carrito{
 display: flex;
 justify-content: space-between;
 padding: .2em 0 1.5em 0;
 }
 .menu-desplegable-icons{
-  font-size: 1.5em;
+  font-size: 1.7em;
+  width: 39px;
   
 }
 
@@ -41,7 +44,6 @@ padding: .2em 0 1.5em 0;
   color: red;
 }
 .menu-desplegable__icon-cantidad-productos{
-  background-color: #f00000;
   font-size: 11px;
   padding: .2em .5em;
   border-radius: 19px;
@@ -54,17 +56,38 @@ margin: .6em ;
 font-size: 1.9em;
 }
 .menu-desplegable-cont{
-outline: 1px solid #22222252;
-padding: .7em;
+padding:  .7em .7em .7em .2em;
 font-size: 1.4em;
 backdrop-filter: blur(1px);
-
+border-left: 1px solid #ffffff;
 }
 .menu-desplegable-lista{
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 2em;
+}
+.menu-desplegable-item{
+
+
+}
+
+.menu__desplegable--numero-orden{
+  color: #5e5e5e;
+  font-size: .5em;
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  letter-spacing: -1px;
+
+}
+.menu__desplegable--text-item{
+font-size: 2.2em;
+color: #ffffff;
+}
+.menu__desplegable--contenido-text{
+  font-size: .8em;
+  padding: .2em;
+
 }
 
 .menu-desplegable__seccion {

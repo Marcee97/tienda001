@@ -71,6 +71,7 @@ background-color: #53535300;
     font-size: 1.9em;
     position: relative;
       z-index:135;
+
 }
 .title-hidden{
     visibility: hidden;
@@ -79,9 +80,11 @@ background-color: #53535300;
 
 .menu__item{
     list-style: none;
+
 }
 .menu__icon{
-    font-size: 3em;
+    font-size: 2em;
+    color: red;
 }
 
 .menu__icon-cantidad-items{
