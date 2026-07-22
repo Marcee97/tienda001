@@ -15,14 +15,15 @@ export const Carrito = () => {
     setOpenCloseEnvios,
   } = useContext(TiendaContext);
 
-const deleteItem = (id, talle, color) => {
-  console.log(id, talle, color)
-  setCarrito((prevCarrito) =>
-    prevCarrito.filter(
-      (item) => !(item.id === id && item.talle === talle && item.color === color)
-    )
-  );
-}
+  const deleteItem = (id, talle, color) => {
+    console.log(id, talle, color);
+    setCarrito((prevCarrito) =>
+      prevCarrito.filter(
+        (item) =>
+          !(item.id === id && item.talle === talle && item.color === color),
+      ),
+    );
+  };
 
   return (
     <section
@@ -47,9 +48,17 @@ const deleteItem = (id, talle, color) => {
                 alt={item.nombre}
               />
               <div className="carrito__item-cont">
-                <h4 className="carrito__item-title">{item.nombre}</h4>
+                <div className="carrito__item-cont-cabecera">
+                  <h4 className="carrito__item-title">{item.nombre}</h4>
+                  <img
+                    src="\delete-svgrepo-com.svg"
+                    alt="icono para borrar"
+                    onClick={() => deleteItem(item.id, item.talle, item.color)}
+                    className="carrito__icono--delete"
+                  />
+                </div>
                 <p className="carrito__item-precio">${item.precio}</p>
-                <p>Talle: {item.talle}</p>
+                <p className="carrito__item-talle">Talle: {item.talle}</p>
                 <div className="carrito__item-control-cantidad">
                   <SelectorCantidad
                     cantidad={item.cantidad}
@@ -63,7 +72,6 @@ const deleteItem = (id, talle, color) => {
                     }
                     max={item.stock}
                   />
-                  <span className="material-symbols-outlined carrito__item-control-delete" onClick={() => deleteItem(item.id, item.talle, item.color)}>delete</span>
                 </div>
               </div>
               <div className="carrito__cont--selector-cantidad"></div>
@@ -77,13 +85,25 @@ const deleteItem = (id, talle, color) => {
       </div>
       <div className="carrito__footer">
         <div className="carrito__total">
-          <h4 className="carrito__total-label">Total</h4>
-          <p className="carrito__total-price">
-            $
-            {carrito.reduce(
-              (total, item) => total + item.precio * item.cantidad,
-              0,
-            )}
+          <div>
+            <p className="carrito__total--subtotal">
+              Subtotal
+              <span className="carrito__total--subtotal--number">${carrito.reduce(
+                (total, item) => total + item.precio * item.cantidad,
+                0,
+              )}</span>
+            </p>
+          </div>
+          <p className="carrito__total-label">
+            Total{" "}
+            <span className="carrito__total-price">
+              {" "}
+              $
+              {carrito.reduce(
+                (total, item) => total + item.precio * item.cantidad,
+                0,
+              )}
+            </span>
           </p>
         </div>
         <div className="carrito__actions">
