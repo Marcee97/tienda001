@@ -91,6 +91,19 @@
   width: 100%;
   align-items: center;
 }
+.carrito__empty{
+  height: 85%;
+  margin-top: 65px;
+}
+.carrito__empty--cont{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  outline: 1px solid #424242;
+  align-items: center;
+  height: 70%;
+  gap: 2em;
+}
 
 .carrito__footer {
   padding: 0.6em;
@@ -107,6 +120,11 @@
   display: flex;
   gap: 1em;
   justify-content: space-between;
+  
+}
+.carrito__total--inactive{
+  visibility: hidden;
+
 }
 
 .carrito__total-label {
@@ -129,6 +147,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  visibility: hidden;
+
 }
 
 .carrito__button {

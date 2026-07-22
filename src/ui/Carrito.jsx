@@ -2,7 +2,6 @@ import { useContext, useEffect } from "react";
 import "../style/carrito.css";
 import { TiendaContext } from "../context/TiendaContext";
 import { SelectorCantidad } from "../components/SelectorCantidad/SelectorCantidad";
-
 export const Carrito = () => {
   const {
     openCloseCarrito,
@@ -13,8 +12,8 @@ export const Carrito = () => {
     ejecutarCompraCarrito,
     openCloseEnvios,
     setOpenCloseEnvios,
+    setOpenCloseMenu
   } = useContext(TiendaContext);
-
   const deleteItem = (id, talle, color) => {
     console.log(id, talle, color);
     setCarrito((prevCarrito) =>
@@ -79,12 +78,19 @@ export const Carrito = () => {
           ))
         ) : (
           <div className="carrito__empty">
+            <div className="carrito__empty--cont">
+
             <p className="carrito__empty-text">Tu carrito está vacío</p>
+            <button className="carrito__button"  onClick={() => (
+              setOpenCloseCarrito(false),
+              setOpenCloseMenu(prev => !prev)
+            )}>IR A COMPRAR</button>
+            </div>
           </div>
         )}
       </div>
       <div className="carrito__footer">
-        <div className="carrito__total">
+        <div className={carrito.length ? "carrito__total" : "carrito__total--inactive"}>
           <div>
             <p className="carrito__total--subtotal">
               Subtotal
