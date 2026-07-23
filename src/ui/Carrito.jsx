@@ -114,7 +114,7 @@ export const Carrito = () => {
         </div>
         <div className="carrito__actions">
           <button
-            className="carrito__button carrito__button--primary"
+            className={carrito.length ? "carrito__button" : "carrito__button--inactive"}
             onClick={(e) => {
               e.stopPropagation();
               if (carrito.length === 0) return;
