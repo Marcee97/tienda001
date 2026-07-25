@@ -17,6 +17,7 @@ export const TiendaProvider = ({ children }) => {
   const [openCloseGuiaTalles, setOpenCloseGuiaTalles] = useState(false);
   const [visibilidadTitle, setVisibilidadTitle] = useState(false);
   const [openChatbot, setOpenChatbot] = useState(false);
+  const [index, setIndex] = useState(0);
 
   const [productoSeleccionadoCarrito, setProductoSeleccionadoCarrito] =
     useState([]);
@@ -147,7 +148,9 @@ export const TiendaProvider = ({ children }) => {
         openChatbot,
         setOpenChatbot,
         variantes,
-        setVariantes
+        setVariantes,
+        index,
+        setIndex,
       }}
     >
       {children}

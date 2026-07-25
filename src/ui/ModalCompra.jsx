@@ -43,6 +43,8 @@ export const ModalCompra = () => {
     setOpenChatbot,
     variantes,
     setVariantes,
+    index,
+    setIndex,
   } = useContext(TiendaContext);
 
   const cargandoVariantes = variantes.length === 0;
@@ -217,6 +219,21 @@ export const ModalCompra = () => {
           </div>
 
           <div className="modal-compra__info">
+            <div className="carrousel__circle">
+            <span
+      className={`carrousel__track--circulo--uno ${
+        index === 1 ? "active__track" : ""
+      }`}
+      onClick={() => setIndexImagenCarrousel(0)}
+    ></span>
+    <span
+      className={`carrousel__track--circulo--dos ${
+        index === 0 ? "active__track" : ""
+      }`}
+      onClick={() => setIndexImagenCarrousel(1)}
+    ></span>
+            </div>
+
             <InfoStock />
             <div className="modal-compra__cont-titulo-chatbot">
               <h4 className="modal-compra__titulo">
@@ -270,6 +287,7 @@ export const ModalCompra = () => {
                             setTalleSeleccionado(null);
                             setIndexImagenCarrousel(0);
                             setCantidad(1);
+                            setIndex(0)
                           }}
                         ></button>
                       ))}
@@ -420,7 +438,9 @@ export const ModalCompra = () => {
                   );
                 }}
               >
-                {talleSeleccionado ? "Agregar al carrito" : "Selecciona un talle"}
+                {talleSeleccionado
+                  ? "Agregar al carrito"
+                  : "Selecciona un talle"}
               </button>
             </div>
           </div>

@@ -1,7 +1,11 @@
 import "../components/carrousel.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TiendaContext } from "../context/TiendaContext";
 export const Carrousel = ({ imagenes }) => {
-  const [index, setIndex] = useState(0);
+
+  const {index, setIndex} = useContext(TiendaContext)
+
+
 
   const anterior = () => setIndex(prev => prev > 0 ? prev - 1 : prev);
   const siguiente = () => setIndex(prev => prev < imagenes.length - 1 ? prev + 1 : prev);
