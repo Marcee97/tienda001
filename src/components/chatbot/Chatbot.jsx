@@ -62,7 +62,6 @@ useEffect(() => {
           close
         </span>
       </div>
-
       <div className="chatbot__mensajes">
         {mensajes.length === 0 && (
           <p className="chatbot__introduccion">
@@ -77,7 +76,6 @@ useEffect(() => {
         ))}
         <div ref={mensajesEndRef} />
       </div>
-
       <div className="chatbot__input-cont">
         <input
           ref={inputChatRef}
@@ -88,7 +86,7 @@ useEffect(() => {
           onChange={(e) => setInputChat(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && enviarMensaje()}
         />
-        <button className="chatbot__btn-enviar" onClick={enviarMensaje}>➤</button>
+        <button className="chatbot__btn-enviar" onMouseDown={(e) => e.preventDefault()} onClick={enviarMensaje}>➤</button>
       </div>
     </div>
   );

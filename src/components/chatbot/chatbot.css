@@ -10,7 +10,7 @@
   flex-direction: column;
   z-index: 100;
   transform: translateX(-104%);
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease-in-out;
 }
 
 .chatbot--active {
@@ -45,6 +45,7 @@
   padding: 0.5em 0.7em;
   border-radius: 15px;
   font-size: 1.1em;
+    animation: aparecerMensaje 0.3s ease-out;
 }
 
 .chatbot__mensaje--user {
@@ -86,4 +87,16 @@
   width: 35px;
   height: 35px;
   cursor: pointer;
+}
+
+
+@keyframes aparecerMensaje {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

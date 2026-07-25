@@ -53,6 +53,7 @@
 
 .carrito__container {
   height: 100dvh;
+    overflow-y: auto;
 }
 
 
@@ -126,7 +127,7 @@
 
 .carrito__footer {
   padding: 0.6em;
-  background-color: #0d0d0d;
+  background-color: #080808;
   border-radius: 15px 15px 0px 0px;
 }
 

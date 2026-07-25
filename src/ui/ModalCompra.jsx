@@ -58,7 +58,7 @@ export const ModalCompra = () => {
     if (animationCompra) {
       const timer = setTimeout(() => {
         setAnimationCompra(false);
-      }, 22000);
+      }, 4000);
 
       return () => clearTimeout(timer);
     }
@@ -152,272 +152,279 @@ export const ModalCompra = () => {
       }
     >
       <SkeletonTheme baseColor="#202020" highlightColor="#444">
+        <MenuDesplegable />
+        <Carrito />
 
-      <MenuDesplegable />
-      <Carrito />
-
-      <div className="modal-compra__cont">
-        <div className="modal-compra__contenedor">
-          <div className="modal-compra__titulo-contenedor"></div>
-        </div>
-        <div className="cont__carrousel--guiatalles">
-          {cargandoVariantes ? (
-            <Skeleton
-              height={350}
-              className="modal-compra__carrousel-skeleton"
-              baseColor="#29292900"
-              highlightColor="#d1cfcf00"
-            />
-          ) : (
-            <Carrousel imagenes={imagenesActuales} />
-          )}
-
-          <GuiaTalles
-            visible={openCloseGuiaTalles}
-            medidas={{
-              NONE: {
-                hombro: "Selecciona",
-                pecho: "0 cm",
-                largo: "0 cm",
-                manga: "0 cm",
-              },
-              S: {
-                hombro: "42 cm",
-                pecho: "96 cm",
-                largo: "68 cm",
-                manga: "20 cm",
-              },
-              M: {
-                hombro: "44 cm",
-                pecho: "100 cm",
-                largo: "70 cm",
-                manga: "21 cm",
-              },
-              L: {
-                hombro: "46 cm",
-                pecho: "106 cm",
-                largo: "72 cm",
-                manga: "22 cm",
-              },
-              XL: {
-                hombro: "48 cm",
-                pecho: "75 cm",
-                largo: "74 cm",
-                manga: "23 cm",
-              },
-              XXL: {
-                hombro: "48 cm",
-                pecho: "75 cm",
-                largo: "74 cm",
-                manga: "23 cm",
-              },
-            }}
-            talle={talleSeleccionado || "NONE"}
-          />
-        </div>
-
-        <div className="modal-compra__info">
-          <InfoStock />
-          <div className="modal-compra__cont-titulo-chatbot">
-            <h4 className="modal-compra__titulo">
-              {cargandoVariantes ? (
-                <Skeleton width={160} />
-              ) : (
-                <>
-                  {variantes[0]?.nombre}{" "}
-                  <span className="modal-compra__color-seleccionado">
-                    {
-                      colores.find((c) => c.color_id === colorSeleccionado)
-                      ?.color
-                    }
-                  </span>
-                </>
-              )}
-            </h4>
-            <h4
-              onClick={() => abrirChatbot()}
-              className="modal-compra__btn-chat"
-            >
-              IA
-            </h4>
+        <div className="modal-compra__cont">
+          <div className="modal-compra__contenedor">
+            <div className="modal-compra__titulo-contenedor"></div>
           </div>
-          <div className="modal-compra__colores-talles">
-            <h4>Colores</h4>
-            <div className="modal-compra__contenedor-btn-colores">
-              <div className="modal-compra__cont-btn-colores">
-                {cargandoVariantes
-                  ? [1, 2, 3].map((n) => (
-                      <Skeleton
-                      key={n}
-                        circle
-                        width={32}
-                        height={32}
-                        className="modal-compra__color-btn"
-                        />
-                      ))
-                      : colores.map((c) => (
-                        <button
-                        key={c.color_id}
-                        className={`modal-compra__color-btn ${
-                          colorSeleccionado === c.color_id ? "active" : ""
-                        }`}
-                        style={{
-                          backgroundColor:
-                          traduccionColores[c.color?.toLowerCase()],
-                        }}
-                        onClick={() => {
-                          setColorSeleccionado(c.color_id);
-                          setTalleSeleccionado(null);
-                          setIndexImagenCarrousel(0);
-                          setCantidad(1);
-                        }}
-                        ></button>
-                    ))}
-              </div>
-              <h4 className="modal-compra__precio">
-                <span className="modal-compra__precio--unidad">UNIT </span>
+          <div className="cont__carrousel--guiatalles">
+            {cargandoVariantes ? (
+              <Skeleton
+                height={350}
+                className="modal-compra__carrousel-skeleton"
+                baseColor="#29292900"
+                highlightColor="#d1cfcf00"
+              />
+            ) : (
+              <Carrousel imagenes={imagenesActuales} />
+            )}
+
+            <GuiaTalles
+              visible={openCloseGuiaTalles}
+              medidas={{
+                NONE: {
+                  hombro: "Selecciona",
+                  pecho: "0 cm",
+                  largo: "0 cm",
+                  manga: "0 cm",
+                },
+                S: {
+                  hombro: "42 cm",
+                  pecho: "96 cm",
+                  largo: "68 cm",
+                  manga: "20 cm",
+                },
+                M: {
+                  hombro: "44 cm",
+                  pecho: "100 cm",
+                  largo: "70 cm",
+                  manga: "21 cm",
+                },
+                L: {
+                  hombro: "46 cm",
+                  pecho: "106 cm",
+                  largo: "72 cm",
+                  manga: "22 cm",
+                },
+                XL: {
+                  hombro: "48 cm",
+                  pecho: "75 cm",
+                  largo: "74 cm",
+                  manga: "23 cm",
+                },
+                XXL: {
+                  hombro: "48 cm",
+                  pecho: "75 cm",
+                  largo: "74 cm",
+                  manga: "23 cm",
+                },
+              }}
+              talle={talleSeleccionado || "NONE"}
+            />
+          </div>
+
+          <div className="modal-compra__info">
+            <InfoStock />
+            <div className="modal-compra__cont-titulo-chatbot">
+              <h4 className="modal-compra__titulo">
                 {cargandoVariantes ? (
-                  <Skeleton width={50} />
+                  <Skeleton width={160} />
                 ) : (
-                  `$${variantes[0]?.precio}`
+                  <>
+                    {variantes[0]?.nombre}{" "}
+                    <span className="modal-compra__color-seleccionado">
+                      {
+                        colores.find((c) => c.color_id === colorSeleccionado)
+                          ?.color
+                      }
+                    </span>
+                  </>
                 )}
               </h4>
-            </div>
-          </div>
-          <div className="modal-compra__talles">
-            <div className="modal-compra__talles-botones">
-              <div className="modal-compra__cont-talles-botones">
-                {cargandoVariantes
-                  ? [1, 2, 3, 4].map((n) => (
-                      <Skeleton key={n} width={50} height={46} />
-                    ))
-                    : tallesUnicos
-                      .filter((t) => t.stock > 0)
-                      .sort((a, b) => {
-                        const orden = ["S", "M", "L", "XL", "XXL"];
-                        return orden.indexOf(a.talle) - orden.indexOf(b.talle);
-                      })
-                      .map((v, index) => (
-                        <button
-                          key={index}
-                          className={`modal-compra__talle-btn ${
-                            talleSeleccionado === v.talle ? "active" : ""
-                          }`}
-                          onClick={() => {
-                            setTalleSeleccionado(v.talle);
-                            setCantidad(1);
-                            setMensajeSeleccionaTalle(false);
-                          }}
-                        >
-                          {v.talle}
-                        </button>
-                      ))}
-              </div>
-              <div className="modal--compra__cont__guiatalles">
-                <p
-                  className="modal--compra__cont__guiatalles--mensage"
-                  style={{
-                    visibility:
-                    openCloseGuiaTalles && !talleSeleccionado
-                    ? "visible"
-                    : "hidden",
-                  }}
-                >
-                  Elegí un talle para ver medidas
-                </p>
-
-                <span
-                  className="material-symbols-outlined modal--compra__cont__guiatalles--btn"
-                  onClick={() => setOpenCloseGuiaTalles((prev) => !prev)}
-                >
-                  settings_accessibility
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="modal-compra__contenedor-cantidad">
-            <div className="modal-compra__stock">
-              <SelectorCantidad
-                cantidad={talleSeleccionado ? cantidad : "-"}
-                setCantidad={setCantidad}
-                max={varianteSeleccionada?.stock}
-              />
-
-              <LiveStock
-                stock={varianteSeleccionada?.stock}
-                onClick={() => {
-                  setOpenCloseInfoStock((prev) => !prev);
-                }}
-              />
-            </div>
-          </div>
-
-          {animationCompra && (
-            <div className="mensaje-agregado">
-              <p className="mensaje-agregado__text">Se agregó al carrito</p>
-              <h4 className="mensaje-agregado__button" onClick={btnOpenCarrito}>
-                Ver
+              <h4
+                onClick={() => abrirChatbot()}
+                className="modal-compra__btn-chat"
+              >
+                IA
               </h4>
             </div>
-          )}
-          <div
-            className={
-              cantidad > 1
-                ? "modal-compra__total"
-                : "modal-compra__total--active"
-              }
-          >
-            <div className="modal-compra__total-cont">
-              <h3 className="modal-compra__precio-label">TOTAL:</h3>
-              {variantes && (
-                <h4 className="modal-compra__precio-total">
-                  ${variantes[0]?.precio * cantidad}
+            <div className="modal-compra__colores-talles">
+              <h4>Colores</h4>
+              <div className="modal-compra__contenedor-btn-colores">
+                <div className="modal-compra__cont-btn-colores">
+                  {cargandoVariantes
+                    ? [1, 2, 3].map((n) => (
+                        <Skeleton
+                          key={n}
+                          circle
+                          width={32}
+                          height={32}
+                          className="modal-compra__color-btn"
+                        />
+                      ))
+                    : colores.map((c) => (
+                        <button
+                          key={c.color_id}
+                          className={`modal-compra__color-btn ${
+                            colorSeleccionado === c.color_id ? "active" : ""
+                          }`}
+                          style={{
+                            backgroundColor:
+                              traduccionColores[c.color?.toLowerCase()],
+                          }}
+                          onClick={() => {
+                            setColorSeleccionado(c.color_id);
+                            setTalleSeleccionado(null);
+                            setIndexImagenCarrousel(0);
+                            setCantidad(1);
+                          }}
+                        ></button>
+                      ))}
+                </div>
+                <h4 className="modal-compra__precio">
+                  <span className="modal-compra__precio--unidad">UNIT </span>
+                  {cargandoVariantes ? (
+                    <Skeleton width={50} />
+                  ) : (
+                    `$${variantes[0]?.precio}`
+                  )}
                 </h4>
-              )}
+              </div>
             </div>
-          </div>
+            <div className="modal-compra__talles">
+              <div className="modal-compra__talles-botones">
+                <div className="modal-compra__cont-talles-botones">
+                  {cargandoVariantes
+                    ? [1, 2, 3, 4].map((n) => (
+                        <Skeleton key={n} width={50} height={46} />
+                      ))
+                    : tallesUnicos
+                        .filter((t) => t.stock > 0)
+                        .sort((a, b) => {
+                          const orden = ["S", "M", "L", "XL", "XXL"];
+                          return (
+                            orden.indexOf(a.talle) - orden.indexOf(b.talle)
+                          );
+                        })
+                        .map((v, index) => (
+                          <button
+                            key={index}
+                            className={`modal-compra__talle-btn ${
+                              talleSeleccionado === v.talle ? "active" : ""
+                            }`}
+                            onClick={() => {
+                              setTalleSeleccionado(v.talle);
+                              setCantidad(1);
+                              setMensajeSeleccionaTalle(false);
+                            }}
+                          >
+                            {v.talle}
+                          </button>
+                        ))}
+                </div>
+                <div className="modal--compra__cont__guiatalles">
+                  <p
+                    className="modal--compra__cont__guiatalles--mensage"
+                    style={{
+                      visibility:
+                        openCloseGuiaTalles && !talleSeleccionado
+                          ? "visible"
+                          : "hidden",
+                    }}
+                  >
+                    Elegí un talle para ver medidas
+                  </p>
 
-          <div className="modal-compra__acciones">
+                  <span
+                    className="material-symbols-outlined modal--compra__cont__guiatalles--btn"
+                    onClick={() => setOpenCloseGuiaTalles((prev) => !prev)}
+                  >
+                    settings_accessibility
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="modal-compra__contenedor-cantidad">
+              <div className="modal-compra__stock">
+                <SelectorCantidad
+                  cantidad={talleSeleccionado ? cantidad : "-"}
+                  setCantidad={setCantidad}
+                  max={varianteSeleccionada?.stock}
+                />
+
+                <LiveStock
+                  stock={varianteSeleccionada?.stock}
+                  onClick={() => {
+                    setOpenCloseInfoStock((prev) => !prev);
+                  }}
+                />
+              </div>
+            </div>
+
+            {animationCompra && (
+              <div className="mensaje-agregado">
+                <p className="mensaje-agregado__text">
+                  {cantidad} {variantes[0]?.nombre} {talleSeleccionado}{" "}
+                  {colores.find((c) => c.color_id === colorSeleccionado)?.color}
+                </p>
+                <h4
+                  className="mensaje-agregado__button"
+                  onClick={btnOpenCarrito}
+                >
+                  <span>Ver</span> Carrito
+                </h4>
+              </div>
+            )}
             <div
               className={
-                mensajeSeleccionaTalle
-                ? "mensaje-selecciona-talle mensaje-selecciona-talle__active"
-                : "mensaje-selecciona-talle"
+                cantidad > 1
+                  ? "modal-compra__total"
+                  : "modal-compra__total--active"
               }
-              >
-              <p className="mensaje-selecciona-talle__text">
-                Selecciona un talle
-              </p>
+            >
+              <div className="modal-compra__total-cont">
+                <h3 className="modal-compra__precio-label">TOTAL:</h3>
+                {variantes && (
+                  <h4 className="modal-compra__precio-total">
+                    ${variantes[0]?.precio * cantidad}
+                  </h4>
+                )}
+              </div>
             </div>
 
-            <button
-              className="modal-compra__btn-agregar"
-              onClick={() => {
-                if (talleSeleccionado === null)
-                  return setMensajeSeleccionaTalle(true);
-                setMensajeSeleccionaTalle(false);
-                const producto = {
-                  id: variantes[0]?.producto_id,
-                  nombre: variantes[0]?.nombre,
-                  precio: variantes[0]?.precio,
-                };
-                agregarAlCarrito(
-                  producto,
-                  talleSeleccionado,
-                  cantidad,
-                  colorSeleccionado,
-                  imagenesActuales[0],
-                  varianteSeleccionada.stock,
-                );
-              }}
-            >
-              {talleSeleccionado ? "Agregar al carrito" : "Seleccionar talle"}
-            </button>
+            <div className="modal-compra__acciones">
+              <div
+                className={
+                  mensajeSeleccionaTalle
+                    ? "mensaje-selecciona-talle mensaje-selecciona-talle__active"
+                    : "mensaje-selecciona-talle"
+                }
+              >
+                <p className="mensaje-selecciona-talle__text">
+                  Selecciona un talle
+                </p>
+              </div>
+
+              <button
+                className="modal-compra__btn-agregar"
+                onClick={() => {
+                  if (talleSeleccionado === null)
+                    return setMensajeSeleccionaTalle(true);
+                  setMensajeSeleccionaTalle(false);
+                  const producto = {
+                    id: variantes[0]?.producto_id,
+                    nombre: variantes[0]?.nombre,
+                    precio: variantes[0]?.precio,
+                  };
+                  agregarAlCarrito(
+                    producto,
+                    talleSeleccionado,
+                    cantidad,
+                    colorSeleccionado,
+                    imagenesActuales[0],
+                    varianteSeleccionada.stock,
+                  );
+                }}
+              >
+                {talleSeleccionado ? "Agregar al carrito" : "Seleccionar talle"}
+              </button>
+            </div>
           </div>
+          <Chatbot open={openChatbot} onClose={() => setOpenChatbot(false)} />
         </div>
-        <Chatbot open={openChatbot} onClose={() => setOpenChatbot(false)} />
-      </div>
-              </SkeletonTheme>
+      </SkeletonTheme>
     </section>
   );
 };

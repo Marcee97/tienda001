@@ -16,10 +16,9 @@
 
 .modal-compra--active {
   min-height: 105vh;
-   background-color: #3a3939;
+  background-color: #3a3939;
 
   z-index: 60;
-
 }
 .modal-compra__contenedor {
   display: flex;
@@ -52,9 +51,9 @@
   font-size: 1.5em;
   color: #8f2222;
 }
-.modal-compra__color-seleccionado{
+.modal-compra__color-seleccionado {
   color: #505050;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 .modal-compra__titulo-contenedor--retoceder {
   color: #3b3b3b;
@@ -114,7 +113,7 @@
   color: #ffffff;
   font-weight: 800;
 }
-.modal-compra__precio--unidad{
+.modal-compra__precio--unidad {
   color: #a3a3a3;
   font-size: 1.1rem;
   letter-spacing: 0em;
@@ -189,27 +188,26 @@
   border: 1px solid #242424;
   background: #333333;
 }
-.modal--compra__cont__guiatalles{
+.modal--compra__cont__guiatalles {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.modal--compra__cont__guiatalles--btn{
+.modal--compra__cont__guiatalles--btn {
   font-size: 1.4em;
+  margin-right: -2px;
 }
 
-.modal--compra__cont__guiatalles--mensage{
-  font-size: .6em;
-  transition: all ease-in-out .5s;
+.modal--compra__cont__guiatalles--mensage {
+  font-size: 0.6em;
+  transition: all ease-in-out 0.5s;
   color: #ffffff;
   transform: translateX(0%);
-
 }
-.active--guiatalles--mensage{
+.active--guiatalles--mensage {
   color: rgb(255, 255, 255);
   transform: translateX(0%);
-
 }
 .modal--compra__cont__guiatalles--mensage {
   font-size: 0.75rem;
@@ -218,8 +216,13 @@
 }
 
 @keyframes pulso-mensaje {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.3; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 .modal-compra__stock {
   display: flex;
@@ -232,15 +235,20 @@
   position: absolute;
   display: flex;
   align-items: center;
-  width: 100%;
-  padding: 0 0.5em;
+  width: 90%;
   justify-content: space-between;
+  margin-top: 28px;
 }
+.mensaje-agregado__text{
 
+}
 .mensaje-agregado__button {
   border: 1 px solid #3a3a3a;
-  padding: 0.3em 1.5em;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .modal-compra__contenedor-label {
@@ -293,19 +301,19 @@
   gap: 0.5em;
   position: relative;
 }
-.mensaje-selecciona-talle{
+.mensaje-selecciona-talle {
   position: absolute;
   transform: translateY(100%);
-  transition: .5s ease-in-out transform;
+  transition: 0.5s ease-in-out transform;
   z-index: 2;
   display: flex;
   width: 100%;
   justify-content: center;
 }
-.mensaje-selecciona-talle__active{
-transform: translateY(-100%);
-color: #ffffff;
-animation: pulso-mensaje 2s ease-in-out infinite;
+.mensaje-selecciona-talle__active {
+  transform: translateY(-100%);
+  color: #ffffff;
+  animation: pulso-mensaje 2s ease-in-out infinite;
 }
 .modal-compra__btn-agregar {
   color: #ffffff;
