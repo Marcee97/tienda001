@@ -1,0 +1,1 @@
+export const formatearPrecio = (precio) => precio?.toLocaleString("es-AR");

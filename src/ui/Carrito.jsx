@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import "../style/carrito.css";
 import { TiendaContext } from "../context/TiendaContext";
 import { SelectorCantidad } from "../components/SelectorCantidad/SelectorCantidad";
+import { formatearPrecio } from "../utils/formatearPrecios";
 export const Carrito = () => {
   const {
     openCloseCarrito,
@@ -41,9 +42,9 @@ export const Carrito = () => {
             e.stopPropagation();
           }}
           src="\back-w-svgrepo-com.svg"
-          />
-          <h3 className="carrito__cabecera--title">Carrito</h3>
-          <img src="\menu-horizontal-del-svgrepo-com (1).svg" alt="puntos menu" />
+        />
+        <h3 className="carrito__cabecera--title">Carrito</h3>
+        <img src="\menu-horizontal-del-svgrepo-com (1).svg" alt="puntos menu" />
       </div>
       <div className="carrito__container">
         {carrito.length > 0 ? (
@@ -68,7 +69,9 @@ export const Carrito = () => {
                   <p className="carrito__item-talle">Talle: {item.talle}</p>
                   <p>{nombresColores[item.color] || "Color desconocido"}</p>
                 </div>
-                <p className="carrito__item-precio">${item.precio}</p>
+                <p className="carrito__item-precio">
+                  ${formatearPrecio(item.precio)}
+                </p>
                 <div className="carrito__item-control-cantidad">
                   <SelectorCantidad
                     cantidad={item.cantidad}
@@ -115,9 +118,11 @@ export const Carrito = () => {
               Subtotal
               <span className="carrito__total--subtotal--number">
                 $
-                {carrito.reduce(
-                  (total, item) => total + item.precio * item.cantidad,
-                  0,
+                {formatearPrecio(
+                  carrito.reduce(
+                    (total, item) => total + item.precio * item.cantidad,
+                    0,
+                  ),
                 )}
               </span>
             </p>
@@ -127,9 +132,11 @@ export const Carrito = () => {
             <span className="carrito__total-price">
               {" "}
               $
-              {carrito.reduce(
-                (total, item) => total + item.precio * item.cantidad,
-                0,
+              {formatearPrecio(
+                carrito.reduce(
+                  (total, item) => total + item.precio * item.cantidad,
+                  0,
+                ),
               )}
             </span>
           </p>

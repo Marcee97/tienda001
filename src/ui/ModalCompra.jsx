@@ -12,6 +12,7 @@ import { Carrito } from "./Carrito.jsx";
 import { MenuDesplegable } from "./MenuDesplegable.jsx";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { formatearPrecio } from "../utils/formatearPrecios.js";
 export const ModalCompra = () => {
   const {
     productoSeleccionado,
@@ -278,7 +279,7 @@ export const ModalCompra = () => {
                   {cargandoVariantes ? (
                     <Skeleton width={50} />
                   ) : (
-                    `$${variantes[0]?.precio}`
+                    `$${formatearPrecio(variantes[0]?.precio)}`
                   )}
                 </h4>
               </div>
@@ -339,9 +340,10 @@ export const ModalCompra = () => {
             <div className="modal-compra__contenedor-cantidad">
               <div className="modal-compra__stock">
                 <SelectorCantidad
-                  cantidad={talleSeleccionado ? cantidad : "-"}
+                  cantidad={cantidad}
                   setCantidad={setCantidad}
                   max={varianteSeleccionada?.stock}
+                  disabled={!talleSeleccionado}
                 />
 
                 <LiveStock
@@ -378,7 +380,7 @@ export const ModalCompra = () => {
                 <h3 className="modal-compra__precio-label">TOTAL:</h3>
                 {variantes && (
                   <h4 className="modal-compra__precio-total">
-                    ${variantes[0]?.precio * cantidad}
+                    ${formatearPrecio(variantes[0]?.precio * cantidad)}
                   </h4>
                 )}
               </div>
@@ -418,7 +420,7 @@ export const ModalCompra = () => {
                   );
                 }}
               >
-                {talleSeleccionado ? "Agregar al carrito" : "Seleccionar talle"}
+                {talleSeleccionado ? "Agregar al carrito" : "Selecciona un talle"}
               </button>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import "../SelectorCantidad/selectorCantidad.css";
 
-export const SelectorCantidad = ({ cantidad, setCantidad, max = 10 }) => {
+export const SelectorCantidad = ({ cantidad, setCantidad, max = 10, disabled = false }) => {
 const restar = (e) => {
   e.stopPropagation();
   setCantidad(Math.max(1, cantidad - 1));
@@ -15,7 +15,7 @@ const restar = (e) => {
       <button
         className="selector-cantidad__btn"
         onClick={restar}
-        disabled={cantidad === 1}
+        disabled={disabled || cantidad === 1}
       >
         −
       </button>
@@ -23,7 +23,7 @@ const restar = (e) => {
       <button
         className="selector-cantidad__btn"
         onClick={sumar}
-        disabled={cantidad === max}
+        disabled={disabled || cantidad === max}
       >
         +
       </button>
