@@ -62,7 +62,6 @@ display: flex;
 width: 100%;
 justify-content: space-between;
 align-items: center;
-padding: 0 .3em;
 color: #dadada;
 background-color: #53535300;
 }
@@ -83,16 +82,19 @@ background-color: #53535300;
 
 }
 .menu__icon{
-    font-size: 2em;
-    color: red;
+    rotate: 90deg;
+    margin-right: -25px;
+    width: 127%;
 }
 
 .menu__icon-cantidad-items{
   background-color: #ff0000;
   font-size: 13px;
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 1px;
+  right: 18px;
   border-radius: 15px;
   padding: .2em .5em;
 }
+
+

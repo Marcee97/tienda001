@@ -20,6 +20,7 @@ export const Welcome = () => {
           <div className="welcome__boton-punto" />
         </div>
         <p className="welcome__cont-boton-text"></p>
+      <p className="welcome__cont--text">Toca para Ver</p>
       </div>
       <div className="welcome__bg">
         <div

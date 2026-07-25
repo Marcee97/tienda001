@@ -111,7 +111,7 @@ export const ModalEnvio = () => {
       className="modal-envio"
     >
       <div className="modal-envio__header">
-        <h3 className="modal-envio__title">Envio</h3>
+        <h3 className="modal-envio__title">Datos de Envio</h3>
         <span
           className="material-symbols-outlined modal-envio__close"
           onClick={(e) => {
@@ -165,7 +165,7 @@ export const ModalEnvio = () => {
                   <h4 className="modal-envio__item-titulo">{item.nombre}</h4>
                   <p className="modal-envio__item-talle">Talle: <span className="modal-envio__item-talle-numero">{item.talle}</span> </p>
                   <div className="modal-envio__item-cantidad">
-                    <p className="modal-envio__item-cantidad-label">{item.cantidad}</p>
+                    <p className="modal-envio__item-cantidad-label">Cantidad: {item.cantidad}</p>
                     <p className="modal-envio__item-precio">${item.precio}</p>
                   </div>
                 </div>
