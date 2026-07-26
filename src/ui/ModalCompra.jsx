@@ -178,10 +178,10 @@ export const ModalCompra = () => {
               visible={openCloseGuiaTalles}
               medidas={{
                 NONE: {
-                  hombro: "Selecciona",
-                  pecho: "0 cm",
-                  largo: "0 cm",
-                  manga: "0 cm",
+                  hombro: "0 Cm",
+                  pecho: "0 Cm",
+                  largo: "0 Cm",
+                  manga: "0 Cm",
                 },
                 S: {
                   hombro: "42 cm",
@@ -203,13 +203,13 @@ export const ModalCompra = () => {
                 },
                 XL: {
                   hombro: "48 cm",
-                  pecho: "75 cm",
+                  pecho: "65 cm",
                   largo: "74 cm",
                   manga: "23 cm",
                 },
                 XXL: {
                   hombro: "48 cm",
-                  pecho: "75 cm",
+                  pecho: "70 cm",
                   largo: "74 cm",
                   manga: "23 cm",
                 },
@@ -220,18 +220,18 @@ export const ModalCompra = () => {
 
           <div className="modal-compra__info">
             <div className="carrousel__circle">
-            <span
-      className={`carrousel__track--circulo--uno ${
-        index === 1 ? "active__track" : ""
-      }`}
-      onClick={() => setIndexImagenCarrousel(0)}
-    ></span>
-    <span
-      className={`carrousel__track--circulo--dos ${
-        index === 0 ? "active__track" : ""
-      }`}
-      onClick={() => setIndexImagenCarrousel(1)}
-    ></span>
+              <span
+                className={`carrousel__track--circulo--uno ${
+                  index === 1 ? "active__track" : ""
+                }`}
+                onClick={() => setIndexImagenCarrousel(0)}
+              ></span>
+              <span
+                className={`carrousel__track--circulo--dos ${
+                  index === 0 ? "active__track" : ""
+                }`}
+                onClick={() => setIndexImagenCarrousel(1)}
+              ></span>
             </div>
 
             <InfoStock />
@@ -287,7 +287,7 @@ export const ModalCompra = () => {
                             setTalleSeleccionado(null);
                             setIndexImagenCarrousel(0);
                             setCantidad(1);
-                            setIndex(0)
+                            setIndex(0);
                           }}
                         ></button>
                       ))}
@@ -363,7 +363,6 @@ export const ModalCompra = () => {
                   max={varianteSeleccionada?.stock}
                   disabled={!talleSeleccionado}
                 />
-
                 <LiveStock
                   stock={varianteSeleccionada?.stock}
                   onClick={() => {
@@ -372,21 +371,6 @@ export const ModalCompra = () => {
                 />
               </div>
             </div>
-
-            {animationCompra && (
-              <div className="mensaje-agregado">
-                <p className="mensaje-agregado__text">
-                  {cantidad} {variantes[0]?.nombre} {talleSeleccionado}{" "}
-                  {colores.find((c) => c.color_id === colorSeleccionado)?.color}
-                </p>
-                <h4
-                  className="mensaje-agregado__button"
-                  onClick={btnOpenCarrito}
-                >
-                  <span>Ver</span> Carrito
-                </h4>
-              </div>
-            )}
             <div
               className={
                 cantidad > 1
@@ -403,7 +387,18 @@ export const ModalCompra = () => {
                 )}
               </div>
             </div>
-
+              <div className={!animationCompra ? "mensaje-agregado" : "mensaje-agregado mensaje__active"}>
+                <p className="mensaje-agregado__text">
+                  {cantidad} {variantes[0]?.nombre} {talleSeleccionado}{" "}
+                  {colores.find((c) => c.color_id === colorSeleccionado)?.color}
+                </p>
+                <h4
+                  className="mensaje-agregado__button"
+                  onClick={btnOpenCarrito}
+                >
+                  <span>Ver</span>
+                </h4>
+              </div>
             <div className="modal-compra__acciones">
               <div
                 className={

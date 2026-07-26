@@ -28,7 +28,7 @@
 .modal-compra__info {
   border-radius: 25px 25px 0 0;
   box-shadow: 0 2px 12px 1px #000000f6;
-  padding: 0.3em .8em;
+  padding: 0.1em .7em;
   border: 1px solid #13131350;
   background-color: #1a1a1a;
   color: #f5f5f5;
@@ -213,7 +213,7 @@
   align-items: center;
 }
 .modal--compra__cont__guiatalles--btn {
-  font-size: 1.4em;
+  font-size: 1.5em;
   margin-right: -2px;
 }
 
@@ -255,10 +255,15 @@
   align-items: center;
   width: 90%;
   justify-content: space-between;
-  margin-top: 28px;
+  transition: .5s transform ease-in-out;
+  padding: 0 .1em;
 }
 .mensaje-agregado__text{
-
+  
+}
+.mensaje__active{
+  transform: translateY(-100%);
+  
 }
 .mensaje-agregado__button {
   border: 1 px solid #3a3a3a;

@@ -96,9 +96,10 @@ export const Carrito = () => {
               <p className="carrito__empty-text">Tu carrito está vacío</p>
               <button
                 className="carrito__button"
-                onClick={() => (
+                onClick={(e) => (                  
                   setOpenCloseCarrito(false),
-                  setOpenCloseMenu((prev) => !prev)
+                  setOpenCloseMenu(false),
+                  e.stopPropagation()
                 )}
               >
                 IR A COMPRAR
