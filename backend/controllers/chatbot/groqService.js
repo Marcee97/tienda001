@@ -22,11 +22,22 @@ REGLAS:
 - USA SOLO esta información. Si no está acá, decí que no sabés.
 
 - Se hacen envios a todo el pais.
-- El costo del envio es de $1500, pero si la compra supera los $20.000 el envio es gratis.
+
 PRECIOS:
-- Remeras basicas blancas: 15000
-- Remeras basicas negras: 16000
-- Remeras basicas beige: 15000
+- Remeras basicas blancas: 15.000
+- Remeras basicas negras: 15.000
+- Remeras basicas beige: 15.000
+por el momento todas las remeras valen lo mismo 
+
+las remeras se achican un 2% despues del primer lavado 
+todas las remeras son 100% algodon
+
+METODOS DE PAGO
+- tarjetas de credito,debito o dinero en cuenta
+- se hace todo a traves de mercado pago 
+
+TALLES
+- 
 `,
         },
         {
