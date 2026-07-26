@@ -12,13 +12,11 @@ const {openCloseMenu, setOpenCloseMenu, carrito,visibilidadTitle, openCloseCarri
       <div className={"menu__container"}>
         <h1 className={visibilidadTitle ? "menu__title title-hidden" : "menu__title "}>NOMBRE</h1>
         <ul className="menu__list" onClick={(e)=>{e.stopPropagation(); setOpenCloseMenu(prev => !prev);
-          console.log("estado de :",openCloseMenu)
         }}>
           <li className="menu__item">
-            <img className={openCloseMenu || openCloseCarrito || openChatbot ? "menu__icon menu-hidden" : "menu__icon"} src="\menu-duo-lg-svgrepo-com.svg"/>
+            <img className={openCloseMenu || openCloseCarrito || openChatbot || !visibilidadTitle ? "menu__icon menu-hidden" : "menu__icon"} src="\menu-duo-lg-svgrepo-com.svg"/>
           </li>
         </ul>
-       
       </div>
     </section>
   );
