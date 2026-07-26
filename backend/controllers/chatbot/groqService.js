@@ -41,7 +41,7 @@ const tools = [
           talle: { type: "string", description: "Talle, ej: S, M, L, XL" },
           color: {
             type: "string",
-            description: "Color, ej: blanco, negro, beige",
+            description: "Color, ej: blanco, negro",
           },
         },
         required: ["nombreProducto"],
@@ -69,7 +69,6 @@ REGLAS:
 PRECIOS:
 - Remeras basicas blancas: 15.000
 - Remeras basicas negras: 15.000
-- Remeras basicas beige: 15.000
 por el momento todas las remeras valen lo mismo
 
 las remeras se achican un 2% despues del primer lavado
@@ -99,7 +98,6 @@ METODOS DE PAGO
 
       for (const toolCall of mensajeModelo.tool_calls) {
         const args = JSON.parse(toolCall.function.arguments);
-          console.log("ARGUMENTOS RECIBIDOS:", args);
         const filas = await consultarStock(args.nombreProducto, args.talle, args.color);
 
         mensajes.push({

@@ -129,7 +129,7 @@ export const ModalEnvio = () => {
             : "modal-envio__productos"
         }
       >
-        <p
+        <div
           className={
             openCloseProductoss
               ? "text-informativo"
@@ -137,7 +137,14 @@ export const ModalEnvio = () => {
           }
           onClick={() => setOpenCloseProductoss((prev) => !prev)}
         >
-          <span className="">Resumen de Compra</span>
+          <div className="modal-envio__cont--text">
+            <img
+              src="\bag-svgrepo-com.svg"
+              alt="svg formulario"
+              className="modal-envio-svg-products"
+            />
+            <span className="modal-envio-prodctos-text">Resumen de Compra</span>
+          </div>
           <span className="modal-envio__icon">
             <svg
               width="20"
@@ -150,7 +157,7 @@ export const ModalEnvio = () => {
               <path d="M9 18l6-6-6-6" />
             </svg>
           </span>
-        </p>
+        </div>
 
         <div className="modal-envio__productos--cont">
           {carrito.length > 0 ? (
@@ -163,9 +170,16 @@ export const ModalEnvio = () => {
                 />
                 <div className="modal-envio__item-cont">
                   <h4 className="modal-envio__item-titulo">{item.nombre}</h4>
-                  <p className="modal-envio__item-talle">Talle: <span className="modal-envio__item-talle-numero">{item.talle}</span> </p>
+                  <p className="modal-envio__item-talle">
+                    Talle:{" "}
+                    <span className="modal-envio__item-talle-numero">
+                      {item.talle}
+                    </span>{" "}
+                  </p>
                   <div className="modal-envio__item-cantidad">
-                    <p className="modal-envio__item-cantidad-label">Cantidad: {item.cantidad}</p>
+                    <p className="modal-envio__item-cantidad-label">
+                      Cantidad: {item.cantidad}
+                    </p>
                     <p className="modal-envio__item-precio">${item.precio}</p>
                   </div>
                 </div>
@@ -183,7 +197,10 @@ export const ModalEnvio = () => {
         <div
           className={`modal-envio__formulario ${cargando ? "loading--active" : ""}`}
         >
-          <h3 className="modal-envio__formulario--titulo">Datos Personales</h3>
+          <div className="modal-envio__formulario--titulo">
+            <img src="\person-male-svgrepo-com.svg" alt="svg person form"  className="modal-envio__form--svg"/>
+            <span>Datos Personales</span>
+          </div>
           <p className="modal-envio__label">
             Nombre y Apellido{" "}
             {errores.nombre && (
