@@ -98,9 +98,13 @@ export const ModalEnvio = () => {
     }
 
     setErrores(nuevosErrores);
-    const primerError = Object.keys(nuevosErrores)[0];
-    if (primerError && refs[primerError]?.current?.focus())
-      return Object.keys(nuevosErrores).length === 0;
+
+  const primerError = Object.keys(nuevosErrores)[0];
+  if (primerError) {
+    refs[primerError]?.current?.focus();
+  }
+
+  return Object.keys(nuevosErrores).length === 0;
   };
   return (
     <section
