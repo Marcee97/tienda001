@@ -45,6 +45,7 @@ export const ModalCompra = () => {
     setVariantes,
     index,
     setIndex,
+    carrito
   } = useContext(TiendaContext);
 
   const cargandoVariantes = variantes.length === 0;
@@ -251,12 +252,21 @@ export const ModalCompra = () => {
                   </>
                 )}
               </h4>
+              <div className="modal-compra__cont--svg--ia">
+
+               <img src="\shoppingcart.svg" alt="svg open carrito" className="modal-compra__svg-carrito" onClick={()=> setOpenCloseCarrito(true)}/>
+               {carrito.length > 0 && (
+
+               <span>{carrito.length}</span>
+               )}
               <h4
                 onClick={() => abrirChatbot()}
                 className="modal-compra__btn-chat"
-              >
+                >
                 IA
               </h4>
+                </div>
+             
             </div>
             <div className="modal-compra__colores-talles">
               <h4>Colores</h4>
@@ -389,7 +399,7 @@ export const ModalCompra = () => {
             </div>
               <div className={!animationCompra ? "mensaje-agregado" : "mensaje-agregado mensaje__active"}>
                 <p className="mensaje-agregado__text">
-                  {cantidad} {variantes[0]?.nombre} {talleSeleccionado}{" "}
+                 Agregaste al Carrito {cantidad} {variantes[0]?.nombre} {talleSeleccionado}{" "}
                   {colores.find((c) => c.color_id === colorSeleccionado)?.color}
                 </p>
                 <h4

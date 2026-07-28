@@ -84,7 +84,18 @@
   align-items: center;
   padding: 0.2em 0;
 }
+.modal-compra__cont--svg--ia{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 20%;
+  
+}
 .modal-compra__btn-chat {
+}
+.modal-compra__svg-carrito{
+  width: 33%;
+  margin-top: -6px;
 }
 .modal-compra__titulo-carrousel {
   font-weight: 900;
@@ -303,8 +314,8 @@
   justify-content: space-between;
   width: 100%;
   font-size: 1.3em;
-  padding: 0.8em 0;
   gap: 0.5em;
+  padding: 0 0 1.8em 0;
 }
 
 .modal-compra__precio-label {
