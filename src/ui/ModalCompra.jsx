@@ -98,41 +98,50 @@ export const ModalCompra = () => {
     setMensajes((prev) => [...prev, { role: "bot", texto: data.respuesta }]);
   };
   //------------------ LOGICA DE SELECCION DE VARIANTES (COLORES TALLES Y STOCK)------------------
-  const colores = variantes.reduce((acc, item) => {
-    const existe = acc.some((c) => c.color_id === item.color_id);
-    if (!existe) {
-      acc.push({
-        color_id: item.color_id,
-        color: item.color,
-      });
-    }
+ const colores = variantes.reduce((acc, item) => {
+  const existe = acc.some((c) => c.color_id === item.color_id);
+  if (!existe) {
+    acc.push({
+      color_id: item.color_id,
+      color: item.color,
+    });
+  }
 
-    return acc;
-  }, []);
+  return acc;
+}, []);
 
-  useEffect(() => {
-    if (colores.length > 0 && !colorSeleccionado) {
-      setColorSeleccionado(colores[0].color_id);
-    }
-  }, [colores]);
+useEffect(() => {
+  if (colores.length > 0 && !colorSeleccionado) {
+    setColorSeleccionado(colores[0].color_id);
+  }
+}, [colores]);
 
-  const tallesFiltrados = variantes.filter(
-    (v) => v.color_id === colorSeleccionado,
-  );
+const tallesFiltrados = variantes.filter(
+  (v) => v.color_id === colorSeleccionado,
+);
 
-  const imagenesPorColor = variantes.reduce((acc, item) => {
-    if (!acc[item.color_id]) {
-      acc[item.color_id] = [];
-    }
+const imagenesPorColor = variantes.reduce((acc, item) => {
+  if (item.orden === 3) return acc;
 
-    if (!acc[item.color_id].includes(item.url)) {
-      acc[item.color_id].push(item.url);
-    }
+  if (!acc[item.color_id]) {
+    acc[item.color_id] = [];
+  }
 
-    return acc;
-  }, {});
+  if (!acc[item.color_id].includes(item.url)) {
+    acc[item.color_id].push(item.url);
+  }
 
+  return acc;
+}, {});
+
+const imagenMedidasPorColor = variantes.reduce((acc, item) => {
+  if (item.orden === 3) {
+    acc[item.color_id] = item.url;
+  }
+  return acc;
+}, {});
   const imagenesActuales = imagenesPorColor[colorSeleccionado] || [];
+const imagenMedidasActual = imagenMedidasPorColor[colorSeleccionado] || null;
 
   const tallesUnicos = tallesFiltrados.filter(
     (item, index, self) =>
@@ -163,61 +172,67 @@ export const ModalCompra = () => {
           <div className="modal-compra__contenedor">
             <div className="modal-compra__titulo-contenedor"></div>
           </div>
-          <div className="cont__carrousel--guiatalles">
-            {cargandoVariantes ? (
-              <Skeleton
-                height={350}
-                className="modal-compra__carrousel-skeleton"
-                baseColor="#29292900"
-                highlightColor="#d1cfcf00"
-              />
-            ) : (
-              <Carrousel imagenes={imagenesActuales} />
-            )}
+         <div className="cont__carrousel--guiatalles">
+  {cargandoVariantes ? (
+    <Skeleton
+      height={350}
+      className="modal-compra__carrousel-skeleton"
+      baseColor="#29292900"
+      highlightColor="#d1cfcf00"
+    />
+  ) : openCloseGuiaTalles ? (
+    <img
+      src={imagenMedidasActual}
+      alt="Remera plana con medidas"
+      className="modal-compra__imagen-medidas"
+    />
+  ) : (
+    <Carrousel imagenes={imagenesActuales} />
+  )}
 
-            <GuiaTalles
-              visible={openCloseGuiaTalles}
-              medidas={{
-                NONE: {
-                  hombro: "0 Cm",
-                  pecho: "0 Cm",
-                  largo: "0 Cm",
-                  manga: "0 Cm",
-                },
-                S: {
-                  hombro: "42 cm",
-                  pecho: "96 cm",
-                  largo: "68 cm",
-                  manga: "20 cm",
-                },
-                M: {
-                  hombro: "44 cm",
-                  pecho: "100 cm",
-                  largo: "70 cm",
-                  manga: "21 cm",
-                },
-                L: {
-                  hombro: "46 cm",
-                  pecho: "106 cm",
-                  largo: "72 cm",
-                  manga: "22 cm",
-                },
-                XL: {
-                  hombro: "48 cm",
-                  pecho: "65 cm",
-                  largo: "74 cm",
-                  manga: "23 cm",
-                },
-                XXL: {
-                  hombro: "48 cm",
-                  pecho: "70 cm",
-                  largo: "74 cm",
-                  manga: "23 cm",
-                },
-              }}
-              talle={talleSeleccionado || "NONE"}
-            />
-          </div>
+  <GuiaTalles
+    visible={openCloseGuiaTalles}
+    medidas={{
+      NONE: {
+        hombro: "0 Cm",
+        pecho: "0 Cm",
+        largo: "0 Cm",
+        manga: "0 Cm",
+      },
+      S: {
+        hombro: "42 cm",
+        pecho: "96 cm",
+        largo: "68 cm",
+        manga: "20 cm",
+      },
+      M: {
+        hombro: "44 cm",
+        pecho: "100 cm",
+        largo: "70 cm",
+        manga: "21 cm",
+      },
+      L: {
+        hombro: "46 cm",
+        pecho: "106 cm",
+        largo: "72 cm",
+        manga: "22 cm",
+      },
+      XL: {
+        hombro: "48 cm",
+        pecho: "65 cm",
+        largo: "74 cm",
+        manga: "23 cm",
+      },
+      XXL: {
+        hombro: "48 cm",
+        pecho: "70 cm",
+        largo: "74 cm",
+        manga: "23 cm",
+      },
+    }}
+    talle={talleSeleccionado || "NONE"}
+  />
+</div>
 
           <div className="modal-compra__info">
             <div className="carrousel__circle">
@@ -257,7 +272,7 @@ export const ModalCompra = () => {
                <img src="\shoppingcart.svg" alt="svg open carrito" className="modal-compra__svg-carrito" onClick={()=> setOpenCloseCarrito(true)}/>
                {carrito.length > 0 && (
 
-               <span>{carrito.length}</span>
+               <span className="modalcompra__svg--cantidad">{carrito.length}</span>
                )}
               <h4
                 onClick={() => abrirChatbot()}
@@ -399,8 +414,7 @@ export const ModalCompra = () => {
             </div>
               <div className={!animationCompra ? "mensaje-agregado" : "mensaje-agregado mensaje__active"}>
                 <p className="mensaje-agregado__text">
-                 Agregaste al Carrito {cantidad} {variantes[0]?.nombre} {talleSeleccionado}{" "}
-                  {colores.find((c) => c.color_id === colorSeleccionado)?.color}
+                 Se agrego al Carrito
                 </p>
                 <h4
                   className="mensaje-agregado__button"
