@@ -233,7 +233,6 @@ const imagenMedidasActual = imagenMedidasPorColor[colorSeleccionado] || null;
     talle={talleSeleccionado || "NONE"}
   />
 </div>
-
           <div className="modal-compra__info">
             <div className="carrousel__circle">
               <span
@@ -256,7 +255,7 @@ const imagenMedidasActual = imagenMedidasPorColor[colorSeleccionado] || null;
                 {cargandoVariantes ? (
                   <Skeleton width={160} />
                 ) : (
-                  <>
+                  <div>
                     {variantes[0]?.nombre}{" "}
                     <span className="modal-compra__color-seleccionado">
                       {
@@ -264,7 +263,11 @@ const imagenMedidasActual = imagenMedidasPorColor[colorSeleccionado] || null;
                           ?.color
                       }
                     </span>
-                  </>
+                    <span className="modal-compra__talle-seleccionado">
+                      {" "}{talleSeleccionado}
+                    </span>
+                  </div>
+                  
                 )}
               </h4>
               <div className="modal-compra__cont--svg--ia">
