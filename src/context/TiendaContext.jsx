@@ -18,6 +18,7 @@ export const TiendaProvider = ({ children }) => {
   const [visibilidadTitle, setVisibilidadTitle] = useState(false);
   const [openChatbot, setOpenChatbot] = useState(false);
   const [index, setIndex] = useState(0);
+  const [stockAgotado, setStockAgotado] = useState(false);
 
   const [productoSeleccionadoCarrito, setProductoSeleccionadoCarrito] =
     useState([]);
@@ -44,19 +45,27 @@ export const TiendaProvider = ({ children }) => {
   ) => {
     if (!stock)
       return console.log("No hay stock disponible para este producto");
-    console.log(
-      producto,
-      "este deberia ser el prodycto seleccio9nadkpara el carrito",
+
+    const existe = carrito.find(
+      (item) =>
+        item.id === producto.id && item.talle === talle && item.color === color,
     );
 
+    const cantidadEnCarrito = existe?.cantidad || 0;
+
+    if (cantidadEnCarrito + cantidad > stock) {
+     setStockAgotado(true)
+      return;
+    }
+
     setCarrito((prev) => {
-      const existe = prev.find(
+      const existeEnPrev = prev.find(
         (item) =>
           item.id === producto.id &&
           item.talle === talle &&
           item.color === color,
       );
-      if (existe) {
+      if (existeEnPrev) {
         return prev.map((item) =>
           item.id === producto.id &&
           item.talle === talle &&
@@ -151,6 +160,8 @@ export const TiendaProvider = ({ children }) => {
         setVariantes,
         index,
         setIndex,
+        stockAgotado,
+        setStockAgotado,
       }}
     >
       {children}
