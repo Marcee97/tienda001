@@ -52,10 +52,16 @@ export const ModalCompra = () => {
 
   const [indexImagenCarrousel, setIndexImagenCarrousel] = useState(0);
   const [mensajeSeleccionaTalle, setMensajeSeleccionaTalle] = useState(false);
+  const [animar, setAnimar] = useState(false);
   const inputChatRef = useRef(null);
 
   const mensajesEndRef = useRef(null);
 
+useEffect(() => {
+  if (carrito.length > 0) {
+    setAnimar(true);
+  }
+}, [carrito.length]);
   useEffect(() => {}, [openCloseInfoStock]);
 
   useEffect(() => {
@@ -273,10 +279,16 @@ const imagenMedidasActual = imagenMedidasPorColor[colorSeleccionado] || null;
               <div className="modal-compra__cont--svg--ia">
 
                <img src="\shoppingcart.svg" alt="svg open carrito" className="modal-compra__svg-carrito" onClick={()=> setOpenCloseCarrito(true)}/>
-               {carrito.length > 0 && (
-
-               <span className="modalcompra__svg--cantidad">{carrito.length}</span>
-               )}
+              {carrito.length > 0 && (
+  <span
+    className={`modalcompra__svg--cantidad ${
+      animar ? "animar-carrito" : ""
+    }`}
+    onAnimationEnd={() => setAnimar(false)}
+  >
+    {carrito.length}
+  </span>
+)}
               <h4
                 onClick={() => abrirChatbot()}
                 className="modal-compra__btn-chat"
