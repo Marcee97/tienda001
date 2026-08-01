@@ -71,7 +71,6 @@ export const ModalCompra = () => {
       const timer = setTimeout(() => {
         setAnimationCompra(false);
       }, 4000);
-
       return () => clearTimeout(timer);
     }
   }, [animationCompra]);
@@ -174,21 +173,12 @@ export const ModalCompra = () => {
   };
   return (
     <section
-      className={
-        openCloseModalCompra
-          ? "modal-compra modal-compra--active"
-          : "modal-compra"
-      }
+     className="modal-compra"
     >
       <SkeletonTheme baseColor="#202020" highlightColor="#444">
         <MenuDesplegable />
         <Carrito />
-
-        <div className="modal-compra__cont">
-          <div className="modal-compra__contenedor">
-            <div className="modal-compra__titulo-contenedor"></div>
-          </div>
-          <div className="cont__carrousel--guiatalles">
+            <div className="cont__carrousel--guiatalles">
             {cargandoVariantes ? (
               <Skeleton
                 height={350}
@@ -249,6 +239,11 @@ export const ModalCompra = () => {
               talle={talleSeleccionado || "NONE"}
             />
           </div>
+
+        <div className="modal-compra__cont">
+          <div className="modal-compra__contenedor">
+          </div>
+      
           <div className="modal-compra__info">
             <div className="carrousel__circle">
               <span
@@ -265,7 +260,6 @@ export const ModalCompra = () => {
               ></span>
             </div>
 
-            <InfoStock />
             <div className="modal-compra__cont-titulo-chatbot">
               <h4 className="modal-compra__titulo">
                 {cargandoVariantes ? (
@@ -440,18 +434,7 @@ export const ModalCompra = () => {
                 )}
               </div>
             </div>
-            <div
-              className={
-                !animationCompra
-                  ? "mensaje-agregado"
-                  : "mensaje-agregado mensaje__active"
-              }
-            >
-              <p className="mensaje-agregado__text">Se agrego al Carrito</p>
-              <h4 className="mensaje-agregado__button" onClick={btnOpenCarrito}>
-                <span>Ver</span>
-              </h4>
-            </div>
+           
             <div className="modal-compra__acciones">
               <div
                 className={
@@ -464,7 +447,6 @@ export const ModalCompra = () => {
                   Selecciona un talle
                 </p>
               </div>
-
               <div
                 className={
                   stockAgotado
@@ -498,13 +480,14 @@ export const ModalCompra = () => {
                   );
                 }}
               >
-                {talleSeleccionado
-                  ? "Agregar al carrito"
-                  : "Selecciona un talle"}
+                {!talleSeleccionado
+                  ? "Selecciona un talle" : animationCompra
+                  ? "Se agregó al carrito ✓"
+                  : "Agregar al Carrito"}
+                  
               </button>
             </div>
           </div>
-          <Chatbot open={openChatbot} onClose={() => setOpenChatbot(false)} />
         </div>
       </SkeletonTheme>
     </section>

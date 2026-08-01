@@ -3,9 +3,11 @@
   margin: 0;
   box-sizing: border-box;
      font-family: "Share Tech Mono", monospace;
+     
 }
 
 
-html{
-  background-color: black;
+html, body, #root{
+  height: 100%;
+
 }
