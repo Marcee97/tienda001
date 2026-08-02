@@ -345,6 +345,15 @@
   color: #f5f5f5;
   visibility: hidden;
 }
+.modal-compra__precio-total {
+  animation: bump 0.25s ease;
+}
+
+@keyframes bump {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
 
 .modal-compra__total-cont {
   display: flex;

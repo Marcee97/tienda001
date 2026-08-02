@@ -428,7 +428,7 @@ export const ModalCompra = () => {
               <div className="modal-compra__total-cont">
                 <h3 className="modal-compra__precio-label">TOTAL:</h3>
                 {variantes && (
-                  <h4 className="modal-compra__precio-total">
+                  <h4 className="modal-compra__precio-total" key={cantidad}>
                     ${formatearPrecio(variantes[0]?.precio * cantidad)}
                   </h4>
                 )}
