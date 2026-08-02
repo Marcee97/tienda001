@@ -20,6 +20,7 @@ export const TiendaProvider = ({ children }) => {
   const [index, setIndex] = useState(0);
   const [stockAgotado, setStockAgotado] = useState(false);
 
+
   const [productoSeleccionadoCarrito, setProductoSeleccionadoCarrito] =
     useState([]);
 
