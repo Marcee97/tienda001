@@ -172,78 +172,75 @@ export const ModalCompra = () => {
     inputChatRef.current?.focus();
   };
   return (
-    <section
-     className="modal-compra"
-    >
+    <section className="modal-compra">
+      <Chatbot open={openChatbot} onClose={() => setOpenChatbot(false)} />
+      <MenuDesplegable />
+      <Carrito />
       <SkeletonTheme baseColor="#202020" highlightColor="#444">
-        <MenuDesplegable />
-        <Carrito />
-            <div className="cont__carrousel--guiatalles">
-            {cargandoVariantes ? (
-              <Skeleton
-                height={350}
-                className="modal-compra__carrousel-skeleton"
-                baseColor="#29292900"
-                highlightColor="#d1cfcf00"
-              />
-            ) : openCloseGuiaTalles ? (
-              <img
-                src={imagenMedidasActual}
-                alt="Remera plana con medidas"
-                className="modal-compra__imagen-medidas"
-              />
-            ) : (
-              <Carrousel imagenes={imagenesActuales} />
-            )}
-
-            <GuiaTalles
-              visible={openCloseGuiaTalles}
-              medidas={{
-                NONE: {
-                  hombro: "0 Cm",
-                  pecho: "0 Cm",
-                  largo: "0 Cm",
-                  manga: "0 Cm",
-                },
-                S: {
-                  hombro: "42 cm",
-                  pecho: "96 cm",
-                  largo: "68 cm",
-                  manga: "20 cm",
-                },
-                M: {
-                  hombro: "44 cm",
-                  pecho: "100 cm",
-                  largo: "70 cm",
-                  manga: "21 cm",
-                },
-                L: {
-                  hombro: "46 cm",
-                  pecho: "106 cm",
-                  largo: "72 cm",
-                  manga: "22 cm",
-                },
-                XL: {
-                  hombro: "48 cm",
-                  pecho: "65 cm",
-                  largo: "74 cm",
-                  manga: "23 cm",
-                },
-                XXL: {
-                  hombro: "48 cm",
-                  pecho: "70 cm",
-                  largo: "74 cm",
-                  manga: "23 cm",
-                },
-              }}
-              talle={talleSeleccionado || "NONE"}
+        <div className="cont__carrousel--guiatalles">
+          {cargandoVariantes ? (
+            <Skeleton
+              height={350}
+              className="modal-compra__carrousel-skeleton"
+              baseColor="#29292900"
+              highlightColor="#d1cfcf00"
             />
-          </div>
+          ) : openCloseGuiaTalles ? (
+            <img
+              src={imagenMedidasActual}
+              alt="Remera plana con medidas"
+              className="modal-compra__imagen-medidas"
+            />
+          ) : (
+            <Carrousel imagenes={imagenesActuales} />
+          )}
+
+          <GuiaTalles
+            visible={openCloseGuiaTalles}
+            medidas={{
+              NONE: {
+                hombro: "0 Cm",
+                pecho: "0 Cm",
+                largo: "0 Cm",
+                manga: "0 Cm",
+              },
+              S: {
+                hombro: "42 cm",
+                pecho: "96 cm",
+                largo: "68 cm",
+                manga: "20 cm",
+              },
+              M: {
+                hombro: "44 cm",
+                pecho: "100 cm",
+                largo: "70 cm",
+                manga: "21 cm",
+              },
+              L: {
+                hombro: "46 cm",
+                pecho: "106 cm",
+                largo: "72 cm",
+                manga: "22 cm",
+              },
+              XL: {
+                hombro: "48 cm",
+                pecho: "65 cm",
+                largo: "74 cm",
+                manga: "23 cm",
+              },
+              XXL: {
+                hombro: "48 cm",
+                pecho: "70 cm",
+                largo: "74 cm",
+                manga: "23 cm",
+              },
+            }}
+            talle={talleSeleccionado || "NONE"}
+          />
+        </div>
 
         <div className="modal-compra__cont">
-          <div className="modal-compra__contenedor">
-          </div>
-      
+
           <div className="modal-compra__info">
             <div className="carrousel__circle">
               <span
@@ -434,7 +431,7 @@ export const ModalCompra = () => {
                 )}
               </div>
             </div>
-           
+
             <div className="modal-compra__acciones">
               <div
                 className={
@@ -481,10 +478,10 @@ export const ModalCompra = () => {
                 }}
               >
                 {!talleSeleccionado
-                  ? "Selecciona un talle" : animationCompra
-                  ? "Se agregó al carrito ✓"
-                  : "Agregar al Carrito"}
-                  
+                  ? "Selecciona un talle"
+                  : animationCompra
+                    ? "Se agregó al carrito ✓"
+                    : "Agregar al Carrito"}
               </button>
             </div>
           </div>

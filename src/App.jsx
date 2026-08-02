@@ -8,7 +8,9 @@ import { Failed } from "./ui/Failed";
 import { Pending } from "./ui/Pending";
 import { Welcome } from "./ui/Welcome";
 import { ModalEnvio } from "./ui/ModalEnvio";
+import { useEffect } from "react";
 export const App = () => {
+ 
   return (
     <section className="app">
       <TiendaProvider>

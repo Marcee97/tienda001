@@ -17,6 +17,8 @@
 }
 .welcome--active{
   transform: translateY(-100%);
+  position: fixed;
+
 }
 .welcome__bg {
   position: absolute;
