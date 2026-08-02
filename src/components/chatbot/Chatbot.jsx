@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import "../chatbot/chatbot.css";
+import { createPortal } from "react-dom";
 
 export const Chatbot = ({ open, onClose }) => {
   const [mensajes, setMensajes] = useState([]);
@@ -52,7 +53,27 @@ useEffect(() => {
     viewport.removeEventListener('scroll', ajustar);
   };
 }, [open]);
-  return (
+useEffect(() => {
+  if (open) {
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+  } else {
+    const scrollY = document.body.style.top;
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    window.scrollTo(0, parseInt(scrollY || "0") * -1);
+  }
+
+  return () => {
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+  };
+}, [open]);
+  return createPortal (
     <div className={`chatbot ${open ? "chatbot--active" : ""}`}>
       <div className="chatbot__header">
         <span
@@ -88,6 +109,7 @@ useEffect(() => {
         />
         <button className="chatbot__btn-enviar" onMouseDown={(e) => e.preventDefault()} onClick={enviarMensaje}>➤</button>
       </div>
-    </div>
+    </div>,
+     document.body
   );
 };

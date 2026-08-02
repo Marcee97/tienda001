@@ -18,6 +18,7 @@
   flex-direction: column;
   background-color: #313131;
   position: relative;
+
 }
 
 .modal-compra__info {
@@ -31,6 +32,7 @@
   color: #f5f5f5;
   overflow: hidden;
   height: 100%;
+
 }
 .carrousel__circle {
   display: flex;
