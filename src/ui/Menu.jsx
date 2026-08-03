@@ -10,7 +10,7 @@ const {openCloseMenu, setOpenCloseMenu, carrito,visibilidadTitle, openCloseCarri
       <div className="img-back-container">
       </div>
       <div className={"menu__container"}>
-        <h1 className={visibilidadTitle ? "menu__title title-hidden" : "menu__title "}>NOMBRE</h1>
+        <h1 className={visibilidadTitle ? "menu__title title-hidden" : "menu__title "}>HISBELL</h1>
         <ul className="menu__list" onClick={(e)=>{e.stopPropagation(); setOpenCloseMenu(prev => !prev);
         }}>
           <li className="menu__item">

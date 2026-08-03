@@ -27,7 +27,7 @@ export const MenuDesplegable = () => {
         setOpenCloseMenu(false);
       }}
     >
-      <h2 className="menu-desplegable-title">NOMBRE</h2>
+      <h2 className="menu-desplegable-title">Hisbell</h2>
       <div
         className="menu-desplegable-cont"
         onClick={(e) => e.stopPropagation()}

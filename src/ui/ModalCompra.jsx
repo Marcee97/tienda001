@@ -459,7 +459,9 @@ export const ModalCompra = () => {
 
               <button
                 className="modal-compra__btn-agregar"
+                disabled={animationCompra}
                 onClick={() => {
+                  if (animationCompra) return;
                   if (talleSeleccionado === null)
                     return setMensajeSeleccionaTalle(true);
                   setMensajeSeleccionaTalle(false);
