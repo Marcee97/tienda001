@@ -413,6 +413,7 @@ export const ModalCompra = () => {
                     setOpenCloseInfoStock((prev) => !prev);
                   }}
                 />
+                <InfoStock/>
               </div>
             </div>
             <div

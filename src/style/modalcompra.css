@@ -207,15 +207,19 @@
   gap: 0.5em;
 }
 .modal-compra__color-btn {
-  width: 35px;
-  height: 35px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   border: 2px solid transparent;
+  background-clip: content-box;
+  padding: 0;
+  transition: padding 0.15s ease;
 }
 
 .modal-compra__color-btn.active {
-  border-color: black;
-  transform: scale(1.1);
+  border-color: #525252;
+  padding: 3px;
+
 }
 
 .modal-compra__talles {
