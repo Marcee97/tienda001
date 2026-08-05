@@ -109,7 +109,7 @@ export const ModalEnvio = () => {
   return (
     <section
       style={{
-        maxHeight: openCloseEnvios ? "100vh" : "0",
+        maxHeight: openCloseEnvios ? "100vh" : "0vh",
         transition: "max-height 0.4s ease",
       }}
       className="modal-envio"

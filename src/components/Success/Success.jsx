@@ -1,63 +1,102 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../Success/success.css";
 import { TiendaContext } from "../../context/TiendaContext";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { formatearPrecio } from "../../utils/formatearPrecios.js";
+
 export const Success = () => {
+ 
   const navigate = useNavigate();
-  useEffect(() => {
-    console.log("estas en el success");
-  }, []);
-
   const [searchParams] = useSearchParams();
-   const [venta, setVenta] = useState(null);
   const paymentID = searchParams.get("payment_id");
-  console.log(paymentID, "este es el paymentID que se esta enviando al success desde los PARAMS");
-useEffect(() => {
-  if(!paymentID) return;
-try{
 
-  const data = fetch(`import.meta.env.VITE_API_URL}/api/success/${paymentID}`)
-  console.log(data, "estos son los datos que se estan enviando al al success desde los PARAMS");
-}catch(error) {
-  console.error("Error al obtener los datos de la venta:", error)
-}
-}, [paymentID]);
-  
-const {datosFormulario} = useContext(TiendaContext);
+  const [venta, setVenta] = useState(null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (!paymentID) return;
+
+    const obtenerVenta = async () => {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/success/${paymentID}`,
+        );
+        if (!res.ok) throw new Error("No se pudo obtener la venta");
+        const data = await res.json();
+        setVenta(data);
+      } catch (err) {
+        console.error("Error al obtener los datos de la venta:", err);
+        setError(true);
+      }
+    };
+
+    obtenerVenta();
+  }, [paymentID]);
+
   return (
     <section className="success">
-      <div className="success__container">
-        <h3 className="success__title">Pagaste correctamente</h3>
-        <span class="material-symbols-outlined success__icon">
+      <div className="success__header">
+        <span className="material-symbols-outlined success__icon">
           check_circle
         </span>
-        <p className="success__text">
-          Pagaste: <span className="success__price">{datosFormulario.precio}</span>
+        <h3 className="success__title">¡Pedido confirmado!</h3>
+        <p className="success__subtitle">
+          Recibimos tu pedido y lo vamos a procesar a la brevedad.
         </p>
+        <button className="success__button" onClick={() => navigate("/")}>
+          Seguir comprando
+        </button>
       </div>
-      <div className="success__cont--email">
-        {venta ? (
-          <>
-            <p className="success__text">
-              Total: <span className="success__price">${venta.total}</span>
-            </p>
-            <div className="success__cont--email">
-              <p className="success__text">
-                Te enviamos un email a
-                <span className="success__email"> {venta.email}</span>
-              </p>
+
+      {error ? (
+        <p className="success__error">
+          No pudimos encontrar los datos de tu pedido.
+        </p>
+      ) : !venta ? (
+        <p className="success__cargando">Cargando pedido...</p>
+      ) : (
+        <>
+          <div className="success__card">
+            <h4 className="success__card-titulo">Detalles del pedido</h4>
+            <div className="success__fila">
+              <span className="success__label">N° de orden</span>
+              <span className="success__valor">{venta.orden_id}</span>
             </div>
-            <div className="success__cont--orden">
-              <p className="success__orden">Tu número de orden: {venta.id}</p>
+            <div className="success__fila">
+              <span className="success__label">Email</span>
+              <span className="success__valor">{venta.email}</span>
             </div>
-          </>
-        ) : (
-          <p>Cargando...</p>
-        )}
-      </div>
-      <button className="success__button" onClick={() => navigate("/")}>
-        Volver Al Hom
-      </button>
+          </div>
+
+          <div className="success__card">
+            <h4 className="success__card-titulo">Productos</h4>
+            {venta.items?.map((item, i) => (
+              <div key={i} className="success__item">
+                <img
+                  src={item.imagen}
+                  alt={item.nombre}
+                  className="success__item-imagen"
+                />
+                <div className="success__item-info">
+                  <p className="success__item-nombre">{item.nombre}</p>
+                  <p className="success__item-variante">
+                    Talle {item.talle} · {item.color} · Cant. {item.cantidad}
+                  </p>
+                </div>
+                <span className="success__item-precio">
+                  ${formatearPrecio(item.precio * item.cantidad)}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className="success__card">
+            <h4 className="success__card-titulo">Envío</h4>
+            <p className="success__envio-nombre">{venta.envio?.nombre}</p>
+            <p className="success__envio-direccion">{venta.envio?.ciudad}</p>
+          </div>
+        </>
+      )}
     </section>
   );
 };
