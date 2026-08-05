@@ -49,54 +49,41 @@ export const Success = () => {
       </div>
 
       {error ? (
-        <p className="success__error">
-          No pudimos encontrar los datos de tu pedido.
-        </p>
-      ) : !venta ? (
-        <p className="success__cargando">Cargando pedido...</p>
-      ) : (
-        <>
-          <div className="success__card">
-            <h4 className="success__card-titulo">Detalles del pedido</h4>
-            <div className="success__fila">
-              <span className="success__label">N° de orden</span>
-              <span className="success__valor">{venta.orden_id}</span>
-            </div>
-            <div className="success__fila">
-              <span className="success__label">Email</span>
-              <span className="success__valor">{venta.email}</span>
-            </div>
-          </div>
+  <p className="success__error">
+    No pudimos encontrar los datos de tu pedido.
+  </p>
+) : !venta ? (
+  <p className="success__cargando">Cargando pedido...</p>
+) : (
+  <>
+    <div className="success__card">
+      <h4 className="success__card-titulo">Detalles del pedido</h4>
+      <div className="success__fila">
+        <span className="success__label">N° de orden</span>
+        <span className="success__valor">{venta.id}</span>
+      </div>
+      <div className="success__fila">
+        <span className="success__label">Email</span>
+        <span className="success__valor">{venta.email}</span>
+      </div>
+      <div className="success__fila">
+        <span className="success__label">Total</span>
+        <span className="success__valor">
+          ${formatearPrecio(venta.total)}
+        </span>
+      </div>
+    </div>
 
-          <div className="success__card">
-            <h4 className="success__card-titulo">Productos</h4>
-            {venta.items?.map((item, i) => (
-              <div key={i} className="success__item">
-                <img
-                  src={item.imagen}
-                  alt={item.nombre}
-                  className="success__item-imagen"
-                />
-                <div className="success__item-info">
-                  <p className="success__item-nombre">{item.nombre}</p>
-                  <p className="success__item-variante">
-                    Talle {item.talle} · {item.color} · Cant. {item.cantidad}
-                  </p>
-                </div>
-                <span className="success__item-precio">
-                  ${formatearPrecio(item.precio * item.cantidad)}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          <div className="success__card">
-            <h4 className="success__card-titulo">Envío</h4>
-            <p className="success__envio-nombre">{venta.envio?.nombre}</p>
-            <p className="success__envio-direccion">{venta.envio?.ciudad}</p>
-          </div>
-        </>
-      )}
+    <div className="success__card">
+      <h4 className="success__card-titulo">Envío</h4>
+      <p className="success__envio-nombre">{venta.nombre}</p>
+      <p className="success__envio-direccion">
+        {venta.calle} {venta.numero}, {venta.ciudad}, {venta.provincia}
+      </p>
+      <p className="success__envio-direccion">CP {venta.codigo_postal}</p>
+    </div>
+  </>
+)}
     </section>
   );
 };
