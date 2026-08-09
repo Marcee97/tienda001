@@ -4,7 +4,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 const enviarEmailCompra = async ({ envio, carrito, total }) => {
   console.log(envio, "esto en el formulario que llega emnail service")
-  const { nombre, email, calle, numero, ciudad, provincia, codigoPostal } = envio;
+  const { nombre, email, calle, numero, ciudad, provincia, codigo_postal } = envio;
 
   console.log(envio, carrito, total, "esta es la info que llega al emailService");
 
@@ -15,7 +15,7 @@ const enviarEmailCompra = async ({ envio, carrito, total }) => {
     html: `
       <h1>Gracias ${nombre}!</h1>
       <p>Tu compra fue confirmada.</p>
-      <p>Dirección: ${calle} ${numero}, ${ciudad}, ${provincia} (CP ${codigoPostal})</p>
+      <p>Dirección: ${calle} ${numero}, ${ciudad}, ${provincia} (CP ${codigo_postal})</p>
       ${carrito
         .map(
           (item) => `
