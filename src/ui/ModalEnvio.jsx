@@ -99,12 +99,12 @@ export const ModalEnvio = () => {
 
     setErrores(nuevosErrores);
 
-  const primerError = Object.keys(nuevosErrores)[0];
-  if (primerError) {
-    refs[primerError]?.current?.focus();
-  }
+    const primerError = Object.keys(nuevosErrores)[0];
+    if (primerError) {
+      refs[primerError]?.current?.focus();
+    }
 
-  return Object.keys(nuevosErrores).length === 0;
+    return Object.keys(nuevosErrores).length === 0;
   };
   return (
     <section
@@ -202,7 +202,11 @@ export const ModalEnvio = () => {
           className={`modal-envio__formulario ${cargando ? "loading--active" : ""}`}
         >
           <div className="modal-envio__formulario--titulo">
-            <img src="\person-male-svgrepo-com.svg" alt="svg person form"  className="modal-envio__form--svg"/>
+            <img
+              src="\person-male-svgrepo-com.svg"
+              alt="svg person form"
+              className="modal-envio__form--svg"
+            />
             <span>Datos Personales</span>
           </div>
           <p className="modal-envio__label">
@@ -336,12 +340,18 @@ export const ModalEnvio = () => {
             }}
           >
             {cargando ? (
-              <span className="btn-text-cargando">Redirigiendo...</span>
+              <span className="btn-text-cargando">
+                Redirigiendo
+                <span className="btn-puntos">
+                  <span>.</span>
+                  <span>.</span>
+                  <span>.</span>
+                </span>
+              </span>
             ) : (
               <span className="btn-text-confirmar">Confirmar</span>
             )}
           </button>
-          {/*Crea base de datos setear este formulario crear logica dde backend en hoja aparte */}
         </div>
       </div>
     </section>

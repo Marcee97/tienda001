@@ -223,15 +223,15 @@ export const ModalCompra = () => {
                 manga: "22 cm",
               },
               XL: {
-                hombro: "48 cm",
-                pecho: "65 cm",
-                largo: "74 cm",
-                manga: "23 cm",
+                pecho: "48 cm",
+                cintura: "48 cm",
+                largo: "75 cm",
+                manga: "24 cm",
               },
               XXL: {
-                hombro: "48 cm",
-                pecho: "70 cm",
-                largo: "74 cm",
+                pecho: "65 cm",
+                cintura: "65 cm",
+                largo: "79 cm",
                 manga: "23 cm",
               },
             }}
