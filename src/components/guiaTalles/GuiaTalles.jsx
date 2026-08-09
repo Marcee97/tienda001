@@ -2,7 +2,7 @@ import "../guiaTalles/guiatalles.css";
 
 const lineas = [
   {
-    key: "hombro",
+    key: "cintura",
     x1: 31,
     y1: 28,
     x2: 68,

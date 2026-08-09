@@ -1,6 +1,6 @@
 .modal-envio {
   position: fixed;
-  background-color:  #0C0E11;
+  background-color: #0c0e11;
   color: #f5f5f5;
   bottom: 0;
   width: 100%;
@@ -25,21 +25,21 @@
   font-size: 2.4em;
 }
 .modal-envio__cont {
-  padding: 0 .2em;
+  padding: 0 0.2em;
   display: flex;
   flex-direction: column;
   gap: 1em;
-  background-color: #0C0E11;
+  background-color: #0c0e11;
   border-radius: 10px;
 }
-.modal-envio__cont--text{
+.modal-envio__cont--text {
   display: flex;
   align-items: center;
   justify-content: start;
-  gap: .3em;
+  gap: 0.3em;
 }
 
-.modal-envio-svg-products{
+.modal-envio-svg-products {
   width: 10%;
 }
 .modal-envio__productos {
@@ -60,7 +60,7 @@
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  background-color: #18191C;
+  background-color: #18191c;
   font-size: 1.5em;
   padding: 0.4em;
 }
@@ -71,7 +71,7 @@
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  background-color: #18191C;
+  background-color: #18191c;
   padding: 0.4em;
   border-radius: 8px;
   border: 1px solid #27282c;
@@ -94,13 +94,13 @@
   border-top: 1px solid #2d2e31;
   padding: 1em 0;
 }
-.modal-envio__formulario--titulo{
+.modal-envio__formulario--titulo {
   font-size: 1.5em;
   display: flex;
   justify-content: start;
-  gap: .3em;
+  gap: 0.3em;
 }
-.modal-envio__form--svg{
+.modal-envio__form--svg {
   width: 9%;
 }
 
@@ -127,7 +127,7 @@
   border: none;
   border-radius: 5px;
   width: 99%;
-  background-color: #18191C;
+  background-color: #18191c;
   color: #f5f5f5;
   border: 1px solid #27282c;
 }
@@ -137,12 +137,11 @@
 .modal-envio__item {
   width: 100%;
   display: flex;
-  padding: .5em .2em;
+  padding: 0.5em 0.2em;
   gap: 0.5em;
   background-color: #1f1f1f;
   border-top: 1px solid #3a3a3a;
   color: #ffffff;
-
 }
 .modal-envio__item-titulo {
   font-size: 1.4em;
@@ -164,7 +163,7 @@
 .modal-envio__item-cantidad {
   display: flex;
   justify-content: space-between;
-  padding: .9em 0;
+  padding: 0.9em 0;
   align-items: center;
   max-width: 250px;
   min-width: 250px;
@@ -175,9 +174,9 @@
   font-weight: 900;
   border: 1px solid #fff;
   border-radius: 39px;
-  padding: .2em .5em;
+  padding: 0.2em 0.5em;
 }
-.modal-envio__item-talle-numero{
+.modal-envio__item-talle-numero {
   color: #999999;
 }
 .modal-envio__boton-confirmar {
@@ -188,5 +187,33 @@
   color: #f5f5f5;
   background-color: #1e1e1e;
   border: none;
-  margin: .5em 0;
+  margin: 0.5em 0;
+}
+
+.btn-puntos span {
+  opacity: 0;
+  animation: parpadeoPunto 1.4s infinite;
+}
+
+.btn-puntos span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.btn-puntos span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.btn-puntos span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes parpadeoPunto {
+  0%,
+  80%,
+  100% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
 }

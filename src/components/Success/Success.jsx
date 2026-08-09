@@ -53,7 +53,14 @@ export const Success = () => {
     No pudimos encontrar los datos de tu pedido.
   </p>
 ) : !venta ? (
-  <p className="success__cargando">Cargando pedido...</p>
+<p className="success__cargando">
+  Cargando pedido
+  <span className="success__puntos">
+    <span>.</span>
+    <span>.</span>
+    <span>.</span>
+  </span>
+</p>
 ) : (
   <>
     <div className="success__card">
