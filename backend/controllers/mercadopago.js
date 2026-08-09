@@ -1,16 +1,13 @@
 require("dotenv").config();
 const {pool} = require ("../database/db.config.js")
-console.log(process.env.TOKEN_MERCADOPAGO)
 const { MercadoPagoConfig, Preference } = require('mercadopago');
 const client = new MercadoPagoConfig({ accessToken: process.env.TOKEN_MERCADOPAGO });
 
 
 const crearPreferencia = async (req, res) => {
-  console.log(req.body, "este es el body")
 
   const {carrito, datosFormulario} = req.body
   try{
-    console.log("DATA EN BACK", req.body)
     
     const ids = carrito.map((item) => item.id);
     const { rows: productos } = await pool.query(
@@ -24,8 +21,6 @@ const carritoSeguro = carrito.map((item) => {
     precio: productoReal.precio
   }
 })
-console.log("productos DB", productos);
-console.log("Carruto seguor", carritoSeguro)
     const preference = new Preference(client);
     
     const response = await preference.create({
