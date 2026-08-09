@@ -11,23 +11,17 @@ const paymentClient = new Payment(client);
 const webhook = async (req, res) => {
   try {
     console.log("🔔 WEBHOOK RECIBIDO");
-    console.log("BODY:", req.body);
 
     if (req.body.type === "payment" && req.body.data?.id) {
       const paymentId = req.body.data.id;
-      console.log("💰 Pago detectado:", paymentId);
 
       const payment = await paymentClient.get({ id: paymentId });
 
-      console.log("📊 PAYMENT:", {
-        id: payment.id,
-        status: payment.status,
-        amount: payment.transaction_amount,
-      });
+     
 //-------------------PAGO APROBADO-------------------------------------------------------
       if (payment.status === "approved") {
         console.log("✅ PAGO APROBADO");
-        console.log("METADATA:", JSON.stringify(payment.metadata, null, 2));
+       
 
         // 1. Evitar duplicados
         const existe = await pool.query(
