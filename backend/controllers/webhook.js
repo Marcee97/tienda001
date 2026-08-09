@@ -87,8 +87,7 @@ const webhook = async (req, res) => {
 try{
 
           await enviarEmailCompra({
-            email:datos_formulario.email,
-            nombre:datos_formulario.nombre,
+            envio: datos_formulario,
             carrito:carrito_seguro,
             total:payment.transaction_amount
           })
