@@ -18,6 +18,7 @@ export const Chatbot = ({ open, onClose }) => {
 
   const enviarMensaje = async () => {
     if (!inputChat.trim()) return;
+     const esPrimerMensaje = mensajes.length === 0;
 
     setMensajes((prev) => [...prev, { role: "user", texto: inputChat }]);
     setInputChat("");
@@ -27,7 +28,7 @@ export const Chatbot = ({ open, onClose }) => {
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mensaje: inputChat }),
+        body: JSON.stringify({ mensaje: inputChat, esPrimerMensaje}),
       }
     );
 

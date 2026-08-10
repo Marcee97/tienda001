@@ -10,7 +10,7 @@ const consultarStock = async (nombreProducto, talle, color) => {
   console.log("agente yendo a la base de datosss", nombreProducto);
   const result = await  pool.query(
     `
-    SELECT v.stock, v.talle, c.nombre AS color, p.nombre AS producto
+    SELECT v.stock, v.talle, c.nombre AS color, p.nombre AS producto, p.precio
     FROM variantes v
     JOIN productos p ON v.producto_id = p.id
     JOIN colores c ON v.color_id = c.id
@@ -30,7 +30,7 @@ const tools = [
     function: {
       name: "consultarStock",
       description:
-        "Consulta el stock disponible de una remera por nombre, talle y color",
+          "Consulta el stock y precio disponible de una remera por nombre, talle y color. Usar tanto para preguntas de stock/disponibilidad como de precio.",
       parameters: {
         type: "object",
         properties: {
@@ -50,7 +50,7 @@ const tools = [
   },
 ];
 const chatBot = async (req, res) => {
-  const { mensaje } = req.body;
+  const { mensaje, esPrimerMensaje } = req.body;
 
   try {
     const mensajes = [
@@ -59,17 +59,13 @@ const chatBot = async (req, res) => {
         content: `Sos el asistente de "Tienda001".
 
 REGLAS:
-- Saluda al comienzo de la conversacion.
+- ${esPrimerMensaje ? "- Empezá tu respuesta con un saludo breve." : "- No saludes, ya estás en medio de la conversación."}
 - Máximo 4 líneas.
 - Nunca termines con una pregunta.
 - Si te preguntan por STOCK o disponibilidad de talles/colores, SIEMPRE usá la herramienta consultarStock antes de responder. Nunca digas que no sabés sin haber llamado a la herramienta primero.
 - Si te preguntan por stock disponible, usá la herramienta consultarStock.
 - Se hacen envios a todo el pais.
 
-PRECIOS:
-- Remeras basicas blancas: 15.000
-- Remeras basicas negras: 15.000
-por el momento todas las remeras valen lo mismo
 
 las remeras se achican un 2% despues del primer lavado
 todas las remeras son 100% algodon
