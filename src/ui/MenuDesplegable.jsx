@@ -143,7 +143,13 @@ export const MenuDesplegable = () => {
             </div>
           </li>
         </ul>
+        <div className="menu-desplegable__footer">
+
+        <img src="\MP_RGB_HANDSHAKE_pluma_horizontal (1).svg" alt="mercadopago svg" className="menu-desplegable__footer--svg" />
+        </div>
+
       </div>
+
     </section>
   );
 };

@@ -103,3 +103,13 @@ color: #ffffff;
   color:#505050;
   font-size:.8em;
 }
+
+.menu-desplegable__footer{
+  height: 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.menu-desplegable__footer--svg{
+  width: 40%;
+}
