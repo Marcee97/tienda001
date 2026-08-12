@@ -162,6 +162,7 @@ export const ModalEnvio = () => {
             </svg>
           </span>
         </div>
+       
 
         <div className="modal-envio__productos--cont">
           {carrito.length > 0 ? (
@@ -353,6 +354,7 @@ export const ModalEnvio = () => {
             )}
           </button>
         </div>
+       
       </div>
     </section>
   );
