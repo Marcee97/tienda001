@@ -1,0 +1,156 @@
+.suscripciones {
+  background-color: #111111e1;
+  width: 100%;
+  height: 100dvh;
+  position: fixed;
+  z-index: 175;
+  backdrop-filter: blur(8px);
+  color: #fff;
+  overflow: hidden;
+  transition: transform .5s ease-in-out;
+  transform: translateX(100%); /* oculto por defecto, fuera de pantalla a la derecha */
+}
+
+.suscripciones__active {
+  transform: translateX(0%); /* visible, en su posición normal */
+}
+.suscripciones_cabezera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.7em 0.5em;
+  font-size: 1.7em;
+}
+.suscripciones_cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.suscripcion__img---cont {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.suscripcion__svg--main {
+  width: 70%;
+}
+.suscripciones__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  list-style: none;
+  gap: 0.3em;
+  font-size: 1.2em;
+  font-weight: 800;
+}
+.suscripciones_li {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0.4em;
+  font-family: "inter", sans-serif;
+}
+
+.suscripciones_list--check {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.suscripciones__btn--cont {
+  padding: 1em 0;
+  display: flex;
+  height: max-content;
+  margin-top: 2em;
+  margin-top: 55px;
+}
+.suscripciones__btn {
+  font-size: 1.2em;
+  padding: 0.7em 1em;
+  background-color: #fff;
+  color: #000;
+  font-weight: 800;
+  width: 100%;
+  border-radius: 0.5em;
+  border: none;
+}
+.suscripciones__btn--como-funciona{
+margin-top: .8em;
+font-size: 1.4em;
+}
+.suscripciones__btn--precio {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+}
+.suscripciones__cont--explicacion {
+  width: 100%;
+  height: 100dvh;
+  background-color: #5e5e5eec;
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0.9em 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 165;
+  transform: translateY(100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.suscripciones__cont--explicacion--activa {
+  transform: translateY(0);
+
+}
+
+.suscripciones__explicacion {
+  padding: 2em 0;
+  width: 80%;
+  font-size: 1.5em;
+  color: #fff; /* si el fondo es oscuro, el texto necesita contraste */
+}
+.suscripciones__scroll {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+}
+.suscripciones__btn--cerrar {
+  position: absolute;
+  top: -.1em;
+  right: -.2em;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.5em;
+  padding: 0.25em;
+}
+.suscripciones__explicacion h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.8em;
+  color: #fff;
+}
+
+.suscripciones__explicacion h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.2em 0 0.4em;
+  color: #fff;
+}
+
+.suscripciones__explicacion p {
+  margin-bottom: 0.8em;
+  line-height: 1.6;
+  color: #fff;
+}
+
+.suscripciones__explicacion strong {
+  font-weight: 700;
+  color: #ffd166;
+}

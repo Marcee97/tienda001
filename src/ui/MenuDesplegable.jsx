@@ -11,6 +11,8 @@ export const MenuDesplegable = () => {
     carrito,
     cerrarModalCompra,
     setOpenCloseModalCompra,
+    openCloseSuscripciones,
+    setOpenCloseSuscripciones,
   } = useContext(TiendaContext);
 
   const [seccionAbierta, setSeccionAbierta] = useState(null);
@@ -57,13 +59,26 @@ export const MenuDesplegable = () => {
         <ul className="menu-desplegable-lista">
           <li
             className="menu-desplegable-item"
-            onClick={(e) => toggleSeccion(e, "sorteos")}
+            onClick={(e) => {
+              toggleSeccion(e, "suscribirme");
+              setOpenCloseSuscripciones(true); // o el valor que corresponda
+            }}
           >
             <p className="menu__desplegable--numero-orden">
               (01)
-              <span className="menu__desplegable--text-item">
-                Sorteos
-              </span>
+              <span className="menu__desplegable--text-item">Suscribirme</span>
+            </p>
+
+           
+          </li>
+
+          <li
+            className="menu-desplegable-item"
+            onClick={(e) => toggleSeccion(e, "sorteos")}
+          >
+            <p className="menu__desplegable--numero-orden">
+              (02)
+              <span className="menu__desplegable--text-item">Sorteos</span>
             </p>
 
             <div
@@ -84,7 +99,7 @@ export const MenuDesplegable = () => {
             onClick={(e) => toggleSeccion(e, "ubicacion")}
           >
             <p className="menu__desplegable--numero-orden">
-              (02)
+              (03)
               <span className="menu__desplegable--text-item">Ubicación</span>
             </p>
 
@@ -106,7 +121,7 @@ export const MenuDesplegable = () => {
             onClick={(e) => toggleSeccion(e, "sitio")}
           >
             <p className="menu__desplegable--numero-orden">
-              (03)
+              (04)
               <span className="menu__desplegable--text-item">Sitio Web</span>
             </p>
 
@@ -128,7 +143,7 @@ export const MenuDesplegable = () => {
             onClick={(e) => toggleSeccion(e, "chatbot")}
           >
             <p className="menu__desplegable--numero-orden">
-              (04)
+              (05)
               <span className="menu__desplegable--text-item">ChatBot</span>
             </p>
 
@@ -144,12 +159,13 @@ export const MenuDesplegable = () => {
           </li>
         </ul>
         <div className="menu-desplegable__footer">
-
-        <img src="\MP_RGB_HANDSHAKE_pluma_horizontal (1).svg" alt="mercadopago svg" className="menu-desplegable__footer--svg" />
+          <img
+            src="\MP_RGB_HANDSHAKE_pluma_horizontal (1).svg"
+            alt="mercadopago svg"
+            className="menu-desplegable__footer--svg"
+          />
         </div>
-
       </div>
-
     </section>
   );
 };

@@ -11,6 +11,10 @@ export const ModalEnvio = () => {
     setOpenCloseEnvios,
     datosFormulario,
     setDatosFormulario,
+    modoCompra,
+    setModoCompra,
+    productoSuscripcion,
+    setProductoSuscripcion,
   } = useContext(TiendaContext);
 
   const [errores, setErrores] = useState({});
@@ -52,24 +56,28 @@ export const ModalEnvio = () => {
 
   const enviarFormulario = async () => {
     setCargando(true);
-    console.log(datosFormulario, "estos son los datos del formulario");
 
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/crear-preferencia`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ carrito, datosFormulario }),
-      },
-    );
+    const endpoint =
+      modoCompra === "suscripcion"
+        ? "/api/crear-suscripcion"
+        : "/api/crear-preferencia";
+
+    const body =
+      modoCompra === "suscripcion"
+        ? { productoId: productoSuscripcion.id, datosFormulario }
+        : { carrito, datosFormulario };
+
+    const response = await fetch(`${import.meta.env.VITE_API_URL}${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
     const data = await response.json();
-    console.log(data, "aca deberia estar el init point");
+
     if (!data.init_point) {
       console.error("No llegó init_point");
       setCargando(false);
-      return; // ← para que no navegue a /undefined
+      return;
     }
     window.location.href = data.init_point;
   };
@@ -162,7 +170,6 @@ export const ModalEnvio = () => {
             </svg>
           </span>
         </div>
-       
 
         <div className="modal-envio__productos--cont">
           {carrito.length > 0 ? (
@@ -354,7 +361,6 @@ export const ModalEnvio = () => {
             )}
           </button>
         </div>
-       
       </div>
     </section>
   );

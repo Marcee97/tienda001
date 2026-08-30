@@ -48,6 +48,12 @@ export const ModalCompra = () => {
     carrito,
     stockAgotado,
     setStockAgotado,
+    modoCompra,
+    setModoCompra,
+    productoSuscripcion,
+    setProductoSuscripcion,
+    openCloseEnvios,
+    setOpenCloseEnvios,
   } = useContext(TiendaContext);
 
   const cargandoVariantes = variantes.length === 0;
@@ -240,7 +246,6 @@ export const ModalCompra = () => {
         </div>
 
         <div className="modal-compra__cont">
-
           <div className="modal-compra__info">
             <div className="carrousel__circle">
               <span
@@ -337,12 +342,17 @@ export const ModalCompra = () => {
                       ))}
                 </div>
                 <h4 className="modal-compra__precio">
-                  <span className="modal-compra__precio--unidad">UNIT </span>
-                  {cargandoVariantes ? (
-                    <Skeleton width={50} />
-                  ) : (
-                    `$${formatearPrecio(variantes[0]?.precio)}`
-                  )}
+                  <span className="modal-compra__precio--unidad">
+                    {modoCompra === "suscripcion" ? "" : "UNIT"}{" "}
+                  </span>
+                    {cargandoVariantes ? (
+    <Skeleton width={50} />
+  ) : modoCompra === "suscripcion" ? (
+    <>${formatearPrecio(7000)}<span className="modal-compra__precio--unidad">/Mes</span></>
+  ) : (
+    <>${formatearPrecio(variantes[0]?.precio)} </>
+  )}
+
                 </h4>
               </div>
             </div>
@@ -413,7 +423,7 @@ export const ModalCompra = () => {
                     setOpenCloseInfoStock((prev) => !prev);
                   }}
                 />
-                <InfoStock/>
+                <InfoStock />
               </div>
             </div>
             <div
@@ -465,11 +475,25 @@ export const ModalCompra = () => {
                   if (talleSeleccionado === null)
                     return setMensajeSeleccionaTalle(true);
                   setMensajeSeleccionaTalle(false);
+
                   const producto = {
                     id: variantes[0]?.producto_id,
                     nombre: variantes[0]?.nombre,
                     precio: variantes[0]?.precio,
                   };
+
+                  if (modoCompra === "suscripcion") {
+                    setProductoSuscripcion({
+                      ...producto,
+                      talle: talleSeleccionado,
+                      color: colorSeleccionado,
+                      imagen: imagenesActuales[0],
+                    });
+                    setOpenCloseModalCompra(false);
+                    setOpenCloseEnvios(true);
+                    return;
+                  }
+
                   agregarAlCarrito(
                     producto,
                     talleSeleccionado,
@@ -482,9 +506,11 @@ export const ModalCompra = () => {
               >
                 {!talleSeleccionado
                   ? "Selecciona un talle"
-                  : animationCompra
-                    ? "Se agregó al carrito ✓"
-                    : "Agregar al Carrito"}
+                  : modoCompra === "suscripcion"
+                    ? "Crear suscripción"
+                    : animationCompra
+                      ? "Se agregó al carrito ✓"
+                      : "Agregar al Carrito"}
               </button>
             </div>
           </div>

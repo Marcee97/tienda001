@@ -15,11 +15,14 @@ export const TiendaProvider = ({ children }) => {
   const [openCloseEnvios, setOpenCloseEnvios] = useState(false);
   const [openCloseInfoStock, setOpenCloseInfoStock] = useState(false);
   const [openCloseGuiaTalles, setOpenCloseGuiaTalles] = useState(false);
+  const [openCloseSuscripciones, setOpenCloseSuscripciones] = useState(false);
   const [visibilidadTitle, setVisibilidadTitle] = useState(false);
   const [openChatbot, setOpenChatbot] = useState(false);
   const [index, setIndex] = useState(0);
   const [stockAgotado, setStockAgotado] = useState(false);
 
+  const [modoCompra, setModoCompra] = useState("unica"); // "unica" | "suscripcion"
+  const [productoSuscripcion, setProductoSuscripcion] = useState(null);
 
   const [productoSeleccionadoCarrito, setProductoSeleccionadoCarrito] =
     useState([]);
@@ -55,7 +58,7 @@ export const TiendaProvider = ({ children }) => {
     const cantidadEnCarrito = existe?.cantidad || 0;
 
     if (cantidadEnCarrito + cantidad > stock) {
-     setStockAgotado(true)
+      setStockAgotado(true);
       return;
     }
 
@@ -163,6 +166,12 @@ export const TiendaProvider = ({ children }) => {
         setIndex,
         stockAgotado,
         setStockAgotado,
+        modoCompra,
+        setModoCompra,
+        productoSuscripcion,
+        setProductoSuscripcion,
+        openCloseSuscripciones,
+        setOpenCloseSuscripciones,
       }}
     >
       {children}
