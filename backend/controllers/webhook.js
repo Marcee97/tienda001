@@ -28,6 +28,7 @@ const webhook = async (req, res) => {
           `SELECT id FROM ventas WHERE mp_payment_id = $1`,
           [String(payment.id)]
         );
+        
 
         if (existe.rows.length > 0) {
           console.log("⚠️ Pago ya procesado, ignorando");

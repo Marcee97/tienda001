@@ -345,14 +345,17 @@ export const ModalCompra = () => {
                   <span className="modal-compra__precio--unidad">
                     {modoCompra === "suscripcion" ? "" : "UNIT"}{" "}
                   </span>
-                    {cargandoVariantes ? (
-    <Skeleton width={50} />
-  ) : modoCompra === "suscripcion" ? (
-    <>${formatearPrecio(7000)}<span className="modal-compra__precio--unidad">/Mes</span></>
-  ) : (
-    <>${formatearPrecio(variantes[0]?.precio)} </>
-  )}
-
+                  {cargandoVariantes ? (
+                    <Skeleton width={50} />
+                  ) : modoCompra === "suscripcion" ? (
+                    <>
+                    <span className="modal-compra__precio--unidad">Suscripcion </span>
+                      ${formatearPrecio(7000)}
+                      <span className="modal-compra__precio--unidad">/Mes</span>
+                    </>
+                  ) : (
+                    <>${formatearPrecio(variantes[0]?.precio)} </>
+                  )}
                 </h4>
               </div>
             </div>
@@ -483,12 +486,14 @@ export const ModalCompra = () => {
                   };
 
                   if (modoCompra === "suscripcion") {
-                    setProductoSuscripcion({
-                      ...producto,
-                      talle: talleSeleccionado,
-                      color: colorSeleccionado,
-                      imagen: imagenesActuales[0],
-                    });
+                    agregarAlCarrito(
+                      producto,
+                      talleSeleccionado,
+                      1,
+                      colorSeleccionado,
+                      imagenesActuales[0],
+                      varianteSeleccionada.stock,
+                    );
                     setOpenCloseModalCompra(false);
                     setOpenCloseEnvios(true);
                     return;

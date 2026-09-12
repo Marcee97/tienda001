@@ -64,7 +64,7 @@ export const ModalEnvio = () => {
 
     const body =
       modoCompra === "suscripcion"
-        ? { productoId: productoSuscripcion.id, datosFormulario }
+        ? {producto: carrito[0], datosFormulario }
         : { carrito, datosFormulario };
 
     const response = await fetch(`${import.meta.env.VITE_API_URL}${endpoint}`, {

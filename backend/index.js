@@ -39,7 +39,6 @@ app.use("/api/crear-suscripcion", crearSuscripcion)
 app.get("/", (req, res) => {
   res.send("Servidor funcionando con CommonJS");
 });
-console.log(process.env.TOKEN_MERCADOPAGO);
 const PORT = 3000;
 
 app.listen(PORT, () => {
