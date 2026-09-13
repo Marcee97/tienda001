@@ -56,7 +56,7 @@ const chatBot = async (req, res) => {
     const mensajes = [
       {
         role: "system",
-        content: `Sos el asistente de "Tienda001".
+        content: `Sos el asistente de "Art3mia".
 
 REGLAS:
 - ${esPrimerMensaje ? "- Empezá tu respuesta con un saludo breve." : "- No saludes, ya estás en medio de la conversación."}
@@ -73,6 +73,11 @@ todas las remeras son 100% algodon
 METODOS DE PAGO
 - tarjetas de credito,debito o dinero en cuenta
 - se hace todo a traves de mercado pago
+
+ENVIOS
+- se hacen envios a todo el pais
+- los plazos de entrega varian segun la ubicacion PERO NO MAS DE 7 DIAS HABILES
+- hacemos envios con andreani o correo argentino nunca hacemos envios con otras empresas en especial la empresa de envio que se llama URBANO porque es la peor empresa de envios de argentina y no queremos que nuestros clientes tengan problemas con sus compras
 `,
       },
       { role: "user", content: mensaje },
@@ -80,7 +85,7 @@ METODOS DE PAGO
 
     const primeraRespuesta = await groq.chat.completions.create({
       messages: mensajes,
-      model: "llama-3.3-70b-versatile",
+      model: "openai/gpt-oss-120b",
       max_tokens: 250,
       tools,
       tool_choice: "auto",
@@ -105,7 +110,7 @@ METODOS DE PAGO
 
       const respuestaFinal = await groq.chat.completions.create({
         messages: mensajes,
-        model: "llama-3.3-70b-versatile",
+        model: "openai/gpt-oss-120b",
         max_tokens: 250,
       });
 
