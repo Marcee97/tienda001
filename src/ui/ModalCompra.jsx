@@ -217,8 +217,8 @@ export const ModalCompra = () => {
                 manga: "20 cm",
               },
               M: {
-                hombro: "44 cm",
-                pecho: "100 cm",
+                pecho: "44 cm",
+                cintura: "44 cm",
                 largo: "70 cm",
                 manga: "21 cm",
               },
