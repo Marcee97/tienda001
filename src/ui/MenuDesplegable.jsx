@@ -13,6 +13,9 @@ export const MenuDesplegable = () => {
     setOpenCloseModalCompra,
     openCloseSuscripciones,
     setOpenCloseSuscripciones,
+    modoCompra,
+    setModoCompra,
+   
   } = useContext(TiendaContext);
 
   const [seccionAbierta, setSeccionAbierta] = useState(null);
@@ -57,20 +60,36 @@ export const MenuDesplegable = () => {
           </span>
         </div>
         <ul className="menu-desplegable-lista">
-          <li
-            className="menu-desplegable-item"
-            onClick={(e) => {
-              toggleSeccion(e, "suscribirme");
-              setOpenCloseSuscripciones(true); // o el valor que corresponda
-            }}
-          >
-            <p className="menu__desplegable--numero-orden">
-              (01)
-              <span className="menu__desplegable--text-item">Suscribirme</span>
-            </p>
-
-           
-          </li>
+          {modoCompra === "suscripcion" ? (
+            <li>
+              <p className="menu__desplegable--numero-orden">
+                (01)
+                <span
+                  className="menu__desplegable--text-item"
+                  onClick={() => {setModoCompra((prev) => !prev);
+                    setOpenCloseMenu(false);
+                  }}
+                >
+                  Compra
+                </span>
+              </p>
+            </li>
+          ) : (
+            <li
+              className="menu-desplegable-item"
+              onClick={(e) => {
+                toggleSeccion(e, "suscribirme");
+                setOpenCloseSuscripciones(true); // o el valor que corresponda
+              }}
+            >
+              <p className="menu__desplegable--numero-orden">
+                (01)
+                <span className="menu__desplegable--text-item">
+                  Suscribirme
+                </span>
+              </p>
+            </li>
+          )}
 
           <li
             className="menu-desplegable-item"

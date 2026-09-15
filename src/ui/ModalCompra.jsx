@@ -343,13 +343,13 @@ export const ModalCompra = () => {
                 </div>
                 <h4 className="modal-compra__precio">
                   <span className="modal-compra__precio--unidad">
-                    {modoCompra === "suscripcion" ? "" : "UNIT"}{" "}
+                    {modoCompra === "suscripcion" ? "" : <span className="parpadeo-suscripcion">UNIT</span>}{" "}
                   </span>
                   {cargandoVariantes ? (
                     <Skeleton width={50} />
                   ) : modoCompra === "suscripcion" ? (
                     <>
-                    <span className="modal-compra__precio--unidad">Suscripcion </span>
+                    <span className="modal-compra__precio--unidad parpadeo-suscripcion">Suscripcion </span>
                       ${formatearPrecio(7000)}
                       <span className="modal-compra__precio--unidad">/Mes</span>
                     </>
