@@ -115,11 +115,13 @@
   height: 85%;
   margin-top: 33%;
 }
+.carrito__empty-text{
+  font-size: 1.2em;
+}
 .carrito__empty--cont{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  outline: 1px solid #424242;
   align-items: center;
   height: 70%;
   gap: 2em;
