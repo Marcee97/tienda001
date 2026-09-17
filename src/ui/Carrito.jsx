@@ -108,13 +108,13 @@ export const Carrito = () => {
           </div>
         )}
       </div>
-      <div className="carrito__footer">
+      <div className={carrito.length > 0 ?"carrito__footer" : "carrito__footer carrito__inactive"}>
         <div
           className={
             carrito.length ? "carrito__total" : "carrito__total--inactive"
           }
         >
-          <div>
+          <div className="carrito__total--subtotal-cont">
             <p className="carrito__total--subtotal">
               Subtotal
               <span className="carrito__total--subtotal--number">

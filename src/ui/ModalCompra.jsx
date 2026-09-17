@@ -308,7 +308,7 @@ export const ModalCompra = () => {
               </div>
             </div>
             <div className="modal-compra__colores-talles">
-              <h4>Colores</h4>
+              <h4 className="modal-compra__titulo--colores">Colores</h4>
               <div className="modal-compra__contenedor-btn-colores">
                 <div className="modal-compra__cont-btn-colores">
                   {cargandoVariantes

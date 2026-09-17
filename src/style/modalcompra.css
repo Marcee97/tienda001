@@ -109,7 +109,7 @@
   }
 
   30% {
-    transform: scale(1.5);
+    transform: scale(1.9);
   }
 
   50% {
@@ -200,6 +200,9 @@
 }
 .modal-compra__colores-talles {
   padding: 0.5em 0;
+}
+.modal-compra__titulo--colores{
+  margin-left:9px;
 }
 .modal-compra__contenedor-btn-colores {
   display: flex;
