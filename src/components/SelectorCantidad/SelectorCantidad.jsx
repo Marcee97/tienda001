@@ -9,9 +9,14 @@ export const SelectorCantidad = ({
 }) => {
   const [intentoExtra, setIntentoExtra] = useState(0);
   const [mostrarSinStock, setMostrarSinStock] = useState(false);
+ const [varianteIdPrevia, setVarianteIdPrevia] = useState(varianteId);
+
+   if (varianteId !== varianteIdPrevia) {
+    setVarianteIdPrevia(varianteId);
+    setMostrarSinStock(false);
+  }
   useEffect(() => {
     setMostrarSinStock(false);
-    console.log(varianteId);
   }, [varianteId]);
   const restar = (e) => {
     e.stopPropagation();
@@ -34,7 +39,13 @@ export const SelectorCantidad = ({
           className="selector-cantidad__sin-stock"
           key={`${cantidad}-${intentoExtra}`}
         >
-          <p classanme="selector-cantidad__sin-stock-text">No hay mas</p>
+          {max === 1 ? (
+            <p classanme="selector-cantidad__sin-stock-text">Solo Queda 1</p>
+          ) : (
+
+            <p classanme="selector-cantidad__sin-stock-text">Solo Quedan {max}</p>
+          )
+          }
         </div>
       )}
 
