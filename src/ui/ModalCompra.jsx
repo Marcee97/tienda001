@@ -419,6 +419,7 @@ export const ModalCompra = () => {
                   setCantidad={setCantidad}
                   max={varianteSeleccionada?.stock}
                   disabled={!talleSeleccionado}
+                  varianteId={varianteSeleccionada?.variante_id}
                 />
                 <LiveStock
                   stock={varianteSeleccionada?.stock}
