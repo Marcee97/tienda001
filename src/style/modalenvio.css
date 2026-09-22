@@ -74,9 +74,9 @@
   background-color: #18191c;
   padding: 0.4em;
   border-radius: 8px;
-  border: 1px solid #27282c;
   font-size: 1.5em;
 }
+
 .modal-envio__icon {
   display: flex;
   align-items: center;
@@ -139,17 +139,17 @@
   display: flex;
   padding: 0.5em 0.2em;
   gap: 0.5em;
-  background-color: #1f1f1f;
-  border-top: 1px solid #3a3a3a;
+  background-color: #18191c;
   color: #ffffff;
+  margin-bottom: 0.1em;
 }
 .modal-envio__item-titulo {
   font-size: 1.4em;
 }
 
 .modal-envio__item-precio {
-  font-size: 1.2em;
-  font-weight: 100;
+  font-size: 1.3em;
+  font-weight: 600;
 }
 
 .modal-envio__item-imagen {
@@ -172,9 +172,8 @@
 .modal-envio__item-cantidad-label {
   font-size: 1.1em;
   font-weight: 900;
-  border: 1px solid #fff;
   border-radius: 39px;
-  padding: 0.2em 0.5em;
+  padding: 0.2em 0em;
 }
 .modal-envio__item-talle-numero {
   color: #999999;
@@ -218,9 +217,7 @@
   }
 }
 
-.modal-envio__mercadopago{
 
-}
 .modal-envio__mercadopago-img{
   width: 50%;
 }
