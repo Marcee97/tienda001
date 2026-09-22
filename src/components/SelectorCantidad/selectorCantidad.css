@@ -6,16 +6,16 @@
   overflow: hidden;
   width: fit-content;
   position: relative;
-  padding: .1em .4em;
+  padding: 0.1em 0.4em;
 }
 .selector-cantidad__sin-stock {
   position: absolute;
   width: 100%;
   left: 28px;
-  
+
   animation:
     deslizar 0.3s ease-in-out forwards,
-      parpadeo 0.3s ease-in-out 5 0.5s;
+    parpadeo 0.3s ease-in-out 5 0.5s;
 }
 
 @keyframes deslizar {
@@ -28,15 +28,15 @@
 }
 
 @keyframes parpadeo {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
     opacity: 0.2;
   }
 }
-.selector-cantidad__sin-stock-text{
-
+.selector-cantidad__sin-stock-text {
 }
 
 .selector-cantidad__btn {
