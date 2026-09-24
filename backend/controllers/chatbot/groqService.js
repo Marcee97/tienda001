@@ -1,6 +1,6 @@
 const Groq = require("groq-sdk");
 require("dotenv").config();
-const {pool} = require("../../database/db.config.js")
+const { pool } = require("../../database/db.config.js");
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
 });
@@ -8,7 +8,7 @@ const groq = new Groq({
 // Función real que consulta la base
 const consultarStock = async (nombreProducto, talle, color) => {
   console.log("agente yendo a la base de datosss", nombreProducto);
-  const result = await  pool.query(
+  const result = await pool.query(
     `
     SELECT v.stock, v.talle, c.nombre AS color, p.nombre AS producto, p.precio
     FROM variantes v
@@ -20,7 +20,7 @@ const consultarStock = async (nombreProducto, talle, color) => {
     `,
     [`%${nombreProducto}%`, talle || null, color || null],
   );
-  console.log(result, "lo que encontroel agente en la base de datos")
+  console.log(result, "lo que encontroel agente en la base de datos");
   return result.rows;
 };
 
@@ -30,7 +30,7 @@ const tools = [
     function: {
       name: "consultarStock",
       description:
-          "Consulta el stock y precio disponible de una remera por nombre, talle y color. Usar tanto para preguntas de stock/disponibilidad como de precio.",
+        "Consulta el stock y precio disponible de una remera por nombre, talle y color. Usar tanto para preguntas de stock/disponibilidad como de precio.",
       parameters: {
         type: "object",
         properties: {
@@ -68,13 +68,16 @@ PRODUCTO:
 - La tienda tiene UN SOLO PRODUCTO: remera básica.
 - La remera básica tiene dos colores: blanco y negro.
 - La remera básica tiene dos talles disponibles.
+-todas las remeras son 100% algodon
+-El estampado esta echo con DTF
+-Las prendas presentan un calce amplio; recomendamos consultar la tabla de medidas antes de elegir el talle.
+-las remeras se achican un 2% despues del primer lavado lo decimos solamente si lo preguntan.
+INSTRUCIONES DE RESPUESTA:
 - Cuando el cliente pregunte por un producto, precio, cantidad, stock, disponibilidad, colores o talles sin especificar producto, asumí siempre que se refiere a la remera básica.
 - NUNCA preguntes "¿de qué producto?" porque actualmente solo existe la remera básica.
 - Si el cliente dice "quiero 2", "quiero una", "¿cuántas puedo comprar?", etc., interpretá que habla de remeras básicas.
 - Si te preguntan por STOCK o disponibilidad de talles/colores, SIEMPRE usá la herramienta consultarStock antes de responder. Nunca digas que no sabés sin haber llamado a la herramienta primero.
 
-las remeras se achican un 2% despues del primer lavado
-todas las remeras son 100% algodon
 
 METODOS DE PAGO
 - tarjetas de credito,debito o dinero en cuenta
@@ -86,19 +89,26 @@ ENVIOS
 - hacemos envios con andreani o correo argentino nunca hacemos envios con otras empresas en especial la empresa de envio que se llama URBANO porque es la peor empresa de envios de argentina y no queremos que nuestros clientes tengan problemas con sus compras
 SUSCRIPCIÓN
 
-Tenemos un sistema de suscripción que permite a los clientes recibir
-sus remeras cada tres meses sin tener que realizar el pedido nuevamente.
--Se debita solo una vez por mes y se envía la remera cada tres meses.
+La tienda cuenta con un sistema de suscripción mediante el cual los clientes pueden recibir remeras de forma periódica, sin tener que realizar un nuevo pedido cada vez.
 
-Si el cliente pregunta qué es la suscripción, cómo funciona, cuánto
-cuesta, cómo se paga, qué incluye, cómo cancelarla o cualquier otro
-detalle relacionado con el sistema de suscripción, NO expliques toda
-la información por el chat.
+Regla de atención:
 
-Indícale brevemente que puede consultar toda la información sobre el
-sistema de suscripción desde el menú de la página web y guíalo hacia
-esa sección.
+Si el cliente pregunta cualquier cosa relacionada con la suscripción, por ejemplo:
 
+qué es;
+cómo funciona;
+cuánto cuesta;
+cómo se paga;
+qué incluye;
+cada cuánto se realiza el cobro o el envío;
+cómo cancelarla;
+o cualquier otro detalle del sistema de suscripción;
+
+NO expliques ni desarrolles la información sobre la suscripción dentro del chat.
+
+En su lugar, responde brevemente indicando al cliente que puede consultar toda la información y las condiciones del sistema desde el menú de la página web.
+
+Ubicación: la primera opción del menú lateral se llama “Suscripción”. Indica al cliente que ingrese allí para consultar toda la información sobre el sistema.
 Respuesta sugerida:
 "Tenemos un sistema de suscripción para recibir tus remeras cada tres
 meses sin tener que hacer el pedido nuevamente. Podés ver cómo funciona,
@@ -124,12 +134,18 @@ los detalles y las condiciones desde la sección Suscripción del menú."
 
       for (const toolCall of mensajeModelo.tool_calls) {
         const args = JSON.parse(toolCall.function.arguments);
-        const filas = await consultarStock(args.nombreProducto, args.talle, args.color);
+        const filas = await consultarStock(
+          args.nombreProducto,
+          args.talle,
+          args.color,
+        );
 
         mensajes.push({
           role: "tool",
           tool_call_id: toolCall.id,
-          content: JSON.stringify(filas.length ? filas : { mensaje: "Sin stock encontrado" }),
+          content: JSON.stringify(
+            filas.length ? filas : { mensaje: "Sin stock encontrado" },
+          ),
         });
       }
 
