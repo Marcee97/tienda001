@@ -114,59 +114,72 @@ const webhookSuscripciones = async (req, res) => {
 
     //-------------------PAGO RECURRENTE COBRADO-------------------
     if (type === "subscription_authorized_payment") {
-      const paymentId = data.id;
-      const payment = new Payment(client);
-      const pagoInfo = await payment.get({ id: paymentId });
-      const preapprovalId =
-        pagoInfo.point_of_interaction?.transaction_data?.subscription_id;
+      const authRes = await fetch(
+        `https://api.mercadopago.com/authorized_payments/${data.id}`,
+        { headers: { Authorization: `Bearer ${process.env.TOKEN_MERCADOPAGO}` } },
+      );
+      const auth = await authRes.json();
 
-      console.log(">>> pago recurrente cobrado, preapprovalId:", preapprovalId);
-
-      if (!preapprovalId) {
-        console.log("⚠️ No se pudo obtener el preapproval_id del pago");
+      if (!authRes.ok || auth.payment?.status !== "approved") {
+        console.log("⚠️ Cobro sin pago aprobado todavía, ignorando");
         return res.sendStatus(200);
       }
 
-      const existe = await pool.query(
-        `SELECT id, pagos_realizados FROM suscripciones WHERE preapproval_id = $1`,
+      const paymentId = auth.payment.id;
+      const preapprovalId = auth.preapproval_id;
+      console.log(">>> pago recurrente cobrado, preapprovalId:", preapprovalId);
+
+      let existe = await pool.query(
+        `SELECT id FROM suscripciones WHERE preapproval_id = $1`,
         [preapprovalId],
       );
 
-      if (existe.rows.length === 0) {
-        console.log(
-          `⚠️ No se encontró suscripción con preapproval_id ${preapprovalId}`,
+      // El cobro puede llegar antes que el evento subscription_preapproval
+      if (existe.rows.length === 0 && auth.external_reference) {
+        existe = await pool.query(
+          `UPDATE suscripciones SET preapproval_id = $1
+           WHERE external_reference = $2 RETURNING id`,
+          [preapprovalId, auth.external_reference],
         );
+      }
+
+      if (existe.rows.length === 0) {
+        console.log(`⚠️ No se encontró suscripción con preapproval_id ${preapprovalId}`);
         return res.sendStatus(200);
       }
 
-      const suscripcionDb = existe.rows[0];
-      const nuevosPagos = suscripcionDb.pagos_realizados + 1;
+      const suscripcionId = existe.rows[0].id;
 
-      await pool.query(
-        `UPDATE suscripciones SET pagos_realizados = $1 WHERE id = $2`,
-        [nuevosPagos, suscripcionDb.id],
-      );
-
-      //Dovelucion
-      await pool.query(
+      // Si el pago ya estaba registrado, no se vuelve a contar
+      const insertado = await pool.query(
         `INSERT INTO pagos_suscripcion (suscripcion_id, mp_payment_id, monto)
          VALUES ($1, $2, $3)
-         ON CONFLICT (mp_payment_id) DO NOTHING`,
-        [suscripcionDb.id, String(paymentId), pagoInfo.transaction_amount],
+         ON CONFLICT (mp_payment_id) DO NOTHING
+         RETURNING id`,
+        [suscripcionId, String(paymentId), auth.transaction_amount],
       );
-      console.log(
-        `✅ Pago registrado. Suscripción ${suscripcionDb.id} ahora tiene ${nuevosPagos} pagos`,
+
+      if (insertado.rows.length === 0) {
+        console.log(`ℹ️ Pago ${paymentId} ya registrado, ignorando`);
+        return res.sendStatus(200);
+      }
+
+      const { rows } = await pool.query(
+        `UPDATE suscripciones SET pagos_realizados = pagos_realizados + 1
+         WHERE id = $1 RETURNING pagos_realizados`,
+        [suscripcionId],
       );
+      const nuevosPagos = rows[0].pagos_realizados;
+
+      console.log(`✅ Pago registrado. Suscripción ${suscripcionId} ahora tiene ${nuevosPagos} pagos`);
 
       if (nuevosPagos % 3 === 0) {
         await pool.query(
           `INSERT INTO envios_suscripcion (suscripcion_id, numero_envio, estado)
            VALUES ($1, $2, 'pendiente')`,
-          [suscripcionDb.id, nuevosPagos / 3],
+          [suscripcionId, nuevosPagos / 3],
         );
-        console.log(
-          `📦 Envío #${nuevosPagos / 3} generado para la suscripción ${suscripcionDb.id}`,
-        );
+        console.log(`📦 Envío #${nuevosPagos / 3} generado para la suscripción ${suscripcionId}`);
       }
     }
 
