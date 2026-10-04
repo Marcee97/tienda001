@@ -343,13 +343,19 @@ export const ModalCompra = () => {
                 </div>
                 <h4 className="modal-compra__precio">
                   <span className="modal-compra__precio--unidad">
-                    {modoCompra === "suscripcion" ? "" : <span className="parpadeo-suscripcion">UNIT</span>}{" "}
+                    {modoCompra === "suscripcion" ? (
+                      ""
+                    ) : (
+                      <span className="parpadeo-suscripcion">UNIT</span>
+                    )}{" "}
                   </span>
                   {cargandoVariantes ? (
                     <Skeleton width={50} />
                   ) : modoCompra === "suscripcion" ? (
                     <>
-                    <span className="modal-compra__precio--unidad parpadeo-suscripcion">Suscripcion </span>
+                      <span className="modal-compra__precio--unidad parpadeo-suscripcion">
+                        Suscripcion{" "}
+                      </span>
                       ${formatearPrecio(7000)}
                       <span className="modal-compra__precio--unidad">/Mes</span>
                     </>
@@ -359,59 +365,75 @@ export const ModalCompra = () => {
                 </h4>
               </div>
             </div>
-            <div className="modal-compra__talles">
-              <div className="modal-compra__talles-botones">
-                <div className="modal-compra__cont-talles-botones">
-                  {cargandoVariantes
-                    ? [1, 2, 3, 4].map((n) => (
-                        <Skeleton key={n} width={50} height={46} />
-                      ))
-                    : tallesUnicos
-                        .filter((t) => t.stock > 0)
-                        .sort((a, b) => {
-                          const orden = ["S", "M", "L", "XL", "XXL"];
-                          return (
-                            orden.indexOf(a.talle) - orden.indexOf(b.talle)
-                          );
-                        })
-                        .map((v, index) => (
-                          <button
-                            key={index}
-                            className={`modal-compra__talle-btn ${
-                              talleSeleccionado === v.talle ? "active" : ""
-                            }`}
-                            onClick={() => {
-                              setTalleSeleccionado(v.talle);
-                              setCantidad(1);
-                              setMensajeSeleccionaTalle(false);
-                            }}
-                          >
-                            {v.talle}
-                          </button>
-                        ))}
-                </div>
-                <div className="modal--compra__cont__guiatalles">
-                  <p
-                    className="modal--compra__cont__guiatalles--mensage"
-                    style={{
-                      visibility:
-                        openCloseGuiaTalles && !talleSeleccionado
-                          ? "visible"
-                          : "hidden",
-                    }}
-                  >
-                    Elegí un talle para ver medidas
-                  </p>
+            {cargandoVariantes ? (
+              <div className="modal-compra__mensaje-cargando">
+                <svg
+                  className="modal-compra__triangulo"
+                  viewBox="0 0 100 90"
+                  aria-hidden="true"
+                >
+                  <polygon points="50,8 92,82 8,82" pathLength="100" />
+                </svg>
+                <span className="modal-compra__mensaje-cargando--texto">
+                  Calibrando Ambiente Virtual
+                </span>
+              </div>
+            ) : (
+              <div className="modal-compra__talles">
+                <div className="modal-compra__talles-botones">
+                  <div className="modal-compra__cont-talles-botones">
+                    {cargandoVariantes
+                      ? [1, 2, 3, 4].map((n) => (
+                          <Skeleton key={n} width={50} height={46} />
+                        ))
+                      : tallesUnicos
+                          .filter((t) => t.stock > 0)
+                          .sort((a, b) => {
+                            const orden = ["S", "M", "L", "XL", "XXL"];
+                            return (
+                              orden.indexOf(a.talle) - orden.indexOf(b.talle)
+                            );
+                          })
+                          .map((v, index) => (
+                            <button
+                              key={index}
+                              className={`modal-compra__talle-btn ${
+                                talleSeleccionado === v.talle ? "active" : ""
+                              }`}
+                              onClick={() => {
+                                setTalleSeleccionado(v.talle);
+                                setCantidad(1);
+                                setMensajeSeleccionaTalle(false);
+                              }}
+                            >
+                              {v.talle}
+                            </button>
+                          ))}
+                  </div>
+                  <div className="modal--compra__cont__guiatalles">
+                    <p
+                      className="modal--compra__cont__guiatalles--mensage"
+                      style={{
+                        visibility:
+                          openCloseGuiaTalles && !talleSeleccionado
+                            ? "visible"
+                            : "hidden",
+                      }}
+                    >
+                      Elegí un talle para ver medidas
+                    </p>
 
-                  <span
-                    className="material-symbols-outlined modal--compra__cont__guiatalles--btn"
-                    onClick={() => setOpenCloseGuiaTalles((prev) => !prev)}
-                  >
-                    settings_accessibility
-                  </span>
+                    <span
+                      className="material-symbols-outlined modal--compra__cont__guiatalles--btn"
+                      onClick={() => setOpenCloseGuiaTalles((prev) => !prev)}
+                    >
+                      settings_accessibility
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
+
             <div className="modal-compra__contenedor-cantidad">
               <div className="modal-compra__stock">
                 <SelectorCantidad

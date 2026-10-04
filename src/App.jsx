@@ -22,7 +22,6 @@ export const App = () => {
             path="/"
             element={
               <>
-              <Welcome />
                 <ModalCompra />
                 <ModalEnvio />
                 <Suscripciones />

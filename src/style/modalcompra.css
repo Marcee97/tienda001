@@ -12,6 +12,51 @@
   justify-content: start;
   background-color: #3a3939;
 }
+.modal-compra__mensaje-cargando{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5em;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-color: #11111142;
+  backdrop-filter: blur(6px);
+  border-radius: 25px 25px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal-compra__mensaje-cargando--texto{
+  font-size: 1.1em;
+
+}
+
+.modal-compra__triangulo {
+  width: 64px;
+  height: 64px;
+  overflow: visible;
+}
+
+.modal-compra__triangulo polygon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: modal-trazar 1.8s ease-in-out infinite;
+}
+
+@keyframes modal-trazar {
+  0%   { stroke-dashoffset: 100; }
+  50%  { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -100; }
+}
 .modal-compra__cont {
   flex: 1;
   display: flex;

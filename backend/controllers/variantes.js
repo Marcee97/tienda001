@@ -27,7 +27,6 @@ const getCatalogoCompleto = async (req, res) => {
       ORDER BY c.orden, pi.orden
     `);
 
-    console.log(result.rows, "catalogo completo");
     res.json(result.rows);
 
   } catch (error) {

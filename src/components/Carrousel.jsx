@@ -1,19 +1,19 @@
 import "../components/carrousel.css";
-import { useContext, useState, useRef } from "react";
+import { useContext, useRef } from "react";
 import { TiendaContext } from "../context/TiendaContext";
-export const Carrousel = ({ imagenes }) => {
 
-  const {index, setIndex} = useContext(TiendaContext)
- const touchStartX = useRef(0);
+export const Carrousel = ({ imagenes }) => {
+  const { index, setIndex, cargandoVariantes } = useContext(TiendaContext);
+  const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
+  const anterior = () => setIndex(prev => (prev > 0 ? prev - 1 : prev));
+  const siguiente = () =>
+    setIndex(prev => (prev < imagenes.length - 1 ? prev + 1 : prev));
 
-  const anterior = () => setIndex(prev => prev > 0 ? prev - 1 : prev);
-  const siguiente = () => setIndex(prev => prev < imagenes.length - 1 ? prev + 1 : prev);
-
-
-    const manejarTouchStart = (e) => {
+  const manejarTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
+    touchEndX.current = e.touches[0].clientX;
   };
 
   const manejarTouchMove = (e) => {
@@ -30,38 +30,43 @@ export const Carrousel = ({ imagenes }) => {
       anterior();
     }
   };
+
   return (
     <div className="carrousel">
-      <div
-        className="carrousel__track"
-        style={{ transform: `translateX(-${index * 100}%)` }}
-         onTouchStart={manejarTouchStart}
-        onTouchMove={manejarTouchMove}
-        onTouchEnd={manejarTouchEnd}
-      >
-        {imagenes.map((img, i) => (
-          <img
-            key={i}
-            src={img}
-            className="carrousel__imagen"
-            onClick={() => setIndex(i)}
-          />
-        ))}
-      </div>
-      <div className="carrousel__controles">
-        <span
-          className="material-symbols-outlined carrousel__btn"
-          onClick={anterior}
-        >
-          arrow_back_ios
-        </span>
-        <span
-          className="material-symbols-outlined carrousel__btn"
-          onClick={siguiente}
-        >
-          arrow_forward_ios
-        </span>
-      </div>
+     
+          <div
+            className="carrousel__track"
+            style={{ transform: `translateX(-${index * 100}%)` }}
+            onTouchStart={manejarTouchStart}
+            onTouchMove={manejarTouchMove}
+            onTouchEnd={manejarTouchEnd}
+          >
+            {imagenes.map((img, i) => (
+              <img
+                key={i}
+                src={img}
+                className="carrousel__imagen"
+                onClick={() => setIndex(i)}
+              />
+            ))}
+          </div>
+
+          <div className="carrousel__controles">
+            <span
+              className="material-symbols-outlined carrousel__btn"
+              onClick={anterior}
+            >
+              arrow_back_ios
+            </span>
+            <span
+              className="material-symbols-outlined carrousel__btn"
+              onClick={siguiente}
+            >
+              arrow_forward_ios
+            </span>
+          </div>
+        
+      
     </div>
   );
 };
