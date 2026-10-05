@@ -83,7 +83,8 @@ INSTRUCIONES DE RESPUESTA:
 METODOS DE PAGO
 - tarjetas de credito,debito o dinero en cuenta
 - se hace todo a traves de mercado pago
-
+INTERESES
+- El interes de las tarjetas de credito es a cargo del banco o billetera virtual que este usando el cliente, la tienda no tiene ningun tipo de interes sobre las compras realizadas con tarjeta de credito
 ENVIOS
 - se hacen envios a todo el pais
 - los plazos de entrega varian segun la ubicacion PERO NO MAS DE 7 DIAS HABILES

@@ -13,7 +13,7 @@ const {openCloseMenu, setOpenCloseMenu, carrito,visibilidadTitle, openCloseCarri
         <ul className="menu__list" onClick={(e)=>{e.stopPropagation(); setOpenCloseMenu(prev => !prev);
         }}>
           <li className="menu__item">
-            <img className={openCloseMenu || openCloseCarrito || openChatbot || !visibilidadTitle ? "menu__icon menu-hidden" : "menu__icon"} src="\menu-duo-lg-svgrepo-com.svg"/>
+            <img className="menu__icon" src="\menu-duo-lg-svgrepo-com.svg"/>
           </li>
         </ul>
       </div>
