@@ -64,7 +64,7 @@ export const ModalEnvio = () => {
 
     const body =
       modoCompra === "suscripcion"
-        ? {producto: carrito[0], datosFormulario }
+        ? { producto: carrito[0], datosFormulario }
         : { carrito, datosFormulario };
 
     const response = await fetch(`${import.meta.env.VITE_API_URL}${endpoint}`, {
@@ -226,6 +226,7 @@ export const ModalEnvio = () => {
           <input
             type="text"
             name="nombre"
+            autoComplete="name"
             placeholder="Ej: Jorge Cafrune"
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}
@@ -332,6 +333,7 @@ export const ModalEnvio = () => {
           <input
             type="email"
             name="email"
+            autoComplete="email"
             placeholder="Ej: alanturing@gmail.com"
             className="modal-envio__input-formulario"
             onChange={cambiosFormulario}

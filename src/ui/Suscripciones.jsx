@@ -109,10 +109,7 @@ export const Suscripciones = () => {
                 otros 3 meses, recibís una nueva.
               </p>
 
-              <p>
-                Podés seguir eligiendo la misma remera o{" "}
-                <strong>cambiar el talle o color cuando quieras</strong>.
-              </p>
+             
 
               <h3>💰 Pagás en cuotas y te sale más barato</h3>
 
