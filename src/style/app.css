@@ -1,3 +1,9 @@
-.app{
+
+.app {
+   max-width: 480px;
+contain: layout;
     position: relative;
+    margin: 0 auto;
+    min-height: 100dvh;
+    overflow: hidden;
 }

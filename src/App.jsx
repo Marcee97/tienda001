@@ -8,7 +8,6 @@ import { Failed } from "./ui/Failed";
 import { Pending } from "./ui/Pending";
 import { Welcome } from "./ui/Welcome";
 import { ModalEnvio } from "./ui/ModalEnvio";
-import { useEffect } from "react";
 import { Suscripciones } from "./ui/Suscripciones";
 export const App = () => {
  

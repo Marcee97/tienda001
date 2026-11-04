@@ -5,6 +5,10 @@
   width: 100%;
   padding: .1em;
   padding-left: .5em;
+       max-width: 480px;
+
+
+
 
 }
 .menu-hidden {

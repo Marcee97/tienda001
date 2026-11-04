@@ -1,4 +1,7 @@
 .carrito {
+         max-width: 480px;
+
+
   position: absolute;
   display: flex;
   flex-direction: column;

@@ -1,4 +1,8 @@
 .menu-desplegable{
+       max-width: 480px;
+
+
+
 display: flex;
 justify-content: space-between;
 background-color: #000000ec;

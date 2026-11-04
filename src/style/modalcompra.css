@@ -1,5 +1,9 @@
 .modal-compra {
    position: fixed;
+         max-width: 480px;
+
+
+
   inset: 0;
   color: #fff;
   z-index: 60;
