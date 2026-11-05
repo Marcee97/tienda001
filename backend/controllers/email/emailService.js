@@ -9,9 +9,9 @@ const enviarEmailCompra = async ({ envio, carrito, total }) => {
   console.log(envio, carrito, total, "esta es la info que llega al emailService");
 
   await resend.emails.send({
-    from: "Hisbell <onboarding@resend.dev>",
+    from: "Art3mia <soporte@art3mia.com>",
     to: email,
-    subject: "✅ Confirmación de compra - Hisbell",
+    subject: "✅ Confirmación de compra - Art3mia",
     html: `
       <h1>Gracias ${nombre}!</h1>
       <p>Tu compra fue confirmada.</p>
