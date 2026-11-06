@@ -96,7 +96,7 @@ export const Carrito = () => {
               <p className="carrito__empty-text">Tu carrito está vacío</p>
               <button
                 className="carrito__button"
-                onClick={(e) => (                  
+                onClick={(e) => (
                   setOpenCloseCarrito(false),
                   setOpenCloseMenu(false),
                   e.stopPropagation()
@@ -108,7 +108,13 @@ export const Carrito = () => {
           </div>
         )}
       </div>
-      <div className={carrito.length > 0 ?"carrito__footer" : "carrito__footer carrito__inactive"}>
+      <div
+        className={
+          carrito.length > 0
+            ? "carrito__footer"
+            : "carrito__footer carrito__inactive"
+        }
+      >
         <div
           className={
             carrito.length ? "carrito__total" : "carrito__total--inactive"
@@ -116,16 +122,20 @@ export const Carrito = () => {
         >
           <div className="carrito__total--subtotal-cont">
             <p className="carrito__total--subtotal">
-              Subtotal
+              Precio original
               <span className="carrito__total--subtotal--number">
                 $
                 {formatearPrecio(
-                  carrito.reduce(
+                carrito.reduce(
                     (total, item) => total + item.precio * item.cantidad,
                     0,
                   ),
                 )}
               </span>
+            </p>
+            <p className="carrito__total--subtotal-envio-cont">
+              Envío
+              <span className="carrito__total--subtotal-envio">10.000</span>
             </p>
           </div>
           <p className="carrito__total-label">
@@ -137,7 +147,7 @@ export const Carrito = () => {
                 carrito.reduce(
                   (total, item) => total + item.precio * item.cantidad,
                   0,
-                ),
+                ) + 10000,
               )}
             </span>
           </p>

@@ -17,18 +17,15 @@ const webhook = async (req, res) => {
 
       const payment = await paymentClient.get({ id: paymentId });
 
-     
-//-------------------PAGO APROBADO-------------------------------------------------------
+      //-------------------PAGO APROBADO-------------------------------------------------------
       if (payment.status === "approved") {
         console.log("✅ PAGO APROBADO");
-       
 
         // 1. Evitar duplicados
         const existe = await pool.query(
           `SELECT id FROM ventas WHERE mp_payment_id = $1`,
-          [String(payment.id)]
+          [String(payment.id)],
         );
-        
 
         if (existe.rows.length > 0) {
           console.log("⚠️ Pago ya procesado, ignorando");
@@ -53,9 +50,9 @@ const webhook = async (req, res) => {
             datos_formulario.codigo_postal,
             payment.transaction_amount,
             String(payment.id),
-          ]
+          ],
         );
-        
+
         const ventaId = venta.rows[0].id;
 
         // 3. Guardar items
@@ -64,9 +61,16 @@ const webhook = async (req, res) => {
             pool.query(
               `INSERT INTO venta_items (venta_id, producto_id, color_id, talle, cantidad, precio_unitario)
                VALUES ($1, $2, $3, $4, $5, $6)`,
-              [ventaId, item.id, item.color, item.talle, item.cantidad, item.precio]
-            )
-          )
+              [
+                ventaId,
+                item.id,
+                item.color,
+                item.talle,
+                item.cantidad,
+                item.precio,
+              ],
+            ),
+          ),
         );
 
         // 4. Actualizar stock
@@ -75,22 +79,23 @@ const webhook = async (req, res) => {
             pool.query(
               `UPDATE variantes SET stock = stock - $1
                WHERE producto_id = $2 AND color_id = $3 AND talle = $4 AND stock >= $1`,
-              [item.cantidad, item.id, item.color, item.talle]
-            )
-          )
+              [item.cantidad, item.id, item.color, item.talle],
+            ),
+          ),
         );
-try{
-
+        try {
           await enviarEmailCompra({
             envio: datos_formulario,
-            carrito:carrito_seguro,
-            total:payment.transaction_amount
-          })
-          console.log(("se envia la data al compoenente emailService"))
-        }catch(error){
+            carrito: carrito_seguro,
+            total: payment.transaction_amount,
+          });
+          console.log("se envia la data al compoenente emailService");
+        } catch (error) {
           console.error("❌ Error al enviar email:", error);
         }
-        console.log("✅ Venta guardada y stock actualizado y se envio mail de verificación");
+        console.log(
+          "✅ Venta guardada y stock actualizado y se envio mail de verificación",
+        );
       }
     }
 

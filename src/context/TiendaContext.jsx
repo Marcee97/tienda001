@@ -121,9 +121,7 @@ export const TiendaProvider = ({ children }) => {
     email: "",
   });
 
-  const guiaTalles = () => {
-    console.log("messi");
-  };
+
   return (
     <TiendaContext.Provider
       value={{
