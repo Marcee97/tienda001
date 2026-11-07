@@ -205,14 +205,14 @@ export const ModalCompra = () => {
             visible={openCloseGuiaTalles}
             medidas={{
               NONE: {
-                hombro: "0 Cm",
-                pecho: "0 Cm",
+                pecho: "selecciona un talle",
+                cintura: "0 Cm",
                 largo: "0 Cm",
                 manga: "0 Cm",
               },
               S: {
-                hombro: "42 cm",
-                pecho: "96 cm",
+                pecho: "42 cm",
+                cintura: "42 cm",
                 largo: "68 cm",
                 manga: "20 cm",
               },
@@ -223,21 +223,21 @@ export const ModalCompra = () => {
                 manga: "21 cm",
               },
               L: {
-                hombro: "46 cm",
-                pecho: "106 cm",
+                pecho: "46 cm",
+                cintura: "46 cm",
                 largo: "72 cm",
                 manga: "22 cm",
               },
               XL: {
-                pecho: "48 cm",
-                cintura: "48 cm",
-                largo: "75 cm",
+                pecho: "55 cm",
+                cintura: "56 cm",
+                largo: "78 cm",
                 manga: "24 cm",
               },
               XXL: {
-                pecho: "65 cm",
-                cintura: "65 cm",
-                largo: "79 cm",
+                pecho: "60 cm",
+                cintura: "61 cm",
+                largo: "84 cm",
                 manga: "23 cm",
               },
             }}

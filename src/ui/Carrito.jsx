@@ -135,7 +135,7 @@ export const Carrito = () => {
             </p>
             <p className="carrito__total--subtotal-envio-cont">
               Envío
-              <span className="carrito__total--subtotal-envio">10.000</span>
+              <span className="carrito__total--subtotal-envio">$10.999</span>
             </p>
           </div>
           <p className="carrito__total-label">
@@ -147,7 +147,7 @@ export const Carrito = () => {
                 carrito.reduce(
                   (total, item) => total + item.precio * item.cantidad,
                   0,
-                ) + 10000,
+                ) + 10999,
               )}
             </span>
           </p>

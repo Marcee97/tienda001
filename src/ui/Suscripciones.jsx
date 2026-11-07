@@ -100,16 +100,17 @@ export const Suscripciones = () => {
                 por <strong>$7.000 al mes</strong>.
               </p>
 
-              <h3>👕 Una remera cada 3 meses</h3>
+              <h3>👕 Una remera cada 60 dias</h3>
 
               <p>
-                Por cada <strong>3 pagos mensuales</strong>, recibís{" "}
-                <strong>una remera de tu elección</strong>. Una vez que recibís
-                tu remera, la suscripción continúa automáticamente y, después de
-                otros 3 meses, recibís una nueva.
+                Por cada <strong>3 pagos mensuales</strong>{" "}
+                <span className="suscripcion__aclaracion">
+                  (60 días en total)
+                </span>
+                , recibís <strong>una remera de tu elección</strong>. Una vez
+                que recibís tu remera, la suscripción continúa automáticamente
+                y, después de otros 60 días, recibís una nueva.
               </p>
-
-             
 
               <h3>💰 Pagás en cuotas y te sale más barato</h3>
 
@@ -127,7 +128,7 @@ export const Suscripciones = () => {
 
               <p>
                 <strong>
-                  Es decir: pagás menos, pero tenés que esperar 3 meses para
+                  Es decir: pagás menos, pero tenés que esperar 60 días para
                   recibirla.
                 </strong>
               </p>
@@ -140,10 +141,10 @@ export const Suscripciones = () => {
               </p>
 
               <p>
-                Si decidís cancelar antes de completar los 3 meses,{" "}
+                Si decidís cancelar antes de completar los 3 pagos,{" "}
                 <strong>
-                  se cancela la suscripción y se te devuelve el total de lo que
-                  hayas pagado hasta ese momento
+                  se cancela la suscripción y se te devuelve el total de los
+                  pagos que hayas hecho
                 </strong>
                 .
               </p>
@@ -165,7 +166,7 @@ export const Suscripciones = () => {
             className="suscripciones__btn"
             onClick={() => {
               setModoCompra("suscripcion");
-              setOpenCloseMenu(false)
+              setOpenCloseMenu(false);
               setOpenCloseSuscripciones(false);
               setOpenCloseModalCompra(true); // abre el mismo ModalCompra que ya usás
             }}

@@ -2,7 +2,7 @@ import "../guiaTalles/guiatalles.css";
 
 const lineas = [
   {
-    key: "cintura",
+    key: "pecho",
     x1: 31,
     y1: 28,
     x2: 68,
@@ -13,7 +13,7 @@ const lineas = [
     delay: 0,
   },
   {
-    key: "pecho",
+    key: "cintura",
     x1: 29,
     y1: 91,
     x2: 70,
@@ -59,41 +59,45 @@ export const GuiaTalles = ({ talle, medidas, visible }) => {
       preserveAspectRatio="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {lineas.map(({ key, x1, y1, x2, y1b, etX, etY, delay }) => (
-        <g
-          key={key}
-          className="guiatalles__grupo"
-          style={{ animationDelay: `${delay}ms` }}
-        >
-          <line
-            x1={x1}
-            y1={y1}
-            x2={x2}
-            y2={y1b}
-            stroke="#4a90e2"
-            strokeWidth="0.5"
-            strokeDasharray="2 1"
-          />
-          <rect
-            x={etX - 7}
-            y={etY - 3}
-            width="14"
-            height="5"
-            rx="1"
-            fill="#4a90e2"
-          />
-          <text
-            x={etX}
-            y={etY + 1}
-            textAnchor="middle"
-            fontSize="3"
-            fill="white"
-            fontFamily="sans-serif"
-          >
-            {m[key]}
-          </text>
-        </g>
-      ))}
+    {lineas.map(({ key, x1, y1, x2, y1b, etX, etY, delay }) => {
+  const ancho = m[key].length * 1.7 + 4; // 1.7 = ancho aprox. por carácter, 4 = padding
+
+  return (
+    <g
+      key={key}
+      className="guiatalles__grupo"
+      style={{ animationDelay: `${delay}ms` }}
+    >
+      <line
+        x1={x1}
+        y1={y1}
+        x2={x2}
+        y2={y1b}
+        stroke="#4a90e2"
+        strokeWidth="0.5"
+        strokeDasharray="2 1"
+      />
+      <rect
+        x={etX - ancho / 2}
+        y={etY - 3}
+        width={ancho}
+        height="5"
+        rx="1"
+        fill="#4a90e2"
+      />
+      <text
+        x={etX}
+        y={etY + 1}
+        textAnchor="middle"
+        fontSize="3"
+        fill="white"
+        fontFamily="sans-serif"
+      >
+        {m[key]}
+      </text>
+    </g>
+  );
+})}
     </svg>
   );
 };

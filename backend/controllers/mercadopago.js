@@ -31,7 +31,7 @@ const crearPreferencia = async (req, res) => {
             quantity: item.cantidad,
             unit_price: Number(item.precio),
           })),
-          { title: "Envío", quantity: 1, unit_price: 10000 },
+          { title: "Envío", quantity: 1, unit_price: 10999 },
         ],
         metadata: {
           carritoSeguro,

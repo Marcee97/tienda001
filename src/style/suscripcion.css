@@ -108,6 +108,12 @@ transform: translateY(100%);
   transform: translateY(100%);
   transition: transform 0.5s ease-in-out;
 }
+.suscripcion__aclaracion {
+  font-size: 0.75em;
+  color: #999;
+  font-weight: 400;
+  white-space: nowrap;
+}
 
 .suscripciones__cont--explicacion--activa {
   transform: translateY(0);
