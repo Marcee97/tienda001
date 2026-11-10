@@ -114,7 +114,16 @@ transform: translateY(100%);
   font-weight: 400;
   white-space: nowrap;
 }
-
+.suscripciones__explicacion--mercadopago{
+  outline: 1px solid #fff;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: column;
+}
+.suscripciones__explicacion--mercadopago--pasos{
+  border-bottom: 1px solid #fff;
+}
 .suscripciones__cont--explicacion--activa {
   transform: translateY(0);
   

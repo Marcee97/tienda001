@@ -99,6 +99,16 @@ export const Suscripciones = () => {
                 Elegís la remera que querés, tu talle y color, y te suscribís
                 por <strong>$7.000 al mes</strong>.
               </p>
+              <h3>💳 ¿Cómo se realizan los pagos?</h3>
+              <p>
+                Los cobros se realizan automáticamente a través de{" "}
+                <strong>MercadoPago</strong>, utilizando el medio de pago que
+                asociás al momento de suscribirte. No necesitás realizar ninguna
+                operación adicional:{" "}
+                <strong>
+                  Los pagos se debitan mensualmente de forma automática.
+                </strong>
+              </p>
 
               <h3>👕 Una remera cada 60 dias</h3>
 
@@ -120,17 +130,12 @@ export const Suscripciones = () => {
               </p>
 
               <p>
-                En lugar de comprar la remera en un solo pago, con la
+                La diferencia de comprar la remera en un solo pago, con la
                 suscripción la abonás en cuotas de{" "}
-                <strong>$7.000 por mes</strong>. La única diferencia es que la
-                remera se entrega una vez completados los 3 pagos.
-              </p>
-
-              <p>
-                <strong>
-                  Es decir: pagás menos, pero tenés que esperar 60 días para
-                  recibirla.
-                </strong>
+                <strong>$7.000 por mes</strong>.Y la remera se entrega una vez
+                completados los 3 pagos.
+                <br />
+                <strong>Y te queda mas barato con la Suscripcion</strong>
               </p>
 
               <h3>🔄 ¿Y si quiero cancelar?</h3>
@@ -150,7 +155,7 @@ export const Suscripciones = () => {
               </p>
 
               <p>
-                Por ejemplo, si llevás 2 meses pagando y todavía falta 1 mes
+                Por ejemplo, si llevás 2 meses pagando y todavía falta 1 pago
                 para recibir la remera, podés cancelar y{" "}
                 <strong>se te devuelve el total de esos 2 pagos</strong>.
               </p>
@@ -158,6 +163,33 @@ export const Suscripciones = () => {
               <p>
                 <strong>Sin permanencia. Sin compromisos.</strong>
               </p>
+              <h3>💳 ¿Cómo me doy de Baja?</h3>
+              <p>
+                Para darte de baja lo haces desde la app de mercadopago: <br />
+              </p>
+              <div className="suscripciones__explicacion--mercadopago">
+                <div className="suscripciones__explicacion--mercadopago--pasos">
+                  <h3>1. Abrí el menú</h3>{" "}
+                  <p>
+                    Tocá el botón de menú para desplegar las opciones de
+                    navegación.
+                  </p>
+                </div>
+                <div className="suscripciones__explicacion--mercadopago--pasos">
+                  <h3>2. Buscá «Suscripciones»</h3>{" "}
+                  <p>
+                    Deslizá hacia abajo, casi hasta el final del menú, y
+                    seleccioná Suscripciones.
+                  </p>
+                </div>
+                <div>
+                  <h3>3. Cancelá tu suscripción</h3>{" "}
+                  <p>
+                    3. Cancelá tu suscripción Entrá en tu suscripción de Art3mia
+                    y seleccioná la opción para darla de baja.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

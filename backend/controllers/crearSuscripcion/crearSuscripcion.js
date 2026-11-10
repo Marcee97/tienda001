@@ -59,8 +59,8 @@ const crearSuscripcion = async (req, res) => {
 
     console.log("=== SUSCRIPCIÓN CREADA ===");
      console.log("external_reference:", externalReference);
-    console.log("preapproval_id:", suscripcion.id);
-    console.log("init_point:", suscripcion.init_point);
+    console.log("preapproval_id:");
+    console.log("init_point:");
 
     res.status(201).json({ init_point: suscripcion.init_point });
   } catch (error) {

@@ -4,6 +4,7 @@ const {
   PreApproval,
   PaymentRefund,
 } = require("mercadopago");
+const { enviarEmailSuscripcion } = require("../email/emailService.js");
 const { pool } = require("../../database/db.config");
 //test_user_1898662543850859181@testuser.com
 const client = new MercadoPagoConfig({
@@ -116,7 +117,9 @@ const webhookSuscripciones = async (req, res) => {
     if (type === "subscription_authorized_payment") {
       const authRes = await fetch(
         `https://api.mercadopago.com/authorized_payments/${data.id}`,
-        { headers: { Authorization: `Bearer ${process.env.TOKEN_MERCADOPAGO}` } },
+        {
+          headers: { Authorization: `Bearer ${process.env.TOKEN_MERCADOPAGO}` },
+        },
       );
       const auth = await authRes.json();
 
@@ -144,7 +147,9 @@ const webhookSuscripciones = async (req, res) => {
       }
 
       if (existe.rows.length === 0) {
-        console.log(`⚠️ No se encontró suscripción con preapproval_id ${preapprovalId}`);
+        console.log(
+          `⚠️ No se encontró suscripción con preapproval_id ${preapprovalId}`,
+        );
         return res.sendStatus(200);
       }
 
@@ -171,7 +176,29 @@ const webhookSuscripciones = async (req, res) => {
       );
       const nuevosPagos = rows[0].pagos_realizados;
 
-      console.log(`✅ Pago registrado. Suscripción ${suscripcionId} ahora tiene ${nuevosPagos} pagos`);
+      console.log(
+        `✅ Pago registrado. Suscripción ${suscripcionId} ahora tiene ${nuevosPagos} pagos`,
+      );
+
+      try {
+        const { rows: datos } = await pool.query(
+          `SELECT s.nombre, s.email, s.calle, s.numero, s.ciudad, s.provincia,
+            s.codigo_postal, s.talle,
+            p.nombre AS producto, c.nombre AS color
+     FROM suscripciones s
+     JOIN productos p ON p.id = s.producto_id
+     JOIN colores c ON c.id = s.color_id
+     WHERE s.id = $1`,
+          [suscripcionId],
+        );
+        await enviarEmailSuscripcion({
+          tipo: nuevosPagos % 3 === 0 ? "envio" : "pago",
+          suscripcion: datos[0],
+          nuevosPagos,
+        });
+      } catch (err) {
+        console.error("❌ Error enviando email de pago:", err);
+      }
 
       if (nuevosPagos % 3 === 0) {
         await pool.query(
@@ -179,7 +206,9 @@ const webhookSuscripciones = async (req, res) => {
            VALUES ($1, $2, 'pendiente')`,
           [suscripcionId, nuevosPagos / 3],
         );
-        console.log(`📦 Envío #${nuevosPagos / 3} generado para la suscripción ${suscripcionId}`);
+        console.log(
+          `📦 Envío #${nuevosPagos / 3} generado para la suscripción ${suscripcionId}`,
+        );
       }
     }
 

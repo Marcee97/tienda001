@@ -46,6 +46,8 @@ const crearPreferencia = async (req, res) => {
         notification_url: "https://ecomercce-back.onrender.com/api/webhook",
       },
     });
+    // https://f317-181-168-143-151.ngrok-free.app
+    //https://ecomercce-back.onrender.com
     res.json({ id: response.id, init_point: response.init_point });
   } catch (error) {
     console.error("Error creando preferencia", error);
