@@ -187,7 +187,7 @@ const webhookSuscripciones = async (req, res) => {
             p.nombre AS producto, c.nombre AS color
      FROM suscripciones s
      JOIN productos p ON p.id = s.producto_id
-     JOIN colores c ON c.id = s.color_id
+     JOIN colores c ON c.id = s.color_id::int
      WHERE s.id = $1`,
           [suscripcionId],
         );
